@@ -7,9 +7,9 @@ require("rgl")
 
 # Params ----
 
-n <- 2               # default 7
+n <- 5               # default 7
 GAPopulation <- 10  # default 500
-GAIterations <- 2   # default 50
+GAIterations <- 10   # default 50
 GAMutations <- 0.1   # % (def 0.1)
 GACrossovers <- 0.8  # % (def 0.8)
 
@@ -17,12 +17,18 @@ isSingleTest <- FALSE
 graphs <- TRUE
 quality <- 100 #graph probes
 
+mutationTests <- seq(0, 1, 0.05)
+crossoverTests <- seq(0, 1, 0.05)
+elitismTests <- seq(0, 1, 0.05)
+populationTests <- seq(10, 200, 10)
+iterationTests <- seq(1, 20, 1)
+
 # Functions ----
 
-#funcName <- "Branin" #2d
+funcName <- "Branin" #2d
 #funcName <- "Gulf" #3d
 #funcName <- "CosMix4" #4d
-funcName <- "EMichalewicz" #5d
+#funcName <- "EMichalewicz" #5d
 #funcName <- "Hartman6" #6d
 #funcName <- "PriceTransistor" #9d
 #funcName <- "Schwefel" #10d
@@ -69,7 +75,7 @@ if (isSingleTest) {
   gBest <- NA
   
   temp <- c()
-  values <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
+  values <- mutationTests
   averages <- c()
   for (mutation in values) {
     sum <- 0
@@ -104,7 +110,7 @@ if (isSingleTest) {
   }
   
   temp <- c()
-  values <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
+  values <- crossoverTests
   averages <- c()
   for (crossover in values) {
     sum <- 0
@@ -139,7 +145,7 @@ if (isSingleTest) {
   }
 
   temp <- c()
-  values <- c(0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5)
+  values <- elitismTests
   averages <- c()
   for (elitism in values) {
     sum <- 0
@@ -174,7 +180,7 @@ if (isSingleTest) {
   }
 
   temp <- c()
-  values <- c(100, 200, 300, 400, 500, 600, 700, 800, 900, 1000)
+  values <- populationTests
   averages <- c()
   for (population in values) {
     sum <- 0
@@ -209,7 +215,7 @@ if (isSingleTest) {
   }
 
   temp <- c()
-  values <- c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+  values <- iterationTests
   averages <- c()
   for (iterations in values) {
     sum <- 0
