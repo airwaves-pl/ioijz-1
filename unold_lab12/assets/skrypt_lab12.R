@@ -7,26 +7,26 @@ require("rgl")
 
 # Params ----
 
-n <- 5               # default 7
-GAPopulation <- 10  # default 500
-GAIterations <- 10   # default 50
-GAMutations <- 0.1   # % (def 0.1)
-GACrossovers <- 0.8  # % (def 0.8)
+n <- 10              # minimum 5
+GAPopulation <- 50   # default 50
+GAIterations <- 100  # default 100
+GAMutations <- 0.1   # default 0.1
+GACrossovers <- 0.8  # default 0.8
 
 isSingleTest <- FALSE
 graphs <- TRUE
-quality <- 100 #graph probes
+quality <- 100 #graph resolutions
 
-mutationTests <- seq(0, 1, 0.05)
-crossoverTests <- seq(0, 1, 0.05)
-elitismTests <- seq(0, 1, 0.05)
-populationTests <- seq(10, 200, 10)
-iterationTests <- seq(1, 20, 1)
+mutationTests <- seq(0, 1, 0.1)
+crossoverTests <- seq(0, 1, 0.1)
+elitismTests <- seq(0, 1, 0.1)
+populationTests <- seq(10, 100, 5)
+iterationTests <- seq(10, 200, 10)
 
 # Functions ----
 
-funcName <- "Branin" #2d
-#funcName <- "Gulf" #3d
+#funcName <- "Branin" #2d
+funcName <- "Gulf" #3d
 #funcName <- "CosMix4" #4d
 #funcName <- "EMichalewicz" #5d
 #funcName <- "Hartman6" #6d
@@ -81,10 +81,10 @@ if (isSingleTest) {
     sum <- 0
     vector <- rep(NA,n)
     for (i in 1:n) {
-      GAmin <- ga(type = "real-valued", 
-                  fitness =  function(xx) -f(xx), 
-                  min = c(B[1,]), max = c(B[2,]), 
-                  popSize = GAPopulation, maxiter = GAIterations, 
+      GAmin <- ga(type = "real-valued",
+                  fitness =  function(xx) -f(xx),
+                  min = c(B[1,]), max = c(B[2,]),
+                  popSize = GAPopulation, maxiter = GAIterations,
                   pmutation = mutation, pcrossover = GACrossovers)
       solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
       eval <- f(solution[1,])
@@ -100,15 +100,15 @@ if (isSingleTest) {
   }
   result <- matrix(c(temp),nrow = n,ncol = length(values))
   write.table(result, file = "resultsMutations.csv", row.names=FALSE, na="", col.names=FALSE, sep=";")
-  
+
   if (graphs) {
-    plot(values, averages, 
-         main="Goal function value for different mutation probabilities", 
-         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))), 
+    plot(values, averages,
+         main="Function values for different mutation probabilities",
+         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))),
          type="l", col="red", xlab="params", ylab="value")
     abline(globalOpt,0, col="green")
   }
-  
+
   temp <- c()
   values <- crossoverTests
   averages <- c()
@@ -116,10 +116,10 @@ if (isSingleTest) {
     sum <- 0
     vector <- rep(NA,n)
     for (i in 1:n) {
-      GAmin <- ga(type = "real-valued", 
-                  fitness =  function(xx) -f(xx), 
-                  min = c(B[1,]), max = c(B[2,]), 
-                  popSize = GAPopulation, maxiter = GAIterations, 
+      GAmin <- ga(type = "real-valued",
+                  fitness =  function(xx) -f(xx),
+                  min = c(B[1,]), max = c(B[2,]),
+                  popSize = GAPopulation, maxiter = GAIterations,
                   pmutation = GAMutations, pcrossover = crossover)
       solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
       eval <- f(solution[1,])
@@ -138,8 +138,8 @@ if (isSingleTest) {
 
   if (graphs) {
     plot(values, averages,
-         main="Goal function value for different crossover probabilities", 
-         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))), 
+         main="Function values for different crossover probabilities",
+         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))),
          type="l", col="red", xlab="params", ylab="value")
     abline(globalOpt,0, col="green")
   }
@@ -151,10 +151,10 @@ if (isSingleTest) {
     sum <- 0
     vector <- rep(NA,n)
     for (i in 1:n) {
-      GAmin <- ga(type = "real-valued", 
-                  fitness =  function(xx) -f(xx), 
-                  min = c(B[1,]), max = c(B[2,]), 
-                  popSize = GAPopulation, maxiter = GAIterations, 
+      GAmin <- ga(type = "real-valued",
+                  fitness =  function(xx) -f(xx),
+                  min = c(B[1,]), max = c(B[2,]),
+                  popSize = GAPopulation, maxiter = GAIterations,
                   pmutation = GAMutations, pcrossover = GACrossovers, elitism = elitism)
       solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
       eval <- f(solution[1,])
@@ -173,8 +173,8 @@ if (isSingleTest) {
 
   if (graphs) {
     plot(values, averages,
-         main="Goal function value for different elitism", 
-         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))), 
+         main="Function values for different elitism",
+         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))),
          type="l", col="red", xlab="params", ylab="value")
     abline(globalOpt,0, col="green")
   }
@@ -208,7 +208,7 @@ if (isSingleTest) {
 
   if (graphs) {
     plot(values, averages,
-         main="Goal function value for different population sizes", 
+         main="Function values for different population sizes", 
          ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))), 
          type="l", col="red", xlab="params", ylab="value")
     abline(globalOpt,0, col="green")
@@ -238,12 +238,12 @@ if (isSingleTest) {
     temp <- c(temp, vector)
     averages <- c(averages, (sum / n))
   }
-  result <- matrix(c(temp),nrow = n,ncol = 10)
+  result <- matrix(c(temp),nrow = n,ncol = length(values))
   write.table(result, file = "resultsIterations.csv", row.names=FALSE, na="", col.names=FALSE, sep=";")
 
   if (graphs) {
     plot(values, averages,
-         main="Goal function value for different iteration quantities", 
+         main="Function values for different number of iterations", 
          ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))), 
          type="l", col="red", xlab="params", ylab="value")
     abline(globalOpt,0, col="green")

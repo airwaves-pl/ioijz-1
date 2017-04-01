@@ -97,18 +97,19 @@
 \newpage
 \section{Wprowadzenie}
 \paragraph{}
-Wstęp
+Algorytmy genetyczne to
 
-\subsection{Opis zadania projektowego}
+\fbi
+W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla różnych parametrów. Jako benchmark oceny należało użyć pakietu ,,getGlobalOpts'' oraz języka R.
 
+\fbi
+Pomiary wykonywano na 2 różnych jednostkach roboczych. Ich parametry nie są istotne z punktu widzenia analizy i możliwości porównania rezultatów.
 
-
-\subsection{Środowisko testowe i narzędzia}
-
-\newpage
 \section{Implementacja}
+\paragraph{}
+Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w języku R przygotowany w celu umożliwienia przeprowadzenia pomiarów.
 
-\lstinputlisting[label="lst:skryptGlowny",caption=Skrypt w języku R wykorzystany do badań,firstline=1,lastline=271]{./assets/skrypt_lab12.R}
+\lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w języku R wykorzystany do badań,firstline=1,lastline=300]{./assets/skrypt_lab12.R}
 
 
 \subsection{Parametryzacja skryptu}
@@ -117,7 +118,6 @@ Wybór funkcji do optymalizacji odbywa się przez podanie jej nazwy.
 Pozostałe dane są odczytywane z pakietu ,,globalOptTests''.
 
 
-\newpage
 \section{Przebieg badań}
 \paragraph{}
 Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończąc na 20. Poniżej wymieniono te funkcje wraz z ilością wymiarów podaną w nawiasie.
@@ -133,72 +133,178 @@ Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończ
 	\item Zeldasine20 (20)
 \end{itemize}
 
+\fbi
+Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametry wynosiły kolejno:
 
-\subsection{Branin (wariant 2D)}
-\paragraph{}
-Test
+\begin{itemize}
+	\item rozmiar populacji - 50
+	\item liczba iteracji - 100
+	\item p. mutacji - 0,1
+	\item p. krzyżowania - 0,8
+\end{itemize}
 
-\subsection{Gulf (wariant 3D)}
-\paragraph{}
-Test
 
-\subsection{CosMix4 (wariant 4D)}
+\subsection{Branin (2 parametry)}
 \paragraph{}
-Test
+Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres.
 
-\subsection{EMichalewicz (wariant 5D)}
-\paragraph{}
-Test
-
-\subsection{Hartman6 (wariant 6D)}
-\paragraph{}
-Test
-
-\subsection{PriceTransistor (wariant 9D)}
-\paragraph{}
-Test
-
-\subsection{Schwefel (wariant 10D)}
-\paragraph{}
-Test
-
-\subsection{Zeldasine20 (wariant 20D)}
-\paragraph{}
-Test
-
-\subsection{Test}
-\paragraph{}
-Test
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/branin1.png} % 
+		\caption{Wykres funkcji Branin (d=2)}
+		\label{fig:branin1}
+	\end{center}
+\end{figure}
 
 \fbi
-Na ilustracji (rys.~\ref{fig:ackleys3dwykres}) przedstawiono wykres omawianej funkcji.
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/ackleys3d.png} % 
-		\caption{Wykres funkcji Ackleys (d=3)}
-		\label{fig:ackleys3dwykres}
+		\includegraphics[width=0.9\textwidth]{./assets/branin2.png} % 
+		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\label{fig:branin2}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/ackleys3dkrzyzowanie.png} % 
-		\caption{Wartość znalezionego minimum funkcji w zależności od P. krzyżowania}
-		\label{fig:ackleys3dkrzyzowanie}
+		\includegraphics[width=0.9\textwidth]{./assets/branin3.png} % 
+		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowanie}
+		\label{fig:branin3}
 	\end{center}
 \end{figure}
 
-\newpage
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/branin4.png} % 
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\label{fig:branin4}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/branin5.png} % 
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\label{fig:branin5}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/branin6.png} % 
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:branin6}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/branin7.png} % 
+		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
+		\label{fig:branin7}
+	\end{center}
+\end{figure}
+
+\subsection{Gulf (3 parametry)}
+\paragraph{}
+Gulf jest funkcją przyjmującą trzy parametry. Na ilustracji (rys.~\ref{fig:gulf1}) przedstawiono jej wykres dla pierwszych dwóch wymiarów.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/gulf1.png} % 
+		\caption{Wykres funkcji Gulf (d=3)}
+		\label{fig:gulf1}
+	\end{center}
+\end{figure}
+
+\fbi
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/gulf2.png} % 
+		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\label{fig:gulf2}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/gulf3.png} % 
+		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowanie}
+		\label{fig:gulf3}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/gulf4.png} % 
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\label{fig:gulf4}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/gulf5.png} % 
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\label{fig:gulf5}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/gulf6.png} % 
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:gulf6}
+	\end{center}
+\end{figure}
+
+\fbi
+Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawiona lokalizacja optimum nie jest poprawna, gdyż optymalizacji poddano wersję z 3 parametrami. Ogólnie rzecz biorąc gdyby 3 wymiar przedstawić w postaci gradientu kolorystycznego wtedy byłaby to poprawna lokalizacja niemniej trudna dla intuicyjnego sprawdzenia.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{./assets/gulf7.png} % 
+		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
+		\label{fig:gulf7}
+	\end{center}
+\end{figure}
+
+
+\subsection{CosMix4 (4 parametry)}
+\paragraph{}
+Test
+
+\subsection{EMichalewicz (5 parametrów)}
+\paragraph{}
+Test
+
+\subsection{Hartman6 (6 parametrów)}
+\paragraph{}
+Test
+
+\subsection{PriceTransistor (9 parametrów)}
+\paragraph{}
+Test
+
+\subsection{Schwefel (10 parametrów)}
+\paragraph{}
+Test
+
+\subsection{Zeldasine20 (20 parametrów)}
+\paragraph{}
+Test
+
+
 \section{Podsumowanie}
 \paragraph{}
 Test
 
 \fbi
 Akapit
-
-
-
 
 
 
