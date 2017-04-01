@@ -108,15 +108,31 @@ Wstęp
 \newpage
 \section{Implementacja}
 
-\lstinputlisting[label="lst:skryptGlowny",caption=Skrypt w języku R wykorzystany do badań,firstline=1,lastline=82]{./assets/skrypt_lab12.R}
+\lstinputlisting[label="lst:skryptGlowny",caption=Skrypt w języku R wykorzystany do badań,firstline=1,lastline=271]{./assets/skrypt_lab12.R}
 
 
 \subsection{Parametryzacja skryptu}
+Parametryzacji podlega jedynie algorytm genetyczny.
+Wybór funkcji do optymalizacji odbywa się przez podanie jej nazwy.
+Pozostałe dane są odczytywane z pakietu ,,globalOptTests''.
+
 
 \newpage
 \section{Przebieg badań}
 \paragraph{}
-Akapit
+Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończąc na 20. Poniżej wymieniono te funkcje wraz z ilością wymiarów podaną w nawiasie.
+
+\begin{itemize}
+	\item Branin (2)
+	\item Gulf (3)
+	\item CosMix4 (4)
+	\item EMichalewicz (5)
+	\item Hartman6 (6)
+	\item PriceTransistor (9)
+	\item Schwefel (10)
+	\item Zeldasine20 (20)
+\end{itemize}
+
 
 \subsection{Funkcja Ackleys (wariant 2D)}
 \paragraph{}
