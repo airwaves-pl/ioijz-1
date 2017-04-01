@@ -1,5 +1,6 @@
 
 rm(list=ls())
+dev.off(dev.list()["RStudioGD"])
 
 require("GA")
 require("globalOptTests")
@@ -27,12 +28,12 @@ iterationTests <- seq(10, 200, 10)
 
 #funcName <- "Branin" #2d
 #funcName <- "Gulf" #3d
-#funcName <- "CosMix4" #4d
+funcName <- "CosMix4" #4d
 #funcName <- "EMichalewicz" #5d
 #funcName <- "Hartman6" #6d
 #funcName <- "PriceTransistor" #9d
 #funcName <- "Schwefel" #10d
-funcName <- "Zeldasine20" #20d
+#funcName <- "Zeldasine20" #20d
 
 # Processing ----
 
