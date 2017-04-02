@@ -2,17 +2,12 @@
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-
+\usepackage[export]{adjustbox}
 \usepackage{graphicx}
-
 \usepackage{amsmath} 
-
 \usepackage{listings}
-
 \usepackage{color}
-
 \usepackage{marvosym}
-
 \usepackage{geometry}
 \usepackage{float}
 \usepackage{booktabs}
@@ -111,12 +106,10 @@ Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w języku R
 
 \lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w języku R wykorzystany do badań,firstline=1,lastline=300]{./assets/skrypt_lab12.R}
 
-
 \subsection{Parametryzacja skryptu}
 Parametryzacji podlega jedynie algorytm genetyczny.
 Wybór funkcji do optymalizacji odbywa się przez podanie jej nazwy.
 Pozostałe dane są odczytywane z pakietu ,,globalOptTests''.
-
 
 \section{Przebieg badań}
 \paragraph{}
@@ -143,68 +136,65 @@ Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametr
 	\item p. krzyżowania - 0,8
 \end{itemize}
 
-
 \subsection{Branin (2 parametry)}
 \paragraph{}
-Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres.
+Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres. Wzór funkcji zamieszczono poniżej (\ref{eq:branin}).
+
+\begin{equation}\label{eq:branin}
+	f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
+\end{equation}
+
 
 \begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/branin1.png} % 
-		\caption{Wykres funkcji Branin (d=2)}
-		\label{fig:branin1}
-	\end{center}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./assets/branin1.png}
+	\caption{Wykres funkcji Branin (d=2)}
+	\label{fig:branin1}
 \end{figure}
 
 \fbi
 Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego.
 
 \begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/branin2.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
-		\label{fig:branin2}
-	\end{center}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./assets/branin2.png}
+	\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+	\label{fig:branin2}
 \end{figure}
 
 \begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/branin3.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowanie}
-		\label{fig:branin3}
-	\end{center}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./assets/branin3.png} % 
+	\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+	\label{fig:branin3}
 \end{figure}
 
 \begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/branin4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
-		\label{fig:branin4}
-	\end{center}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./assets/branin4.png} % 
+	\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+	\label{fig:branin4}
 \end{figure}
 
 \begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/branin5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
-		\label{fig:branin5}
-	\end{center}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./assets/branin5.png} % 
+	\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+	\label{fig:branin5}
 \end{figure}
 
 \begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/branin6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
-		\label{fig:branin6}
-	\end{center}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./assets/branin6.png} % 
+	\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+	\label{fig:branin6}
 \end{figure}
 
 \begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/branin7.png} % 
-		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:branin7}
-	\end{center}
+	\centering
+	\includegraphics[width=0.9\textwidth]{./assets/branin7.png} % 
+	\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
+	\label{fig:branin7}
 \end{figure}
 
 \subsection{Gulf (3 parametry)}
@@ -233,7 +223,7 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/gulf3.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowanie}
+		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:gulf3}
 	\end{center}
 \end{figure}
@@ -273,7 +263,6 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\end{center}
 \end{figure}
 
-
 \subsection{CosMix4 (4 parametry)}
 \paragraph{}
 
@@ -281,8 +270,8 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix41.png} % 
-		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\caption{Wykres funkcji CosMix4 (d=4)}
+		\label{fig:cosmix41}
 	\end{center}
 \end{figure}
 
@@ -290,42 +279,47 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix42.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
-		\label{fig:gulf7}
+		\label{fig:cosmix42}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix43.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
-		\label{fig:gulf7}
+		\label{fig:cosmix43}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix44.png} % 
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
-		\label{fig:gulf7}
+		\label{fig:cosmix44}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix45.png} % 
 		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
-		\label{fig:gulf7}
+		\label{fig:cosmix45}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix46.png} % 
-		\caption{Wartość znalezionego optimum w zależności od iteracji}
-		\label{fig:gulf7}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:cosmix46}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix47.png} % 
 		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\label{fig:cosmix47}
 	\end{center}
 \end{figure}
 
@@ -336,8 +330,8 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz1.png} % 
-		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\caption{Wykres funkcji EMIchalewicz (d=5)}
+		\label{fig:emichalewicz1}
 	\end{center}
 \end{figure}
 
@@ -345,53 +339,59 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz2.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
-		\label{fig:gulf7}
+		\label{fig:emichalewicz2}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz3.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
-		\label{fig:gulf7}
+		\label{fig:emichalewicz3}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz4.png} % 
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
-		\label{fig:gulf7}
+		\label{fig:emichalewicz4}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz5.png} % 
 		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
-		\label{fig:gulf7}
+		\label{fig:emichalewicz5}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od iteracji}
-		\label{fig:gulf7}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:emichalewicz6}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz7.png} % 
 		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\label{fig:emichalewicz7}
 	\end{center}
 \end{figure}
 
 \subsection{Hartman6 (6 parametrów)}
 \paragraph{}
 
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman61.png} % 
-		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\caption{Wykres funkcji Hartman6 (d=6)}
+		\label{fig:hartman61}
 	\end{center}
 \end{figure}
 
@@ -399,55 +399,59 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman62.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
-		\label{fig:gulf7}
+		\label{fig:hartman62}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman63.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
-		\label{fig:gulf7}
+		\label{fig:hartman63}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman64.png} % 
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
-		\label{fig:gulf7}
+		\label{fig:hartman64}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman65.png} % 
 		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
-		\label{fig:gulf7}
+		\label{fig:hartman65}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman66.png} % 
-		\caption{Wartość znalezionego optimum w zależności od iteracji}
-		\label{fig:gulf7}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:hartman66}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman67.png} % 
 		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\label{fig:hartman67}
 	\end{center}
 \end{figure}
-
-
 
 \subsection{PriceTransistor (9 parametrów)}
 \paragraph{}
 
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor1.png} % 
-		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\caption{Wykres funkcji PriceTransistor (d=9)}
+		\label{fig:pricetransistor1}
 	\end{center}
 \end{figure}
 
@@ -455,45 +459,49 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor2.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
-		\label{fig:gulf7}
+		\label{fig:pricetransistor2}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor3.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
-		\label{fig:gulf7}
+		\label{fig:pricetransistor3}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor4.png} % 
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
-		\label{fig:gulf7}
+		\label{fig:pricetransistor4}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor5.png} % 
 		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
-		\label{fig:gulf7}
+		\label{fig:pricetransistor5}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od iteracji}
-		\label{fig:gulf7}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:pricetransistor6}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor7.png} % 
 		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\label{fig:pricetransistor7}
 	\end{center}
 \end{figure}
-
 
 \subsection{Schwefel (10 parametrów)}
 \paragraph{}
@@ -502,8 +510,8 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel1.png} % 
-		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\caption{Wykres funkcji Schwefel (d=10)}
+		\label{fig:schwefel1}
 	\end{center}
 \end{figure}
 
@@ -511,54 +519,59 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel2.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
-		\label{fig:gulf7}
+		\label{fig:schwefel2}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel3.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
-		\label{fig:gulf7}
+		\label{fig:schwefel3}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel4.png} % 
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
-		\label{fig:gulf7}
+		\label{fig:schwefel4}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel5.png} % 
 		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
-		\label{fig:gulf7}
+		\label{fig:schwefel5}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od iteracji}
-		\label{fig:gulf7}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:schwefel6}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel7.png} % 
 		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\label{fig:schwefel7}
 	\end{center}
 \end{figure}
-
 
 \subsection{Zeldasine20 (20 parametrów)}
 \paragraph{}
 
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine1.png} % 
-		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\caption{Wykres funkcji Zeldasine (d=20)}
+		\label{fig:zeldasine1}
 	\end{center}
 \end{figure}
 
@@ -566,46 +579,49 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine2.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
-		\label{fig:gulf7}
+		\label{fig:zeldasine2}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine3.png} % 
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
-		\label{fig:gulf7}
+		\label{fig:zeldasine3}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine4.png} % 
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
-		\label{fig:gulf7}
+		\label{fig:zeldasine4}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine5.png} % 
 		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
-		\label{fig:gulf7}
+		\label{fig:zeldasine5}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od iteracji}
-		\label{fig:gulf7}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\label{fig:zeldasine6}
 	\end{center}
 \end{figure}
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine7.png} % 
 		\caption{Poglądowa lokalizacja najlepszego znalezionego optimum}
-		\label{fig:gulf7}
+		\label{fig:zeldasine7}
 	\end{center}
 \end{figure}
-
-
 
 \section{Podsumowanie}
 \paragraph{}
