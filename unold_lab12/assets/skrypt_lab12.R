@@ -31,7 +31,13 @@ elitismTests <- seq(0, 1, 0.1)
 
 # Functions ----
 
-funcName <- "Branin" #2d
+functions <- c("Branin", "Gulf", "CosMix4", "EMichalewicz", "Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
+for (abc in functions)
+{
+  funcName <- abc
+
+# for manual launch
+#funcName <- "Branin" #2d
 #funcName <- "Gulf" #3d
 #funcName <- "CosMix4" #4d
 #funcName <- "EMichalewicz" #5d
@@ -156,3 +162,4 @@ customMeasure("resultsIterations.csv", "5", iterationTests, "itr","ilosc iteracj
 customMeasure("resultsElitism.csv", "6", elitismTests, "elt", "elityzm",
               "Znalezione minimum dla roznych wartosci elityzmu")
 
+}
