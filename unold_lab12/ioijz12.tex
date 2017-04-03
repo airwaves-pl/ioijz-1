@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{titlesec}
 \usepackage{hyperref}
+\usepackage{tabularx}
 
 \geometry{margin=1.2in}
 \usepackage[final]{pdfpages}
@@ -129,28 +130,29 @@ Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończ
 \end{itemize}
 
 \fbi
-Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametry wynosiły kolejno:
+Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametry przedstawiono poniżej (tab. \ref{tab:parametry}).
 
-\begin{tabular}{|c|c|c|c|}
-	\hline
-	- & Parametry domyślne 1 & Parametry domyślne 2 & Parametry domyślne 3 \\ 
-	\hline \hline
-	Rozmiar populacji & 50 & 50 & 25 \\ 
-	\hline 
-	Rozmiar iteracji & 100 & 100 & 50 \\ 
-	\hline 
-	Prawdopodobieństwo mutacji & 0 & 0.1 & 0.1 \\ 
-	\hline 
-	Prawdopodobieństwo krzyżowania & 0 & 0.8 & 0.8 \\ 
-	\hline 
-\end{tabular} 
+\begin{table}[htbp]
+	\centering
+	\caption{Parametry domyślne poszczególnych serii pomiarowych}
+	\label{tab:parametry}
+	\begin{tabularx}{\textwidth}{|X|c|c|c|}
+		\hline
+		- & Seria 1 & Seria 2 & Seria 3 \\ 
+		\hline
+		Rozmiar populacji & 50 & 50 & 25 \\ 
+		\hline 
+		Rozmiar iteracji & 100 & 100 & 50 \\ 
+		\hline 
+		Prawdopodobieństwo mutacji & 0 & 0.1 & 0.1 \\ 
+		\hline 
+		Prawdopodobieństwo krzyżowania & 0 & 0.8 & 0.8 \\ 
+		\hline 
+	\end{tabularx} 
+\end{table}
 
-\begin{itemize}
-	\item rozmiar populacji - 50
-	\item liczba iteracji - 100
-	\item p. mutacji - 0,1
-	\item p. krzyżowania - 0,8
-\end{itemize}
+\fbi
+Zielone linie na wykresach oznaczają optima zwracane w pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas omawianych badań) .
 
 \subsection{Branin (2 parametry)}
 \paragraph{}
@@ -388,6 +390,11 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 
 \subsection{EMichalewicz (5 parametrów)}
 \paragraph{}
+Poniżej zamieszczono wzór rozpatrywanej funkcji.
+
+\begin{equation}\label{eq:emichalewicz}
+f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
+\end{equation}
 
 \newpage
 \begin{figure}[H]
@@ -545,11 +552,17 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \newpage
 \subsection{Schwefel (10 parametrów)}
 \paragraph{}
+Poniżej zamieszczono wzór rozpatrywanej funkcji.
+
+\begin{equation}\label{eq:schwefel}
+f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
+\end{equation}
+
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel1.png} % 
-		\caption{Wykres funkcji Schwefel (d=10)}
+		\caption{Wykres funkcji Schwefel (d=10) dla dwóch pierwszych wymiarów}
 		\label{fig:schwefel1}
 	\end{center}
 \end{figure}
@@ -655,13 +668,18 @@ Test
 \fbi
 Akapit
 
-
-
 \newpage
 \begin{thebibliography}{40}
 
 \bibitem{test1}
-Artur Suchwałko “Wprowadzenie do R dla programistów innych języków” https://cran.r-project.org/doc/contrib/R-dla-programistow-innych-jezykow.pdf
+Artur Suchwałko ,,Wprowadzenie do R dla programistów innych języków'' https://cran.r-project.org/doc/contrib/R-dla-programistow-innych-jezykow.pdf
+
+\bibitem{test2}
+Luca Scrucca ,,A quick tour of GA''
+https://cran.r-project.org/web/packages/GA/vignettes/GA.html
+
+\bibitem{test3}
+Surjanovic, S. \& Bingham, D. (2013). Virtual Library of Simulation Experiments: Test Functions and Datasets. Retrieved April 3, 2017, from http://www.sfu.ca/~ssurjano.
 
 \end{thebibliography}
 
