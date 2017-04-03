@@ -110,7 +110,7 @@ Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w języku R
 Parametryzacji podlega jedynie algorytm genetyczny.
 Wybór funkcji do optymalizacji odbywa się przez podanie jej nazwy.
 Pozostałe dane są odczytywane z pakietu ,,globalOptTests''.
-[todo] dopisać o pętli przechodzącej po wszystkich funkcjach oraz po wszystkich parametrach domyślnych.
+[todo: dopisać o pętli przechodzącej po wszystkich funkcjach oraz po wszystkich parametrach domyślnych]
 
 \newpage
 \section{Przebieg badań}
@@ -131,7 +131,20 @@ Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończ
 \fbi
 Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametry wynosiły kolejno:
 
-[todo] 3 różne wersje domyślne (może być tabelka)
+\begin{tabular}{|c|c|c|c|}
+	\hline
+	- & Parametry domyślne 1 & Parametry domyślne 2 & Parametry domyślne 3 \\ 
+	\hline \hline
+	Rozmiar populacji & 50 & 50 & 25 \\ 
+	\hline 
+	Rozmiar iteracji & 100 & 100 & 50 \\ 
+	\hline 
+	Prawdopodobieństwo mutacji & 0 & 0.1 & 0.1 \\ 
+	\hline 
+	Prawdopodobieństwo krzyżowania & 0 & 0.8 & 0.8 \\ 
+	\hline 
+\end{tabular} 
+
 \begin{itemize}
 	\item rozmiar populacji - 50
 	\item liczba iteracji - 100
@@ -142,7 +155,7 @@ Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametr
 \subsection{Branin (2 parametry)}
 \paragraph{}
 Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres. Wzór funkcji zamieszczono poniżej (\ref{eq:branin}).
-[todo] opisać dziedzinę
+[todo: opisać dziedzinę]
 
 
 \begin{equation}\label{eq:branin}
@@ -159,7 +172,7 @@ Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1})
 
 \fbi
 Powyższy wykres pokazuje trójwymiarowy obraz funkcji Branin.
-[todo] z którego wynika ...
+[todo: z którego wynika ...]
 
 \fbi
 Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego.
@@ -172,7 +185,7 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 \end{figure}
 
 \fbi
-Na powyższym wykresie można zauważyć niski wpływ mutacji na znalezione rozwiązania. Przy wszystkich parametrach domyślnych funkcja znajduje się w pobliżu poszukiwanej([todo] ?) wartości.
+Na powyższym wykresie można zauważyć niski wpływ mutacji na znalezione rozwiązania. Przy wszystkich parametrach domyślnych funkcja znajduje się w pobliżu optymalnej wartości.
 
 \fbi
 Wyjątkiem stanowi tutaj "seria 2" reprezentująca drugi zestaw wartości domyślnych. Przy mutacji wynoszącej 0.7 wynik funkcji znacząco się pogorszył.
@@ -195,7 +208,7 @@ Najlepszy rezultat został otrzymany w przedziale prawdopodobieństwa krzyżowan
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./assets/Branin4.png} % 
-	\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+	\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 	\label{fig:branin4}
 \end{figure}
 
@@ -209,7 +222,7 @@ Zauważalny jest wzrost jakości rozwiązania wraz ze wzrostem ilości jednostek
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./assets/Branin5.png} % 
-	\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+	\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 	\label{fig:branin5}
 \end{figure}
 
@@ -219,7 +232,7 @@ Wykres wskazuje wyranźną zmianę jakości rozwiązań dla 75 i więcej iteracj
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./assets/Branin6.png} % 
-	\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+	\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 	\label{fig:branin6}
 \end{figure}
 
@@ -229,9 +242,13 @@ Z wykonanych badań wynika, że do uzyskania optymalnego rozwiązania należy za
 \fbi
 Warto tutaj zauważyć ponowne (jak w przypadku mutacji) obniżenie się jakości wyniku dla przedziału 0.6-0.8.
 
+\newpage
 \subsection{Gulf (3 parametry)}
 \paragraph{}
 Gulf jest funkcją przyjmującą trzy parametry. Na ilustracji (rys.~\ref{fig:gulf1}) przedstawiono jej wykres dla pierwszych dwóch wymiarów.
+
+[todo: dodać wzór, dziedzinę funkcji]
+
 
 \begin{figure}[H]
 	\begin{center}
@@ -252,6 +269,10 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 	\end{center}
 \end{figure}
 
+\fbi
+Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji są zbliżone do wartości oczekiwanej w przedziale 0.1-0.6. Powyżej tego przedziału mutacja wywiera negatywny wpływ na otrzymywane wyniki.
+
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Gulf3.png} % 
@@ -260,33 +281,59 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 	\end{center}
 \end{figure}
 
+\fbi
+Prawdopodobieństwo krzyżowania ma niski oraz niestabilny wpływ na otrzymane wyniki. Wspólnie (dla wszystkich ustawień domyślnych) najlepsze wyniki uzyskane zostały w przedziale 0.4-0.6. Przyjęcie wartości krzyżowania wykraczających poza wskazany przedział znacząco obniża jakoś uzyskanych wyników.
+
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Gulf4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:gulf4}
 	\end{center}
 \end{figure}
 
+\fbi
+Wykres ten wyraznie obrazuje pozytywny wpływ zwiększenia populacji na jakość wyników. Najlepsze wyniki uzyskano dla populacji wynoszącej przynajmniej 50 jednostek.
+
+\fbi
+Zauważalne jest również pogorszenie wyników w przedziale 65-80[todo: dlaczego].
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Gulf5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:gulf5}
 	\end{center}
 \end{figure}
 
+\fbi
+Na wykresie można zauważyć znaczące poprawienie się rezultatów, gdy ilość iteracji wynosi przynamniej 80. Poniżej tej wartości uzyskane wyniki są znacząco gorsze od optymalnego rozwiązania. 
+
+\fbi
+W przedziale 130-200 [todo: co się dzieje]
+
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Gulf6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:gulf6}
 	\end{center}
 \end{figure}
 
 \fbi
+W przypadku funkcji Gulf elitzym ma znaczący wpływ na otrzymywane wyniki. W celu ich optymalizacji wymanaja jest wartość elityzmu na poziomie przynajmniej 0.4.
+
+\fbi
+Dla wartości powyżej 0.6 wyniki zaczynają się pogarszać. [todo: dlaczego]
+
+
+\fbi
+[todo: zmienic]
 Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawiona lokalizacja optimum nie jest poprawna, gdyż optymalizacji poddano wersję z 3 parametrami. Ogólnie rzecz biorąc gdyby 3 wymiar przedstawić w postaci gradientu kolorystycznego wtedy byłaby to poprawna lokalizacja niemniej trudna dla intuicyjnego sprawdzenia.
 
+\newpage
 \subsection{CosMix4 (4 parametry)}
 \paragraph{}
 
@@ -318,7 +365,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix44.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:cosmix44}
 	\end{center}
 \end{figure}
@@ -326,7 +373,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix45.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:cosmix45}
 	\end{center}
 \end{figure}
@@ -334,7 +381,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/CosMix46.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:cosmix46}
 	\end{center}
 \end{figure}
@@ -342,7 +389,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \subsection{EMichalewicz (5 parametrów)}
 \paragraph{}
 
-
+\newpage
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz1.png} % 
@@ -370,7 +417,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:emichalewicz4}
 	\end{center}
 \end{figure}
@@ -378,7 +425,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:emichalewicz5}
 	\end{center}
 \end{figure}
@@ -386,14 +433,14 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:emichalewicz6}
 	\end{center}
 \end{figure}
 
+\newpage
 \subsection{Hartman6 (6 parametrów)}
 \paragraph{}
-
 
 \begin{figure}[H]
 	\begin{center}
@@ -422,7 +469,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman64.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:hartman64}
 	\end{center}
 \end{figure}
@@ -430,7 +477,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman65.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:hartman65}
 	\end{center}
 \end{figure}
@@ -438,14 +485,14 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman66.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:hartman66}
 	\end{center}
 \end{figure}
 
+\newpage
 \subsection{PriceTransistor (9 parametrów)}
 \paragraph{}
-
 
 \begin{figure}[H]
 	\begin{center}
@@ -474,7 +521,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:pricetransistor4}
 	\end{center}
 \end{figure}
@@ -482,7 +529,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:pricetransistor5}
 	\end{center}
 \end{figure}
@@ -490,14 +537,14 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:pricetransistor6}
 	\end{center}
 \end{figure}
 
+\newpage
 \subsection{Schwefel (10 parametrów)}
 \paragraph{}
-
 
 \begin{figure}[H]
 	\begin{center}
@@ -526,7 +573,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:schwefel4}
 	\end{center}
 \end{figure}
@@ -534,7 +581,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:schwefel5}
 	\end{center}
 \end{figure}
@@ -542,11 +589,12 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Schwefel6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:schwefel6}
 	\end{center}
 \end{figure}
 
+\newpage
 \subsection{Zeldasine20 (20 parametrów)}
 \paragraph{}
 
@@ -578,7 +626,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine204.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:zeldasine4}
 	\end{center}
 \end{figure}
@@ -586,7 +634,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine205.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:zeldasine5}
 	\end{center}
 \end{figure}
@@ -594,7 +642,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine206.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:zeldasine6}
 	\end{center}
 \end{figure}
