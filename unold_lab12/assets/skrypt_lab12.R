@@ -8,17 +8,18 @@ require("rgl")
 
 # Settings ----
 
-nOfRuns <- 10 # minimum 5
+nOfRuns <- 20 # number of runs to calc average
 
-colors <- c("red", "blue", "orange")
-series <- c("Seria 1", "Seria 2", "Seria 3")
+colors <- c("red", "blue", "purple", "black")
+series <- c("Seria 1", "Seria 2", "Seria 3", "Seria 4")
 
 # [mutations,crossovers,populations,iterations,color]
 params = matrix(
   c(0, 0, 50, 100, 1,
-    0.1, 0.8, 50, 100, 2,
-    0.1, 0.8, 25, 50, 3),
-  nrow=3, ncol=5, byrow = TRUE)
+    0, 0.8, 50, 100, 2,
+    0.1, 0, 50, 100, 3,
+    0.1, 0.8, 50, 100, 4),
+  nrow=4, ncol=5, byrow = TRUE)
 
 functions <- c("Branin", "Gulf", "CosMix4", "EMichalewicz", 
 	"Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
@@ -66,13 +67,11 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
     temp <- c(temp, averages)
   }
   result <- matrix(c(temp),nrow = nrow(params),ncol = length(values))
-  write.table(result, file = fileName, row.names=FALSE, 
+  write.table(result, file = paste(funcName, fileName, sep=""), row.names=FALSE, 
               na="", col.names=FALSE, sep=";")
   
   if (graphs) {
-    
     png(file = paste(funcName, graphName, ".png", sep=""), width=600, height=400, units="px")
-    
     plot(0, 0, main=main,
          ylim=c(min(c(temp,globalOpt)),max(c(temp,globalOpt))),
          xlim=c(min(values),max(values)),
@@ -86,12 +85,9 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
       seriesNames <- c(seriesNames, series[params[i,5]])
       lines(values, result[i,], col = color, type = 'l')
     }
-    legend("topright", seriesNames, lty=rep(1,nrow(params)), col=colorNames)
-
+    legend("topright", seriesNames, lwd=rep(2,nrow(params)), lty=rep(1,nrow(params)), col=colorNames)
     dev.off()
-    
     summary(gBest)
-    
     png(file = paste(funcName, graphName, mType, ".png", sep=""), width=600, height=400, units="px")
     filled.contour(x, y, z, color.palette = jet.colors, nlevels = 24, 
          plot.axes = { axis(1); axis(2);
@@ -100,7 +96,6 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
          }
     )
     dev.off()
-    
     png(file = paste(funcName, graphName, mType, "fitness", ".png", sep=""), width=600, height=400, units="px")
     plot(gBest)
     dev.off()

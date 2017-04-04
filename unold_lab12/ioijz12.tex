@@ -136,17 +136,17 @@ Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametr
 	\centering
 	\caption{Parametry domyślne poszczególnych serii pomiarowych}
 	\label{tab:parametry}
-	\begin{tabularx}{\textwidth}{|X|c|c|c|}
+	\begin{tabularx}{\textwidth}{|X|c|c|c|c|}
 		\hline
-		- & Seria 1 & Seria 2 & Seria 3 \\ 
+		- & Seria 1 & Seria 2 & Seria 3 & Seria 4\\ 
 		\hline
-		Rozmiar populacji & 50 & 50 & 25 \\ 
+		Rozmiar populacji & 50 & 50 & 50 & 50 \\ 
 		\hline 
-		Rozmiar iteracji & 100 & 100 & 50 \\ 
+		Rozmiar iteracji & 100 & 100 & 100 & 100 \\ 
 		\hline 
-		Prawdopodobieństwo mutacji & 0 & 0.1 & 0.1 \\ 
+		Prawdopodobieństwo mutacji & 0 & 0 & 0.1 & 0.1 \\ 
 		\hline 
-		Prawdopodobieństwo krzyżowania & 0 & 0.8 & 0.8 \\ 
+		Prawdopodobieństwo krzyżowania & 0 & 0.8 & 0 & 0.8 \\ 
 		\hline 
 	\end{tabularx} 
 \end{table}
@@ -229,11 +229,11 @@ Zauważalny jest wzrost jakości rozwiązania wraz ze wzrostem ilości jednostek
 \end{figure}
 
 \fbi
-Wykres wskazuje wyranźną zmianę jakości rozwiązań dla 75 i więcej iteracji. Poniżej tej wartośći uzyskiwane wyniki są niestabilne, powyżej osiągają wartość zbliżoną do oczekiwanej.
+Wykres wskazuje wyraźną zmianę jakości rozwiązań dla 75 i więcej iteracji. Poniżej tej wartości uzyskiwane wyniki są niestabilne, powyżej osiągają wartość zbliżoną do oczekiwanej.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./assets/Branin6.png} % 
+	\includegraphics[width=0.9\textwidth]{./assets/Branin6.png}
 	\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 	\label{fig:branin6}
 \end{figure}
@@ -250,6 +250,12 @@ Warto tutaj zauważyć ponowne (jak w przypadku mutacji) obniżenie się jakośc
 Gulf jest funkcją przyjmującą trzy parametry. Na ilustracji (rys.~\ref{fig:gulf1}) przedstawiono jej wykres dla pierwszych dwóch wymiarów.
 
 [todo: dodać wzór, dziedzinę funkcji]
+
+\begin{equation}\label{eq:gulf}
+f(\boldsymbol{x}) = 
+\end{equation}
+http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Gulf.htm
+
 
 
 \begin{figure}[H]
@@ -339,6 +345,7 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \subsection{CosMix4 (4 parametry)}
 \paragraph{}
 
+http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/CosMix4.htm
 
 \begin{figure}[H]
 	\begin{center}
@@ -356,13 +363,20 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 	\end{center}
 \end{figure}
 
+\fbi
+Ogólnie rzecz biorąc, niezależnie od pozostałych parametrów, jedyną niekorzystną sytuacją jest tu jednoczesne wyłączenie mutacji i krzyżowania co możemy zaobserwować na przykładzie serii 1-szej.
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/CosMix43.png} % 
+		\includegraphics[width=0.9\textwidth]{./assets/CosMix43.png}
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:cosmix43}
 	\end{center}
 \end{figure}
+
+\fbi
+Podobnie jak na poprzednim wykresie (rys. \ref{fig:cosmix42}) tak i na powyższym (rys. \ref{fig:cosmix43}) ujawnia się niekorzystny wpływ wyłączenia mutacji i krzyżowania.
+
 
 \begin{figure}[H]
 	\begin{center}
@@ -379,6 +393,9 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 		\label{fig:cosmix45}
 	\end{center}
 \end{figure}
+
+\fbi
+Na dwóch poprzedzających wykresach możemy zaobserwować, że domyślne wartości w postaci wielkości populacji w liczbie 50 i ilości iteracji równej 100 są wzajemnie optymalne.
 
 \begin{figure}[H]
 	\begin{center}
@@ -449,6 +466,9 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 \subsection{Hartman6 (6 parametrów)}
 \paragraph{}
 
+http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Hartman6.htm
+
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.9\textwidth]{./assets/Hartman61.png} % 
@@ -497,9 +517,11 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 	\end{center}
 \end{figure}
 
-\newpage
 \subsection{PriceTransistor (9 parametrów)}
 \paragraph{}
+
+http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/PriceTransistor.htm
+
 
 \begin{figure}[H]
 	\begin{center}
@@ -601,16 +623,17 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Schwefel6.png} % 
+		\includegraphics[width=0.9\textwidth]{./assets/Schwefel6.png} 
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:schwefel6}
 	\end{center}
 \end{figure}
 
-\newpage
 \subsection{Zeldasine20 (20 parametrów)}
 \paragraph{}
 
+
+http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Zeldasine20.htm
 
 \begin{figure}[H]
 	\begin{center}
@@ -630,7 +653,7 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine203.png} % 
+		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine203.png}
 		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:zeldasine3}
 	\end{center}
@@ -638,7 +661,7 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine204.png} % 
+		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine204.png}
 		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
 		\label{fig:zeldasine4}
 	\end{center}
@@ -646,27 +669,34 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine205.png} % 
+		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine205.png}
 		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
 		\label{fig:zeldasine5}
 	\end{center}
 \end{figure}
 
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine206.png} % 
+		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine206.png}
 		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
 		\label{fig:zeldasine6}
 	\end{center}
 \end{figure}
 
+\fbi
+Analizując otrzymane wyniki możemy stwierdzić, że nie udało się otrzymać wartości bliskiej szukanemu optimum. Jest to związane z dużą przestrzenią poszukiwań. Musimy pamiętać, że rozpatrujemy tu funkcję o 20 parametrach.
+
 \newpage
 \section{Podsumowanie}
 \paragraph{}
-Test
+
 
 \fbi
-Akapit
+Wartość prawdopodobieństwa mutacji i krzyżowania zdaje się odgrywać drugorzędną rolę. Istotne jednak by chociaż jedna z nich była włączona z prawdopodobieństwem większym niż 0.
+
+\fbi
+Najlepszym ustawieniem dla elityzmu jest prawdopodobieństwo rzędu 0,5.
 
 \newpage
 \begin{thebibliography}{40}
