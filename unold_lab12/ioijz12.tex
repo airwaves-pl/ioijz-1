@@ -93,7 +93,7 @@
 \newpage
 \section{Wprowadzenie}
 \paragraph{}
-Algorytm genetyczny – algorytm heurystyczny, który swoim działaniem przypomina działanie ewolucji w~naturze. Osobniki będące zbyt słabe zostają wyeliminowane z~populacji w~kolejnych pokoleniach, a~na ich miejsce przyjmowane są lepsze, silniejsze, bardziej adaptowalne. Algorytmy te zakładają możliwość mutacji i~krzyżowania wśród potomków, przez co nie zawsze są oni silniejsi od poprzednio wyeliminowanych członków. Dodatkowo wprowadzają pojęcie elity, która jest bezpośrednio przenoszona do następnego - teoretycznie lepszego pokolenia.
+Algorytm genetyczny – algorytm heurystyczny, który swoim działaniem przypomina działanie ewolucji w~naturze. Osobniki będące zbyt słabe zostają wyeliminowane z~populacji w~kolejnych pokoleniach, a~na ich miejsce przyjmowane są lepsze, silniejsze, bardziej podatne adaptacji. Algorytmy te zakładają możliwość mutacji i~krzyżowania wśród potomków, przez co nie zawsze są oni silniejsi od poprzednio wyeliminowanych członków. Dodatkowo wprowadzają pojęcie elity, która jest bezpośrednio przenoszona do następnego - teoretycznie lepszego pokolenia.
 
 \fbi
 W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla różnych parametrów. Jako benchmark oceny należało użyć pakietu ,,getGlobalOpts'' oraz języka R.
@@ -178,7 +178,7 @@ Dla funkcji o~ilości parametrów większej niż 2 pominięto ilustracje graficz
 \newpage
 \subsection{Branin (2 parametry)}
 \paragraph{}
-Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}).
+Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}) \cite{test4}.
 
 \begin{equation}\label{eq:branin}
 	f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
@@ -197,7 +197,7 @@ Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1})
 Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
 
 \fbi
-Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego. Kolejno dokonano pomiarów dla różnych wartości: prawdopodobieństwa mutacji i~krzyżowania, wielkości populacji, ilości iteracji oraz elityzmu. Wszystkie pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1 -- 4).
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego. Kolejno dokonano pomiarów dla różnych wartości: prawdopodobieństwa mutacji i~krzyżowania, wielkości populacji, ilości iteracji oraz elityzmu. Wszystkie pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1~--~4).
 
 \newpage
 \begin{figure}[H]
@@ -245,7 +245,7 @@ Wykres (rys.~\ref{fig:branin5}) wskazuje wyraźną zmianę jakości rozwiązań 
 \end{figure}
 
 \fbi
-Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0.35. Jego ustawienie poniżej tej wartości powoduje obniżenie się jakości rezultatów.
+Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0,35. Jego ustawienie poniżej tej wartości powoduje obniżenie się jakości rezultatów.
 
 \begin{figure}[H]
 	\centering
@@ -257,7 +257,7 @@ Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optyma
 \newpage
 \subsection{Gulf (3 parametry)}
 \paragraph{}
-Gulf jest funkcją określoną dla ilości parametrów równej 3. Na ilustracji (rys.~\ref{fig:gulf1}) przedstawiono jej wykres dla pierwszych dwóch.
+Gulf jest funkcją określoną dla ilości parametrów równej 3. Na ilustracji (rys.~\ref{fig:gulf1}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:gulf}) \cite{test4}.
 
 \begin{equation}\label{eq:gulf}
 f(\boldsymbol{x}) = \sum_{i=1}^{99} [\exp(- \frac{(u_i - x_2)^{x_3}}{x_1}) - 0.01i]^2
@@ -296,10 +296,10 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 \end{figure}
 
 \fbi
-Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji(rys.~\ref{fig:gulf2}) pokazują nikły wpływ na wartość otrzymanych wyników. Wszystkie wartości utrzymują się na poziomie zbliżonym do optimum, wyjątkiem są skoki niektórych wyników, za co odpowiada heurestyka algorytmu genetycznego.
+Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji (rys.~\ref{fig:gulf2}) pokazują nikły wpływ na wartość otrzymanych wyników. Wszystkie wartości utrzymują się na poziomie zbliżonym do optimum, wyjątkiem są skoki niektórych wyników, za co odpowiada heurystyka algorytmu genetycznego.
 
 \fbi
-Prawdopodobieństwo krzyżowania(rys.~\ref{fig:gulf3}) ma widoczny wpływ na otrzymane wyniki. Wraz ze zwiększeniem wartości krzyżowania rezultat był coraz lepszy. Od przyjętej wartości równej 0,5 wyniki zbliżyły się do optimum funkcji.
+Prawdopodobieństwo krzyżowania (rys.~\ref{fig:gulf3}) ma widoczny wpływ na otrzymane wyniki. Wraz ze zwiększeniem wartości krzyżowania rezultat był coraz lepszy. Od przyjętej wartości równej 0,5 wyniki zbliżyły się do optimum funkcji.
 
 \begin{figure}[H]
 	\begin{center}
@@ -318,10 +318,10 @@ Prawdopodobieństwo krzyżowania(rys.~\ref{fig:gulf3}) ma widoczny wpływ na otr
 \end{figure}
 
 \fbi
-Wykres(rys.~\ref{fig:gulf4}) znalezionego minimum dla rozmiarów populacji wyraźnie obrazuje pozytywny wpływ zwiększenia populacji na jakość wyników. Najlepsze wyniki uzyskano dla populacji wynoszącej przynajmniej 40 jednostek.
+Wykres (rys.~\ref{fig:gulf4}) znalezionego minimum dla rozmiarów populacji wyraźnie obrazuje pozytywny wpływ zwiększenia populacji na jakość wyników. Najlepsze wyniki uzyskano dla populacji wynoszącej przynajmniej 40 jednostek.
 
 \fbi
-Na wykresie(rys.~\ref{fig:gulf5}) można zauważyć znaczące poprawienie się rezultatów, gdy ilość iteracji wynosi przynamniej 60. Poniżej tej wartości uzyskane wyniki są znacząco gorsze od optymalnego rozwiązania. 
+Na wykresie (rys.~\ref{fig:gulf5}) można zauważyć znaczące poprawienie się rezultatów, gdy ilość iteracji wynosi przynajmniej 60. Poniżej tej wartości uzyskane wyniki są znacząco gorsze od optymalnego rozwiązania. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -337,7 +337,7 @@ W przypadku funkcji Gulf elityzm ma znaczący wpływ na otrzymywane wyniki. W ce
 \newpage
 \subsection{CosMix4 (4 parametry)}
 \paragraph{}
-CosMix4 jest funkcją określoną dla ilości parametrów równej 4. Na ilustracji (rys.~\ref{fig:cosmix41}) przedstawiono jej wykres dla pierwszych dwóch.
+CosMix4 jest funkcją określoną dla ilości parametrów równej 4. Na ilustracji (rys.~\ref{fig:cosmix41}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:cosmix4}) \cite{test4}.
 
 \begin{equation}\label{eq:cosmix4}
 f(\boldsymbol{x}) = -0.1 \sum_{i=1}^{4} \cos (5 \pi x_i) - \sum_{i=1}^{4} x_i^2
@@ -373,10 +373,7 @@ Ilustracja powyżej (rys.~\ref{fig:cosmix41}) przedstawia wykres dwóch pierwszy
 \end{figure}
 
 \fbi
-Z wykresu(rys.~\ref{fig:cosmix42}) wynika nikły wpływ mutacji na otrzymane wyniki. Wartości utrzymują sie w~pobliżu optimum.
-
-\fbi
-Wartość krzyżowania powoduje niestabilność wyników w~przedziale (0,0~--~0.6)(rys.~\ref{fig:cosmix44}), dalej wartości osiągają optimum. Wyjątkiem jest wartość 0,8, w~której widoczne jest obniżenie jakości otrzymanych wyników.
+Z wykresu (rys.~\ref{fig:cosmix42}) wynika nikły wpływ mutacji na otrzymane wyniki. Wartości utrzymują się w~pobliżu optimum. Wartość krzyżowania powoduje niestabilność wyników w~przedziale (0~--~0,6) (rys.~\ref{fig:cosmix43}), dalej wartości osiągają optimum. Wyjątkiem jest wartość 0,8 w~której widoczne jest obniżenie jakości otrzymanych wyników.
 
 
 \begin{figure}[H]
@@ -396,13 +393,13 @@ Wartość krzyżowania powoduje niestabilność wyników w~przedziale (0,0~--~0.
 \end{figure}
 
 \fbi
-Na dwóch poprzedzających wykresach(rys.~\ref{fig:cosmix44},\ref{fig:cosmix45}) możemy zaobserwować, że domyślne wartości w~postaci wielkości populacji w~liczbie 40 i~ilości iteracji równej 60 są wzajemnie optymalne.
+Na dwóch poprzedzających wykresach (rys.~\ref{fig:cosmix44},~\ref{fig:cosmix45}) możemy zaobserwować, że domyślne wartości w~postaci wielkości populacji w~liczbie 40 i~ilości iteracji równej 60 są wzajemnie optymalne.
 
 \fbi
 Funkcja osiąga optimum dla wartości populacji równej 85, oraz 170 ilości iteracji.
 
 \fbi
-Zauważalne są tutaj pogroszenia się wyników dla wszystkich serii, gdy ilość iteracji wynosi 110. Wynikać to może z~budowy funkcji, która dla tych parametrów zwraca gorsze wyniki.
+Zauważalne są tutaj pogorszenia się wyników dla wszystkich serii, gdy ilość iteracji wynosi 110. Wynikać to może z~budowy funkcji, która dla tych parametrów zwraca gorsze wyniki.
 
 \begin{figure}[H]
 	\begin{center}
@@ -413,12 +410,12 @@ Zauważalne są tutaj pogroszenia się wyników dla wszystkich serii, gdy iloś�
 \end{figure}
 
 \fbi
-W przypadku funkcji CosMix elityzm ma znaczący wpływ na otrzymane wyniki. Przy elityźmie mniejszym od 0,3 otrzymane wartości są znacząco oddalone od optimum. Dla elityzmu na większego od 0,3 wartości utrzymują się blisko optimum.
+W przypadku funkcji CosMix4 elityzm ma znaczący wpływ na otrzymane wyniki. Przy elityzmie mniejszym od 0,3 otrzymane wartości są znacząco oddalone od optimum. Dla elityzmu na większego od 0,3 wartości utrzymują się blisko optimum.
 
 \newpage
 \subsection{EMichalewicz (5 parametrów)}
 \paragraph{}
-Poniżej zamieszczono wzór rozpatrywanej funkcji.
+EMichalewicz jest funkcją określoną dla ilości parametrów równej 5. Na ilustracji (rys.~\ref{fig:emichalewicz1}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:emichalewicz}) \cite{test4}.
 
 \begin{equation}\label{eq:emichalewicz}
 f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
@@ -451,10 +448,10 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 \end{figure}
 
 \fbi
-Oba wykresy (~rys.\ref{fig:emichalewicz1},\ref{fig:emichalewicz2}) pokazują minimalny wpływ prawdopodobieństwa krzyżowania oraz mutacji na wpływ otrzymywanych wyników. 
+Oba wykresy (~rys.\ref{fig:emichalewicz2},~\ref{fig:emichalewicz3}) pokazują minimalny wpływ prawdopodobieństwa mutacji oraz krzyżowania na wpływ otrzymywanych wyników. 
 
 \fbi
-Z wykonanych pomiarów nie można odczytać dla jakich wartości mutacji, czy krzyżowania funkcja zbliża się od optimum. Najblżej optimum była mutacja na dowolnym, niezerowym poziomie.
+Z wykonanych pomiarów nie można odczytać dla jakich wartości mutacji, czy krzyżowania funkcja zbliża się od optimum. Najbliżej optimum była mutacja na dowolnym, niezerowym poziomie.
 
 \begin{figure}[H]
 	\begin{center}
@@ -474,7 +471,7 @@ Z wykonanych pomiarów nie można odczytać dla jakich wartości mutacji, czy kr
 \end{figure}
 
 \fbi
-Z wykresu(\ref{fig:emichalewicz3}) można odczytać wpływ zwiększenia populacji na jakość otrzymywanych wyników. Funkcja ta logarytmicznie dąży do pewnej wartości, lecz nie jest to wartość optimum. Oznacza to, że modyfikacja samej tylko populacji nie osiągnie optimum dla danej funkcji.
+Z wykresu (rys.~\ref{fig:emichalewicz4}) można odczytać wpływ zwiększenia populacji na jakość otrzymywanych wyników. Funkcja ta logarytmicznie dąży do pewnej wartości, lecz nie jest to wartość optimum. Oznacza to, że modyfikacja samej tylko populacji nie osiągnie optimum dla danej funkcji.
 
 \fbi
 Ilość iteracji ma znaczący wpływ na otrzymane wyniki od wartości równej 50. W dalszym etapie funkcja zbliża się do optimum.
@@ -488,15 +485,15 @@ Ilość iteracji ma znaczący wpływ na otrzymane wyniki od wartości równej 50
 \end{figure}
 
 \fbi
-Tak samo jak w~przypadku wykresu populacji(\ref{fig:emichalewicz3}) elityzm logartymicznie dąży do pewniej wartości, lecz nie do optimum funkcji. Zwiększenie ilości elit w~populacji w~przypadku funkcji EMichalewicza poprawia jakość otrzymywanych wyników.
+Tak samo jak w~przypadku wykresu populacji (rys.~\ref{fig:emichalewicz4}) elityzm logarytmicznie dąży do pewnej wartości, lecz nie do optimum funkcji. Zwiększenie ilości elit w~populacji w~przypadku funkcji EMichalewicza poprawia jakość otrzymywanych wyników.
 
 \fbi
-Wybranie elityzmu na poziomie niższym niż 0,2 powoduje otrzymywanie około dwuktrotnie gorszych wyników niż otrzymano na dowolnie innym poziomie.
+Wybranie elityzmu na poziomie niższym niż 0,2 powoduje otrzymywanie około dwukrotnie gorszych wyników niż otrzymano na dowolnie innym poziomie.
 
 \newpage
 \subsection{Hartman6 (6 parametrów)}
 \paragraph{}
-Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:hartman61}) przedstawiono jej wykres dla pierwszych dwóch.
+Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:hartman61}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:hartman6}) \cite{test4}.
 
 \begin{equation}\label{eq:hartman6}
 f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{ij})^2]
@@ -532,10 +529,7 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{i
 Z wykresu (rys.~\ref{fig:hartman62}) odczytać można niski wpływ mutacji na osiągane wyniki. Dla wszystkich wartości mutacji otrzymywane wyniki zbliżone są do optimum funkcji.
 
 \fbi
-Warto zauważyć, że wszystkie serie posiadają jedną wartość mutacji, dla której następuje pogorszenie otrzymanego wyniku. Serie posiadają inne wartości domyślne dla funkcji. Oznacza to, że funkcja dla pewnej wartości, określonej przez wartości domyślne, zwraca gorsze wyniki.
-
-\fbi
-Wykres krzyżowania(rys.~\ref{fig:hartman63}) wskazuje wartość 0,6 jako graniczną dla otrzymywania optimum funkcji. Przed tą wartością otrzymane wyniki są niestabilne, nie można odczytać nich czy wyniki się poprawiają czy pogarszają.
+Wykres krzyżowania (rys.~\ref{fig:hartman63}) wskazuje wartość 0,6 jako graniczną dla otrzymywania optimum funkcji. Przed tą wartością otrzymane wyniki są niestabilne i nie można stwierdzić czy wyniki się poprawiają czy pogarszają.
 
 \begin{figure}[H]
 	\begin{center}
@@ -555,10 +549,10 @@ Wykres krzyżowania(rys.~\ref{fig:hartman63}) wskazuje wartość 0,6 jako granic
 \end{figure}
 
 \fbi
-Wykres populacji(rys.~\ref{fig:hartman64}) wskazuje na logarytmiczną zbieżność wartości dla danej populacji do optimum funkcji. Wynika z tego, że funkcja ta osiąga optimum dla dowolnych parametrów mutacji i~krzyżowania, lecz dużej populacji.
+Wykres populacji (rys.~\ref{fig:hartman64}) wskazuje na logarytmiczną zbieżność wartości dla danej populacji do optimum funkcji. Wynika z tego, że funkcja ta osiąga optimum dla dowolnych parametrów mutacji i~krzyżowania, lecz dużej populacji.
 
 \fbi
-Ilość iteracji dąży do optimum dla więcej niż 50 iteracji. Wartość ta jest wartością graniczną. Wyniki znajdujące się przed nią są ponad dwuktornie gorsze niż wyniki po niej. Zauważalne są również dwa skoki (dla wartości 110 i~160) pokazujące pogorszenie rezultatu, wskazują one na budowę funkcji, która dla tych wartości zwraca gorsze wyniki.
+Ilość iteracji dąży do optimum dla więcej niż 50 iteracji. Wartość ta jest wartością graniczną. Wyniki znajdujące się przed nią są ponad dwukrotnie gorsze niż wyniki po niej. Zauważalne są również dwa skoki (dla wartości 110 i~160) pokazujące pogorszenie rezultatu, wskazują one na budowę funkcji, która dla tych wartości zwraca gorsze wyniki.
 
 \begin{figure}[H]
 	\begin{center}
@@ -569,12 +563,12 @@ Ilość iteracji dąży do optimum dla więcej niż 50 iteracji. Wartość ta je
 \end{figure}
 
 \fbi
-Zwiększenie elityzmu logartymicznie dąży do wartości optymalnej. Wartości, które zostały w~ten sposób osiągnięte, są bliskie optimum, lecz jego nie osiągają. Oznacza to, że samym elityzmem nie można dla danej funkcji osiągnąć wartości optymalnej, a~tylko się do niej zbliżyć.
+Zwiększenie elityzmu logarytmicznie dąży do wartości optymalnej. Wartości które zostały w~ten sposób osiągnięte, są bliskie optimum, lecz jego nie osiągają. Oznacza to, że samym elityzmem nie można dla danej funkcji osiągnąć wartości optymalnej, a~tylko się do niej zbliżyć.
 
 \newpage
 \subsection{PriceTransistor (9 parametrów)}
 \paragraph{}
-PriceTransistor jest funkcją określoną dla ilości parametrów równej 9. Na ilustracji (rys.~\ref{fig:pricetransistor1}) przedstawiono jej wykres dla pierwszych dwóch.
+PriceTransistor jest funkcją określoną dla ilości parametrów równej 9. Na ilustracji (rys.~\ref{fig:pricetransistor1}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:pricetransistor}) \cite{test4}.
 
 \begin{equation}\label{eq:pricetransistor}
 f(\boldsymbol{x}) = \gamma^2 + \sum_{k=1}^{4} ( \alpha_k^2 + \beta_k^2 )
@@ -642,7 +636,7 @@ W przypadku rozpatrywanej funkcji widać (rys.~\ref{fig:pricetransistor6}), że 
 \newpage
 \subsection{Schwefel (10 parametrów)}
 \paragraph{}
-Schwefel jest funkcją określoną dla ilości parametrów równej 10. Na ilustracji (rys.~\ref{fig:schwefel1}) przedstawiono jej wykres dla pierwszych dwóch.
+Schwefel jest funkcją określoną dla ilości parametrów równej 10. Na ilustracji (rys.~\ref{fig:schwefel1}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:schwefel}) \cite{test4}.
 
 \begin{equation}\label{eq:schwefel}
 f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
@@ -678,7 +672,7 @@ Funkcja ma wiele lokalnych optimów przy domyślnych ograniczeniach (rys.~\ref{f
 \end{figure}
 
 \fbi
-Na podstawie powyższych wykresów mutacji (rys.~\ref{fig:schwefel2}) oraz krzyżowania (rys.~\ref{fig:schwefel3}) możemy uznać, że relatywnie najlepsze wyniki uzyskujemy dla p. mutacji rzędu 0,6 -- 0,7 oraz p. krzyżowania rzędu 0,6 lub 0,9.
+Na podstawie powyższych wykresów mutacji (rys.~\ref{fig:schwefel2}) oraz krzyżowania (rys.~\ref{fig:schwefel3}) możemy uznać, że relatywnie najlepsze wyniki uzyskujemy dla p. mutacji rzędu 0,6~--~0,7 oraz p. krzyżowania rzędu 0,6 lub 0,9.
 
 \begin{figure}[H]
 	\begin{center}
@@ -708,7 +702,7 @@ Na podstawie powyższych wykresów populacji (rys.~\ref{fig:schwefel4}) oraz ite
 \end{figure}
 
 \fbi
-W przypadku rozpatrywanej funkcji najlepsze rezultaty otrzymano (rys.~\ref{fig:schwefel6}) dla wartości elityzmu rzędu 0,6 -- 0,7. Oznacza to, że gdy trochę więcej niż połowa osobników przechodzi do kolejnego pokolenia uzyskujemy najlepsze wyniki.
+W przypadku rozpatrywanej funkcji najlepsze rezultaty otrzymano (rys.~\ref{fig:schwefel6}) dla wartości elityzmu rzędu 0,6~--~0,7. Oznacza to, że gdy trochę więcej niż połowa osobników przechodzi do kolejnego pokolenia uzyskujemy najlepsze wyniki.
 
 \fbi
 Analizując otrzymane rezultaty całościowo możemy stwierdzić, że w~żadnym przypadku nie udało się otrzymać wartości optymalnej. Jest to związane ze stosunkowo dużą przestrzenią poszukiwań i~dużą ilością lokalnych optimów.
@@ -716,7 +710,7 @@ Analizując otrzymane rezultaty całościowo możemy stwierdzić, że w~żadnym 
 \newpage
 \subsection{Zeldasine20 (20 parametrów)}
 \paragraph{}
-Zeldasine20 jest funkcją określoną dla ilości parametrów równej 20. Na ilustracji (rys.~\ref{fig:zeldasine1}) przedstawiono jej wykres dla pierwszych dwóch.
+Zeldasine20 jest funkcją określoną dla ilości parametrów równej 20. Na ilustracji (rys.~\ref{fig:zeldasine1}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:zeldasine}) \cite{test4}.
 
 \begin{equation}\label{eq:zeldasine}
 f(\boldsymbol{x}) = -A \prod_{j=1}^{D} \sin (x_j - z) - \prod_{j=1}^{D} \sin (B \cdot (x_j - z))
@@ -782,7 +776,7 @@ Na podstawie powyższych wykresów populacji (rys.~\ref{fig:zeldasine4}) oraz it
 \end{figure}
 
 \fbi
-W przypadku rozpatrywanej funkcji najlepsze rezultaty otrzymano (rys.~\ref{fig:zeldasine6}) dla wartości elityzmu rzędu 0,9 -- 1,0. Oznacza to, że gdy wszystkie osobniki przechodzą do kolejnego pokolenia uzyskujemy najlepsze wyniki.
+W przypadku rozpatrywanej funkcji najlepsze rezultaty otrzymano (rys.~\ref{fig:zeldasine6}) dla wartości elityzmu rzędu 0,9~--~1,0. Oznacza to, że gdy wszystkie osobniki przechodzą do kolejnego pokolenia uzyskujemy najlepsze wyniki.
 
 \fbi
 Analizując otrzymane rezultaty możemy stwierdzić, że w~żadnym przypadku nie udało się otrzymać wartości bliskiej szukanemu optimum. Jest to związane z~dużą przestrzenią poszukiwań. Musimy pamiętać, że rozpatrujemy tu funkcję o~20 parametrach.
