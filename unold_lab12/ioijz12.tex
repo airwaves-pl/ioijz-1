@@ -130,7 +130,7 @@ Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończ
 \end{itemize}
 
 \fbi
-Każdy pomiar przeprowadzano 20-krotnie wyniki uśredniając. Domyślne parametry przedstawiono poniżej (tabela~\ref{tab:parametry}). Zmianie ulegają wartości  prawdopodobieństwa mutacji i krzyżowania.
+Każdy pomiar przeprowadzano 20-krotnie wyniki uśredniając co oznacza, że wartości widoczne na wykresach dla każdej serii z osobna są uśrednione po osobnych 20 przebiegach. Domyślne parametry każdej z serii przedstawiono poniżej (tabela~\ref{tab:parametry}). Zmianie ulegają wartości  prawdopodobieństwa mutacji i krzyżowania by zbadać znaczenie ich obecności podczas optymalizacji.
 
 \begin{table}[htbp]
 	\centering
@@ -553,6 +553,9 @@ f(\boldsymbol{x}) = \gamma^2 + \sum_{k=1}^{4} ( \alpha_k^2 + \beta_k^2 )
 	\end{center}
 \end{figure}
 
+\fbi
+Na podstawie powyższych wykresów mutacji (rys.~\ref{fig:pricetransistor2}) oraz krzyżowania (rys.~\ref{fig:pricetransistor3}) możemy uznać, że: w przypadku mutacji wystąpił nieoczekiwany wynik dla wartości 0,5 który ,,spłaszczył'' resztę wykresu, w przypadku krzyżowania najlepsze wyniki uzyskano dla wartości prawdopodobieństwa powyżej 0,6.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/PriceTransistor4.png}
@@ -569,6 +572,9 @@ f(\boldsymbol{x}) = \gamma^2 + \sum_{k=1}^{4} ( \alpha_k^2 + \beta_k^2 )
 	\end{center}
 \end{figure}
 
+\fbi
+Na podstawie powyższych wykresów populacji (rys.~\ref{fig:pricetransistor4}) oraz iteracji (rys.~\ref{fig:pricetransistor5}) można zauważyć iż wraz ze wzrostem każdego z parametrów wyniki ulegają poprawie.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/PriceTransistor6.png}
@@ -576,6 +582,9 @@ f(\boldsymbol{x}) = \gamma^2 + \sum_{k=1}^{4} ( \alpha_k^2 + \beta_k^2 )
 		\label{fig:pricetransistor6}
 	\end{center}
 \end{figure}
+
+\fbi
+W przypadku rozpatrywanej funkcji widać (rys.~\ref{fig:pricetransistor6}), że jeden z wynik dla jednej z konfiguracji ,,zaburzył'' skalę wykresu.
 
 \newpage
 \subsection{Schwefel (10 parametrów)}
@@ -610,6 +619,9 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 	\end{center}
 \end{figure}
 
+\fbi
+Na podstawie powyższych wykresów mutacji (rys.~\ref{fig:schwefel2}) oraz krzyżowania (rys.~\ref{fig:schwefel3}) możemy uznać, że relatywnie najlepsze wyniki uzyskujemy dla p. mutacji rzędu 0,6 -- 0,7 oraz p. krzyżowania rzędu 0,6 lub 0,9.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Schwefel4.png}
@@ -626,6 +638,9 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 	\end{center}
 \end{figure}
 
+\fbi
+Na podstawie powyższych wykresów populacji (rys.~\ref{fig:schwefel4}) oraz iteracji (rys.~\ref{fig:schwefel5}) można zauważyć iż zachodzą pewne prawidłowości lecz nie są one całkowicie zgodne z intuicją jeżeli o takowej możemy tu mówić. Optymalny rozmiar populacji zdaje się wynosić 75. Natomiast ilość iteracji powyżej 150 chwilowo pogarsza wyniki, jednak jak widać dla większych wartości ponownie się one polepszają. Warto zauważyć, że dla ilości iteracji 150 nie osiągane jest optimum zatem przypuszczalnie wzrost ilości iteracji powinien tu pomóc. Wszystko zależy też od tego ile czasu możemy przeznaczyć na poszukiwania.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Schwefel6.png}
@@ -633,6 +648,12 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 		\label{fig:schwefel6}
 	\end{center}
 \end{figure}
+
+\fbi
+W przypadku rozpatrywanej funkcji najlepsze rezultaty otrzymano (rys.~\ref{fig:schwefel6}) dla wartości elityzmu rzędu 0,6 -- 0,7. Oznacza to, że gdy trochę więcej niż połowa osobników przechodzi do kolejnego pokolenia uzyskujemy najlepsze wyniki.
+
+\fbi
+Analizując otrzymane rezultaty całościowo możemy stwierdzić, że w żadnym przypadku nie udało się otrzymać wartości optymalnej. Jest to związane ze stosunkowo dużą przestrzenią poszukiwań i dużą ilością lokalnych optimów.
 
 \newpage
 \subsection{Zeldasine20 (20 parametrów)}
@@ -648,15 +669,18 @@ f(\boldsymbol{x}) = -A \prod_{j=1}^{D} \sin (x_j - z) - \prod_{j=1}^{D} \sin (B 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.95\textwidth]{./assets/Zeldasine201.png}
-		\caption{Wykres funkcji Zeldasine (d=20)}
+		\caption{Wykres funkcji Zeldasine20 dla dwóch pierwszych parametrów}
 		\label{fig:zeldasine1}
 	\end{center}
 \end{figure}
 
+\fbi
+Funkcja ma bardzo pofalowaną powierzchnię i dużo lokalnych optimów. Można intuicyjnie założyć, że jest ciężka do optymalizacji.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine202.png}
-		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od prawdopodobieństwa mutacji}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine20 w zależności od prawdopodobieństwa mutacji}
 		\label{fig:zeldasine2}
 	\end{center}
 \end{figure}
@@ -664,15 +688,18 @@ f(\boldsymbol{x}) = -A \prod_{j=1}^{D} \sin (x_j - z) - \prod_{j=1}^{D} \sin (B 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine203.png}
-		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od prawdopodobieństwa krzyżowania}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine20 w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:zeldasine3}
 	\end{center}
 \end{figure}
 
+\fbi
+Na podstawie powyższych wykresów mutacji (rys.~\ref{fig:zeldasine2}) oraz krzyżowania (rys.~\ref{fig:zeldasine3}) możemy uznać, że relatywnie najlepsze wyniki uzyskujemy dla p. mutacji rzędu 0,4 oraz p. krzyżowania rzędu 0,6.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine204.png}
-		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od rozmiarów populacji}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine20 w zależności od rozmiarów populacji}
 		\label{fig:zeldasine4}
 	\end{center}
 \end{figure}
@@ -680,27 +707,32 @@ f(\boldsymbol{x}) = -A \prod_{j=1}^{D} \sin (x_j - z) - \prod_{j=1}^{D} \sin (B 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine205.png}
-		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od ilości iteracji}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine20 w zależności od ilości iteracji}
 		\label{fig:zeldasine5}
 	\end{center}
 \end{figure}
 
+\fbi
+Na podstawie powyższych wykresów populacji (rys.~\ref{fig:zeldasine4}) oraz iteracji (rys.~\ref{fig:zeldasine5}) możemy uznać, że wzrost rozmiaru populacji i ilości iteracji wpływa pozytywnie na jakość rezultatów. Zwłaszcza zwiększanie ilości iteracji w przypadku funkcji z tak dużą ilością parametrów zdaje się prowadzić w dobrym kierunku.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine206.png}
-		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od przyjętego elityzmu}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine20 w zależności od przyjętego elityzmu}
 		\label{fig:zeldasine6}
 	\end{center}
 \end{figure}
 
 \fbi
-Analizując otrzymane wyniki możemy stwierdzić, że nie udało się otrzymać wartości bliskiej szukanemu optimum. Jest to związane z dużą przestrzenią poszukiwań. Musimy pamiętać, że rozpatrujemy tu funkcję o 20 parametrach.
+W przypadku rozpatrywanej funkcji najlepsze rezultaty otrzymano (rys.~\ref{fig:zeldasine6}) dla wartości elityzmu rzędu 0,9 -- 1,0. Oznacza to, że gdy wszystkie osobniki przechodzą do kolejnego pokolenia uzyskujemy najlepsze wyniki.
+
+\fbi
+Analizując otrzymane rezultaty możemy stwierdzić, że w żadnym przypadku nie udało się otrzymać wartości bliskiej szukanemu optimum. Jest to związane z dużą przestrzenią poszukiwań. Musimy pamiętać, że rozpatrujemy tu funkcję o 20 parametrach.
 
 \newpage
 \section{Podsumowanie}
 \paragraph{}
-
+W trakcie prowadzonych badań przetestowano algorytm genetyczny w zadaniu optymalizacji dla 9 funkcji testowych. Analizie poddano wpływ zmiany każdego z parametrów dla 4 różnych konfiguracji pozostałych wartości domyślnych.
 
 \fbi
 Wartość prawdopodobieństwa mutacji i krzyżowania zdaje się odgrywać drugorzędną rolę. Istotne jednak by chociaż jedna z nich była włączona z prawdopodobieństwem większym niż 0.
@@ -710,6 +742,9 @@ Najlepszym ustawieniem dla elityzmu jest prawdopodobieństwo rzędu 0,5.
 
 \fbi
 Z pewnością należałoby zwiększyć ilość prób poddawanych uśrednianiu gdyż dla przyjętych 20 wyniki ciągle są niestabilne. Warto by również rozważyć pomijanie kilku najlepszych i najgorszych wyników przed uśrednianiem.
+
+\fbi
+Co ciekawe wyniki są widocznie gorsze przy konfiguracji w której krzyżowanie jest wyłączone a p. mutacji wynosi 0,5. Taka prawidłowość objawia się dla wszystkich badanych funkcji.
 
 \newpage
 \begin{thebibliography}{40}
