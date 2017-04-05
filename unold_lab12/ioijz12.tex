@@ -93,7 +93,7 @@
 \newpage
 \section{Wprowadzenie}
 \paragraph{}
-Algorytm genetyczny to algorytm heurystyczny...[]
+Algorytm genetyczny – algorytm heurystyczny, który swoim działaniem przypomina działanie ewolucji w~naturze. Osobniki będące zbyt słabe zostają wyeliminowane z populacji w~kolejnych pokoleniach, a na ich miejsce przyjmowane są lepsze, silniejsze, bardziej adaptowalne. Algorytmy te zakładają możliwość mutacji i krzyżowania wśród potomków, przez co nie zawsze są oni silniejsi od poprzednio wyeliminowanych członków. Dodatkowo wprowadzają pojęcie elity, która jest bezpośrednio przenoszona do następnego - teoretycznie lepszego pokolenia.
 
 \fbi
 W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla różnych parametrów. Jako benchmark oceny należało użyć pakietu ,,getGlobalOpts'' oraz języka R.
@@ -256,6 +256,9 @@ f(\boldsymbol{x}) = \sum_{i=1}^{99} [\exp(- \frac{(u_i - x_2)^{x_3}}{x_1}) - 0.0
 \end{figure}
 
 \fbi
+Wykres ten przedstawia trójwymiarowy obraz funkcji Gulf dla trzech parametrów, na którym można zauważyć wzrost wartości wraz ze wzrostem osi x.
+
+\fbi
 Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego.
 
 \begin{figure}[H]
@@ -266,10 +269,6 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 	\end{center}
 \end{figure}
 
-\fbi
-Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji są zbliżone do wartości oczekiwanej w przedziale 0.1-0.6. Powyżej tego przedziału mutacja wywiera negatywny wpływ na otrzymywane wyniki.
-
-
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Gulf3.png}
@@ -279,7 +278,10 @@ Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji są zbliżone do
 \end{figure}
 
 \fbi
-Prawdopodobieństwo krzyżowania ma niski oraz niestabilny wpływ na otrzymane wyniki. Wspólnie (dla wszystkich ustawień domyślnych) najlepsze wyniki uzyskane zostały w przedziale 0.4-0.6. Przyjęcie wartości krzyżowania wykraczających poza wskazany przedział znacząco obniża jakoś uzyskanych wyników.
+Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji(rys.~\ref{fig:gulf2}) pokazują nikły wpływ na wartość otrzymanych wyników. Wszystkie wartości utrzymują się na poziomie zbliżonym do optimum, wyjątkiem są skoki niektórych wyników, za co odpowiada heurestyka algorytmu genetycznego.
+
+\fbi
+Prawdopodobieństwo krzyżowania(rys.~\ref{fig:gulf3}) ma widoczny wpływ na otrzymane wyniki. Wraz ze zwiększeniem wartości krzyżowania rezultat był coraz lepszy. Od przyjętej wartości równej 0,5 wyniki zbliżyły się do optimum funkcji.
 
 \begin{figure}[H]
 	\begin{center}
@@ -288,12 +290,6 @@ Prawdopodobieństwo krzyżowania ma niski oraz niestabilny wpływ na otrzymane w
 		\label{fig:gulf4}
 	\end{center}
 \end{figure}
-
-\fbi
-Wykres ten wyraznie obrazuje pozytywny wpływ zwiększenia populacji na jakość wyników. Najlepsze wyniki uzyskano dla populacji wynoszącej przynajmniej 50 jednostek.
-
-\fbi
-Zauważalne jest również pogorszenie wyników w przedziale 65-80[todo: dlaczego].
 
 \begin{figure}[H]
 	\begin{center}
@@ -304,11 +300,10 @@ Zauważalne jest również pogorszenie wyników w przedziale 65-80[todo: dlaczeg
 \end{figure}
 
 \fbi
-Na wykresie można zauważyć znaczące poprawienie się rezultatów, gdy ilość iteracji wynosi przynamniej 80. Poniżej tej wartości uzyskane wyniki są znacząco gorsze od optymalnego rozwiązania. 
+Wykres(rys.~\ref{fig:gulf4}) znalezionego minimum dla rozmiarów populacji wyraźnie obrazuje pozytywny wpływ zwiększenia populacji na jakość wyników. Najlepsze wyniki uzyskano dla populacji wynoszącej przynajmniej 40 jednostek.
 
 \fbi
-W przedziale 130-200 [todo: co się dzieje]
-
+Na wykresie(rys.~\ref{fig:gulf5}) można zauważyć znaczące poprawienie się rezultatów, gdy ilość iteracji wynosi przynamniej 60. Poniżej tej wartości uzyskane wyniki są znacząco gorsze od optymalnego rozwiązania. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -319,15 +314,7 @@ W przedziale 130-200 [todo: co się dzieje]
 \end{figure}
 
 \fbi
-W przypadku funkcji Gulf elityzm ma znaczący wpływ na otrzymywane wyniki. W celu ich optymalizacji wymagana jest wartość elityzmu na poziomie przynajmniej 0.4.
-
-\fbi
-Dla wartości powyżej 0.6 wyniki zaczynają się pogarszać. [todo: dlaczego]
-
-
-\fbi
-[todo: zmienic]
-Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawiona lokalizacja optimum nie jest poprawna, gdyż optymalizacji poddano wersję z 3 parametrami. Ogólnie rzecz biorąc gdyby 3 wymiar przedstawić w postaci gradientu kolorystycznego wtedy byłaby to poprawna lokalizacja niemniej trudna dla intuicyjnego sprawdzenia.
+W przypadku funkcji Gulf elityzm ma znaczący wpływ na otrzymywane wyniki. W celu ich optymalizacji wymagana jest wartość elityzmu na poziomie przynajmniej 0,3.
 
 \newpage
 \subsection{CosMix4 (4 parametry)}
@@ -349,7 +336,7 @@ f(\boldsymbol{x}) = -0.1 \sum_{i=1}^{4} \cos (5 \pi x_i) - \sum_{i=1}^{4} x_i^2
 \end{figure}
 
 \fbi
-Jak widać funkcja ma dużo lokalnych optimów.
+Wykres ten przedstawia trójwymiarowy obraz czterowymiarowej funkcji Cosinus Mixture. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -358,9 +345,6 @@ Jak widać funkcja ma dużo lokalnych optimów.
 		\label{fig:cosmix42}
 	\end{center}
 \end{figure}
-
-\fbi
-Ogólnie rzecz biorąc, niezależnie od pozostałych parametrów, jedyną niekorzystną sytuacją jest tu jednoczesne wyłączenie mutacji i krzyżowania co możemy zaobserwować na przykładzie serii 1-szej.
 
 \begin{figure}[H]
 	\begin{center}
@@ -371,7 +355,10 @@ Ogólnie rzecz biorąc, niezależnie od pozostałych parametrów, jedyną niekor
 \end{figure}
 
 \fbi
-Podobnie jak na poprzednim wykresie (rys. \ref{fig:cosmix42}) tak i na powyższym (rys. \ref{fig:cosmix43}) ujawnia się niekorzystny wpływ wyłączenia mutacji i krzyżowania.
+Z wykresu(rys.~\ref{fig:cosmix42}) wynika nikły wpływ mutacji na otrzymane wyniki. Wartości utrzymują sie w pobliżu optimum.
+
+\fbi
+Wartość krzyżowania powoduje niestabilność wyników w przedziale (0,0~--~0.6)(rys.~\ref{fig:cosmix44}), dalej wartości osiągają optimum. Wyjątkiem jest wartość 0,8, w~której widoczne jest obniżenie jakości otrzymanych wyników.
 
 
 \begin{figure}[H]
@@ -391,7 +378,13 @@ Podobnie jak na poprzednim wykresie (rys. \ref{fig:cosmix42}) tak i na powyższy
 \end{figure}
 
 \fbi
-Na dwóch poprzedzających wykresach możemy zaobserwować, że domyślne wartości w postaci wielkości populacji w liczbie 50 i ilości iteracji równej 100 są wzajemnie optymalne.
+Na dwóch poprzedzających wykresach(rys.~\ref{fig:cosmix44},\ref{fig:cosmix45}) możemy zaobserwować, że domyślne wartości w postaci wielkości populacji w liczbie 40 i ilości iteracji równej 60 są wzajemnie optymalne.
+
+\fbi
+Funkcja osiąga optimum dla wartości populacji równej 85, oraz 170 ilości iteracji.
+
+\fbi
+Zauważalne są tutaj pogroszenia się wyników dla wszystkich serii, gdy ilość iteracji wynosi 110. Wynikać to może z budowy funkcji, która dla tych parametrów zwraca gorsze wyniki.
 
 \begin{figure}[H]
 	\begin{center}
@@ -434,6 +427,12 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 	\end{center}
 \end{figure}
 
+\fbi
+Oba wykresy (~rys.\ref{fig:emichalewicz1},\ref{fig:emichalewicz2}) pokazują minimalny wpływ prawdopodobieństwa krzyżowania oraz mutacji na wpływ otrzymywanych wyników. 
+
+\fbi
+Z wykonanych pomiarów nie można odczytać dla jakich wartości mutacji, czy krzyżowania funkcja zbliża się od optimum. Najblżej optimum była mutacja na dowolnym, niezerowym poziomie.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/EMichalewicz4.png}
@@ -441,6 +440,7 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 		\label{fig:emichalewicz4}
 	\end{center}
 \end{figure}
+
 
 \begin{figure}[H]
 	\begin{center}
@@ -450,6 +450,12 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 	\end{center}
 \end{figure}
 
+\fbi
+Z wykresu(\ref{fig:emichalewicz3}) można odczytać wpływ zwiększenia populacji na jakość otrzymywanych wyników. Funkcja ta logarytmicznie dąży do pewnej wartości, lecz nie jest to wartość optimum. Oznacza to, że modyfikacja samej tylko populacji nie osiągnie optimum dla danej funkcji.
+
+\fbi
+Ilość iteracji ma znaczący wpływ na otrzymane wyniki od wartości równej 50. W dalszym etapie funkcja zbliża się do optimum.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/EMichalewicz6.png}
@@ -457,6 +463,12 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 		\label{fig:emichalewicz6}
 	\end{center}
 \end{figure}
+
+\fbi
+Tak samo jak w przypadku wykresu populacji(\ref{fig:emichalewicz3}) elityzm logartymicznie dąży do pewniej wartości, lecz nie do optimum funkcji. Zwiększenie ilości elit w populacji w przypadku funkcji EMichalewicza poprawia jakość otrzymywanych wyników.
+
+\fbi
+Wybranie elityzmu na poziomie niższym niż 0,2 powoduje otrzymywanie około dwuktrotnie gorszych wyników niż otrzymano na dowolnie innym poziomie.
 
 \newpage
 \subsection{Hartman6 (6 parametrów)}
