@@ -57,13 +57,13 @@
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 
 \makeatletter
-\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
-  {3.25ex \@plus1ex \@minus.2ex}%
-  {-0em}%
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}
+  {3.25ex \@plus1ex \@minus.2ex}
+  {-0em}
   {\normalfont\normalsize\bfseries}}
-\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
-  {3.25ex \@plus1ex \@minus .2ex}%
-  {-1em}%
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}
+  {3.25ex \@plus1ex \@minus .2ex}
+  {-1em}
   {\normalfont\normalsize\bfseries}}
 \def\toclevel@subsubsubsection{4}
 \def\toclevel@paragraph{5}
@@ -93,7 +93,7 @@
 \newpage
 \section{Wprowadzenie}
 \paragraph{}
-Algorytmy genetyczne to
+Algorytm genetyczny to algorytm heurystyczny...[]
 
 \fbi
 W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla różnych parametrów. Jako benchmark oceny należało użyć pakietu ,,getGlobalOpts'' oraz języka R.
@@ -130,7 +130,7 @@ Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończ
 \end{itemize}
 
 \fbi
-Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametry przedstawiono poniżej (tab. \ref{tab:parametry}).
+Każdy pomiar przeprowadzano 20-krotnie wyniki uśredniając. Domyślne parametry przedstawiono poniżej (tabela~\ref{tab:parametry}). Zmianie ulegają wartości  prawdopodobieństwa mutacji i krzyżowania.
 
 \begin{table}[htbp]
 	\centering
@@ -152,116 +152,105 @@ Każdy pomiar przeprowadzano 10-krotnie wyniki uśredniając. Domyślne parametr
 \end{table}
 
 \fbi
-Zielone linie na wykresach oznaczają optima zwracane w pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas omawianych badań) .
+Zielone linie na wykresach oznaczają optima zawarte w pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas niniejszych pomiarów).
 
+\fbi
+Dla funkcji o ilości parametrów większej niż 2 pominięto ilustracje graficzne znalezionych optimów gdyż optymalizacji podlegają wszystkie wymiary a przedstawienie dwóch pierwszych nie niesie ze sobą przydatnej informacji.
+
+\newpage
 \subsection{Branin (2 parametry)}
 \paragraph{}
-Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres. Wzór funkcji zamieszczono poniżej (\ref{eq:branin}).
-[todo: opisać dziedzinę]
-
+Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres a poniżej jej wzór (\ref{eq:branin}).
 
 \begin{equation}\label{eq:branin}
 	f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
 \end{equation}
 
+, gdzie $ x_1 \in [-5, 10] $ oraz $ x_2 \in [0, 15] $.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./assets/Branin1.png}
-	\caption{Wykres funkcji Branin (d=2)}
+	\includegraphics[width=0.95\textwidth]{./assets/Branin1.png}
+	\caption{Wykres funkcji Branin}
 	\label{fig:branin1}
 \end{figure}
 
 \fbi
-Powyższy wykres pokazuje trójwymiarowy obraz funkcji Branin.
-[todo: z którego wynika ...]
+Powyższy wykres (rys.~\ref{fig:branin1}) pokazuje trójwymiarowy obraz funkcji Branin. Wynika z niego, że funkcja ta ma stosunkowo duży obszar w którym może znajdować się minimum oraz dwie strefy w których wartości są dużo większe.
 
 \fbi
-Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego.
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego. Kolejno dokonano pomiarów dla różnych wartości: prawdopodobieństwa mutacji i krzyżowania, wielkości populacji, ilości iteracji oraz elityzmu. Wszystkie pomiary wykonano dla 4 różnych ustawień domyślnych parametrów.
 
+\newpage
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./assets/Branin2.png}
-	\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+	\includegraphics[width=0.85\textwidth]{./assets/Branin2.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w zależności od prawdopodobieństwa mutacji}
 	\label{fig:branin2}
 \end{figure}
 
-\fbi
-Na powyższym wykresie można zauważyć niski wpływ mutacji na znalezione rozwiązania. Przy wszystkich parametrach domyślnych funkcja znajduje się w pobliżu optymalnej wartości.
-
-\fbi
-Wyjątkiem stanowi tutaj "seria 2" reprezentująca drugi zestaw wartości domyślnych. Przy mutacji wynoszącej 0.7 wynik funkcji znacząco się pogorszył.
-
-
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./assets/Branin3.png} % 
-	\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+	\includegraphics[width=0.85\textwidth]{./assets/Branin3.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w zależności od prawdopodobieństwa krzyżowania}
 	\label{fig:branin3}
 \end{figure}
 
 \fbi
-Wykres przyjmuje wartości zbliżone do oczekiwanych, gdy prawdopodobieństwo krzyżowania wynosi 0.2 lub więcej.
-
-\fbi
-Najlepszy rezultat został otrzymany w przedziale prawdopodobieństwa krzyżowania między 0.4 a 0.6.
-
+Na wykresie (rys.~\ref{fig:branin2}) można zauważyć niski wpływ ustawienia mutacji na znalezione rozwiązania. Przy wszystkich parametrach domyślnych funkcja znajduje się w pobliżu optymalnej wartości. Miejscowe odchylenia są tu najprawdopodobniej związane z charakterem algorytmu i zbyt małą ilością prób poddanych uśrednieniu. Nie możemy tutaj określić czy przy wyłączonej zarówno mutacji jak i krzyżowaniu wyniki ulegają pogorszeniu, gdyż nie ma w tym obszarze spójności. Podobne wnioski możemy wskazać dla wykresu krzyżowania (rys.~\ref{fig:branin3}).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./assets/Branin4.png} % 
-	\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+	\includegraphics[width=0.85\textwidth]{./assets/Branin4.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w zależności od rozmiaru populacji}
 	\label{fig:branin4}
 \end{figure}
 
-\fbi
-Z wykresu można odczytać podatność funkcji w zależności od populacji. Wyniki zbliżone do oczekiwanych zostały uzyskane dla populacji wynoszącej 45 jednostek.
-
-\fbi
-Zauważalny jest wzrost jakości rozwiązania wraz ze wzrostem ilości jednostek populacji.
-
-
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./assets/Branin5.png} % 
-	\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+	\includegraphics[width=0.85\textwidth]{./assets/Branin5.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w zależności od ilości iteracji}
 	\label{fig:branin5}
 \end{figure}
 
 \fbi
-Wykres wskazuje wyraźną zmianę jakości rozwiązań dla 75 i więcej iteracji. Poniżej tej wartości uzyskiwane wyniki są niestabilne, powyżej osiągają wartość zbliżoną do oczekiwanej.
+Z wykresu (rys.~\ref{fig:branin4}) można odczytać podatność funkcji na zmiany rozmiaru populacji. Wyniki zbliżone do oczekiwanych zostały uzyskane dla wartości wynoszącej 45 jednostek. Widać również, że przy małej populacji znaczenie mutacji i krzyżowania jest większe. Zauważalny jest wzrost jakości rozwiązania wraz ze wzrostem ilości jednostek populacji.
+
+\fbi
+Wykres (rys.~\ref{fig:branin5}) wskazuje wyraźną zmianę jakości rozwiązań dla 60 i więcej iteracji. Poniżej tej wartości uzyskiwane wyniki są niestabilne, powyżej osiągają wartość zbliżoną do oczekiwanej szczególnie dla serii 4 (czyli z włączoną mutacją i krzyżowaniem).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.9\textwidth]{./assets/Branin6.png}
-	\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+	\includegraphics[width=0.85\textwidth]{./assets/Branin6.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w zależności od przyjętego elityzmu}
 	\label{fig:branin6}
 \end{figure}
 
 \fbi
-Z wykonanych badań wynika, że do uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0.4. Jego ustawienie poniżej tej wartości powoduje znaczące obniżenie się jakości rozwiązania.
+Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0.4. Jego ustawienie poniżej tej wartości powoduje obniżenie się jakości rezultatów.
 
-\fbi
-Warto tutaj zauważyć ponowne (jak w przypadku mutacji) obniżenie się jakości wyniku dla przedziału 0.6-0.8.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./assets/Branin6elt.png}
+	\caption{Poglądowa lokalizacja najlepszego znalezionego minimum funkcji Branin dla pomiarów przy zmianach elityzmu}
+	\label{fig:branin6elt}
+\end{figure}
 
 \newpage
 \subsection{Gulf (3 parametry)}
 \paragraph{}
-Gulf jest funkcją przyjmującą trzy parametry. Na ilustracji (rys.~\ref{fig:gulf1}) przedstawiono jej wykres dla pierwszych dwóch wymiarów.
-
-[todo: dodać wzór, dziedzinę funkcji]
+Gulf jest funkcją określoną dla ilości parametrów równej 3. Na ilustracji (rys.~\ref{fig:gulf1}) przedstawiono jej wykres dla pierwszych dwóch.
 
 \begin{equation}\label{eq:gulf}
-f(\boldsymbol{x}) = 
+f(\boldsymbol{x}) = \sum_{i=1}^{99} [\exp(- \frac{(u_i - x_2)^{x_3}}{x_1}) - 0.01i]^2
 \end{equation}
-http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Gulf.htm
 
-
+, gdzie $ x_1 \in [0.1, 100] $, $ x_2 \in [0, 25.6] $, $ x_3 \in [0, 5] $ oraz $ u_i = 25 + [-50 \ln (0.01i)]^{1/1.5} $.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Gulf1.png} % 
-		\caption{Wykres funkcji Gulf (d=3)}
+		\includegraphics[width=0.95\textwidth]{./assets/Gulf1.png}
+		\caption{Wykres funkcji Gulf dla dwóch pierwszych parametrów}
 		\label{fig:gulf1}
 	\end{center}
 \end{figure}
@@ -271,8 +260,8 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Gulf2.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Gulf2.png}
+		\caption{Wartość znalezionego minimum dla funkcji Gulf w zależności od prawdopodobieństwa mutacji}
 		\label{fig:gulf2}
 	\end{center}
 \end{figure}
@@ -283,8 +272,8 @@ Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji są zbliżone do
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Gulf3.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+		\includegraphics[width=0.85\textwidth]{./assets/Gulf3.png}
+		\caption{Wartość znalezionego minimum dla funkcji Gulf w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:gulf3}
 	\end{center}
 \end{figure}
@@ -292,11 +281,10 @@ Wartości funkcji Gulf dla zadanego prawdopodobieństwa mutacji są zbliżone do
 \fbi
 Prawdopodobieństwo krzyżowania ma niski oraz niestabilny wpływ na otrzymane wyniki. Wspólnie (dla wszystkich ustawień domyślnych) najlepsze wyniki uzyskane zostały w przedziale 0.4-0.6. Przyjęcie wartości krzyżowania wykraczających poza wskazany przedział znacząco obniża jakoś uzyskanych wyników.
 
-
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Gulf4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Gulf4.png}
+		\caption{Wartość znalezionego minimum dla funkcji Gulf w zależności od rozmiarów populacji}
 		\label{fig:gulf4}
 	\end{center}
 \end{figure}
@@ -309,8 +297,8 @@ Zauważalne jest również pogorszenie wyników w przedziale 65-80[todo: dlaczeg
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Gulf5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\includegraphics[width=0.85\textwidth]{./assets/Gulf5.png} 
+		\caption{Wartość znalezionego minimum dla funkcji Gulf w zależności od ilości iteracji}
 		\label{fig:gulf5}
 	\end{center}
 \end{figure}
@@ -324,14 +312,14 @@ W przedziale 130-200 [todo: co się dzieje]
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Gulf6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\includegraphics[width=0.85\textwidth]{./assets/Gulf6.png}
+		\caption{Wartość znalezionego minimum dla funkcji Gulf w zależności od przyjętego elityzmu}
 		\label{fig:gulf6}
 	\end{center}
 \end{figure}
 
 \fbi
-W przypadku funkcji Gulf elitzym ma znaczący wpływ na otrzymywane wyniki. W celu ich optymalizacji wymanaja jest wartość elityzmu na poziomie przynajmniej 0.4.
+W przypadku funkcji Gulf elityzm ma znaczący wpływ na otrzymywane wyniki. W celu ich optymalizacji wymagana jest wartość elityzmu na poziomie przynajmniej 0.4.
 
 \fbi
 Dla wartości powyżej 0.6 wyniki zaczynają się pogarszać. [todo: dlaczego]
@@ -344,21 +332,29 @@ Jak możemy zauważyć na ilustracji poniżej (rys.~\ref{fig:gulf7}) przedstawio
 \newpage
 \subsection{CosMix4 (4 parametry)}
 \paragraph{}
+CosMix4 jest funkcją określoną dla ilości parametrów równej 4. Na ilustracji (rys.~\ref{fig:cosmix41}) przedstawiono jej wykres dla pierwszych dwóch.
 
-http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/CosMix4.htm
+\begin{equation}\label{eq:cosmix4}
+f(\boldsymbol{x}) = -0.1 \sum_{i=1}^{4} \cos (5 \pi x_i) - \sum_{i=1}^{4} x_i^2
+\end{equation}
+
+, gdzie $ x_i \in [-2, 1] $ oraz $ i \in {1,2,3,4} $.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/CosMix41.png} % 
-		\caption{Wykres funkcji CosMix4 (d=4)}
+		\includegraphics[width=0.95\textwidth]{./assets/CosMix41.png}
+		\caption{Wykres funkcji CosMix4 dla dwóch pierwszych parametrów}
 		\label{fig:cosmix41}
 	\end{center}
 \end{figure}
 
+\fbi
+Jak widać funkcja ma dużo lokalnych optimów.
+
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/CosMix42.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\includegraphics[width=0.85\textwidth]{./assets/CosMix42.png}
+		\caption{Wartość znalezionego minimum dla funkcji CosMix4 w zależności od prawdopodobieństwa mutacji}
 		\label{fig:cosmix42}
 	\end{center}
 \end{figure}
@@ -368,8 +364,8 @@ Ogólnie rzecz biorąc, niezależnie od pozostałych parametrów, jedyną niekor
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/CosMix43.png}
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+		\includegraphics[width=0.85\textwidth]{./assets/CosMix43.png}
+		\caption{Wartość znalezionego minimum dla funkcji CosMix4 w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:cosmix43}
 	\end{center}
 \end{figure}
@@ -380,16 +376,16 @@ Podobnie jak na poprzednim wykresie (rys. \ref{fig:cosmix42}) tak i na powyższy
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/CosMix44.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\includegraphics[width=0.85\textwidth]{./assets/CosMix44.png}
+		\caption{Wartość znalezionego minimum dla funkcji CosMix4 w zależności od rozmiarów populacji}
 		\label{fig:cosmix44}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/CosMix45.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\includegraphics[width=0.85\textwidth]{./assets/CosMix45.png}
+		\caption{Wartość znalezionego minimum dla funkcji CosMix4 w zależności od ilości iteracji}
 		\label{fig:cosmix45}
 	\end{center}
 \end{figure}
@@ -399,12 +395,13 @@ Na dwóch poprzedzających wykresach możemy zaobserwować, że domyślne warto�
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/CosMix46.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\includegraphics[width=0.85\textwidth]{./assets/CosMix46.png}
+		\caption{Wartość znalezionego minimum dla funkcji CosMix4 w zależności od przyjętego elityzmu}
 		\label{fig:cosmix46}
 	\end{center}
 \end{figure}
 
+\newpage
 \subsection{EMichalewicz (5 parametrów)}
 \paragraph{}
 Poniżej zamieszczono wzór rozpatrywanej funkcji.
@@ -413,51 +410,50 @@ Poniżej zamieszczono wzór rozpatrywanej funkcji.
 f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 \end{equation}
 
-\newpage
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz1.png} % 
-		\caption{Wykres funkcji EMIchalewicz (d=5)}
+		\includegraphics[width=0.95\textwidth]{./assets/EMichalewicz1.png}
+		\caption{Wykres funkcji EMichalewicz (d=5)}
 		\label{fig:emichalewicz1}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz2.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\includegraphics[width=0.85\textwidth]{./assets/EMichalewicz2.png}
+		\caption{Wartość znalezionego minimum dla funkcji EMichalewicz w zależności od prawdopodobieństwa mutacji}
 		\label{fig:emichalewicz2}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz3.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+		\includegraphics[width=0.85\textwidth]{./assets/EMichalewicz3.png}
+		\caption{Wartość znalezionego minimum dla funkcji EMichalewicz w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:emichalewicz3}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\includegraphics[width=0.85\textwidth]{./assets/EMichalewicz4.png}
+		\caption{Wartość znalezionego minimum dla funkcji EMichalewicz w zależności od rozmiarów populacji}
 		\label{fig:emichalewicz4}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\includegraphics[width=0.85\textwidth]{./assets/EMichalewicz5.png}
+		\caption{Wartość znalezionego minimum dla funkcji EMichalewicz w zależności od ilości iteracji}
 		\label{fig:emichalewicz5}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/EMichalewicz6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\includegraphics[width=0.85\textwidth]{./assets/EMichalewicz6.png}
+		\caption{Wartość znalezionego minimum dla funkcji EMichalewicz w zależności od przyjętego elityzmu}
 		\label{fig:emichalewicz6}
 	\end{center}
 \end{figure}
@@ -465,13 +461,17 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{d} \sin(x_i) \sin^{2m} (\frac{i x_i^2}{\pi})
 \newpage
 \subsection{Hartman6 (6 parametrów)}
 \paragraph{}
+Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:hartman6}) przedstawiono jej wykres dla pierwszych dwóch.
 
-http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Hartman6.htm
+\begin{equation}\label{eq:hartman6}
+f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{ij})^2]
+\end{equation}
 
+, gdzie $ x_i \in [0, 1] $, $ i \in \{1, ..., 6\} $.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Hartman61.png} % 
+		\includegraphics[width=0.95\textwidth]{./assets/Hartman61.png}
 		\caption{Wykres funkcji Hartman6 (d=6)}
 		\label{fig:hartman61}
 	\end{center}
@@ -479,53 +479,59 @@ http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Hartman6.htm
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Hartman62.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Hartman62.png}
+		\caption{Wartość znalezionego minimum dla funkcji Hartman6 w zależności od prawdopodobieństwa mutacji}
 		\label{fig:hartman62}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Hartman63.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+		\includegraphics[width=0.85\textwidth]{./assets/Hartman63.png}
+		\caption{Wartość znalezionego minimum dla funkcji Hartman6 w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:hartman63}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Hartman64.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Hartman64.png}
+		\caption{Wartość znalezionego minimum dla funkcji Hartman6 w zależności od rozmiarów populacji}
 		\label{fig:hartman64}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Hartman65.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\includegraphics[width=0.85\textwidth]{./assets/Hartman65.png}
+		\caption{Wartość znalezionego minimum dla funkcji Hartman6 w zależności od ilości iteracji}
 		\label{fig:hartman65}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Hartman66.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\includegraphics[width=0.85\textwidth]{./assets/Hartman66.png}
+		\caption{Wartość znalezionego minimum dla funkcji Hartman6 w zależności od przyjętego elityzmu}
 		\label{fig:hartman66}
 	\end{center}
 \end{figure}
 
+\newpage
 \subsection{PriceTransistor (9 parametrów)}
 \paragraph{}
+PriceTransistor jest funkcją określoną dla ilości parametrów równej 9. Na ilustracji (rys.~\ref{fig:pricetransistor1}) przedstawiono jej wykres dla pierwszych dwóch.
 
-http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/PriceTransistor.htm
+\begin{equation}\label{eq:pricetransistor}
+f(\boldsymbol{x}) = \gamma^2 + \sum_{k=1}^{4} ( \alpha_k^2 + \beta_k^2 )
+\end{equation}
+
+, gdzie $ \alpha_k = (1-x_1 x_2)x_3 {\exp[ x^5 (g_{1k} - g_{3k})]}$.
 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor1.png} % 
+		\includegraphics[width=0.95\textwidth]{./assets/PriceTransistor1.png}
 		\caption{Wykres funkcji PriceTransistor (d=9)}
 		\label{fig:pricetransistor1}
 	\end{center}
@@ -533,40 +539,40 @@ http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/PriceTransist
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor2.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\includegraphics[width=0.85\textwidth]{./assets/PriceTransistor2.png}
+		\caption{Wartość znalezionego minimum dla funkcji PriceTransistor w zależności od prawdopodobieństwa mutacji}
 		\label{fig:pricetransistor2}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor3.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+		\includegraphics[width=0.85\textwidth]{./assets/PriceTransistor3.png}
+		\caption{Wartość znalezionego minimum dla funkcji PriceTransistor w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:pricetransistor3}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\includegraphics[width=0.85\textwidth]{./assets/PriceTransistor4.png}
+		\caption{Wartość znalezionego minimum dla funkcji PriceTransistor w zależności od rozmiarów populacji}
 		\label{fig:pricetransistor4}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\includegraphics[width=0.85\textwidth]{./assets/PriceTransistor5.png}
+		\caption{Wartość znalezionego minimum dla funkcji PriceTransistor w zależności od ilości iteracji}
 		\label{fig:pricetransistor5}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/PriceTransistor6.png} % 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\includegraphics[width=0.85\textwidth]{./assets/PriceTransistor6.png}
+		\caption{Wartość znalezionego minimum dla funkcji PriceTransistor w zależności od przyjętego elityzmu}
 		\label{fig:pricetransistor6}
 	\end{center}
 \end{figure}
@@ -574,16 +580,15 @@ http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/PriceTransist
 \newpage
 \subsection{Schwefel (10 parametrów)}
 \paragraph{}
-Poniżej zamieszczono wzór rozpatrywanej funkcji.
+Schwefel jest funkcją określoną dla ilości parametrów równej 10. Na ilustracji (rys.~\ref{fig:schwefel1}) przedstawiono jej wykres dla pierwszych dwóch.
 
 \begin{equation}\label{eq:schwefel}
 f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 \end{equation}
 
-
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Schwefel1.png} % 
+		\includegraphics[width=0.95\textwidth]{./assets/Schwefel1.png}
 		\caption{Wykres funkcji Schwefel (d=10) dla dwóch pierwszych wymiarów}
 		\label{fig:schwefel1}
 	\end{center}
@@ -591,53 +596,58 @@ f(\boldsymbol{x}) = 418.9829d - \sum_{i=1}^{d} x_i \sin(\sqrt{|x_i|})
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Schwefel2.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Schwefel2.png}
+		\caption{Wartość znalezionego minimum dla funkcji Schwefel w zależności od prawdopodobieństwa mutacji}
 		\label{fig:schwefel2}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Schwefel3.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+		\includegraphics[width=0.85\textwidth]{./assets/Schwefel3.png}
+		\caption{Wartość znalezionego minimum dla funkcji Schwefel w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:schwefel3}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Schwefel4.png} % 
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Schwefel4.png}
+		\caption{Wartość znalezionego minimum dla funkcji Schwefel w zależności od rozmiarów populacji}
 		\label{fig:schwefel4}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Schwefel5.png} % 
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\includegraphics[width=0.85\textwidth]{./assets/Schwefel5.png}
+		\caption{Wartość znalezionego minimum dla funkcji Schwefel w zależności od ilości iteracji}
 		\label{fig:schwefel5}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Schwefel6.png} 
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\includegraphics[width=0.85\textwidth]{./assets/Schwefel6.png}
+		\caption{Wartość znalezionego minimum dla funkcji Schwefel w zależności od przyjętego elityzmu}
 		\label{fig:schwefel6}
 	\end{center}
 \end{figure}
 
+\newpage
 \subsection{Zeldasine20 (20 parametrów)}
 \paragraph{}
+Zeldasine20 jest funkcją określoną dla ilości parametrów równej 20. Na ilustracji (rys.~\ref{fig:zeldasine1}) przedstawiono jej wykres dla pierwszych dwóch.
 
+\begin{equation}\label{eq:zeldasine}
+f(\boldsymbol{x}) = -A \prod_{j=1}^{D} \sin (x_j - z) - \prod_{j=1}^{D} \sin (B \cdot (x_j - z))
+\end{equation}
 
-http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Zeldasine20.htm
+, gdzie $ x_j \in [0, \pi]$ oraz $j = \{1, ..., 10\}$.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine201.png} % 
+		\includegraphics[width=0.95\textwidth]{./assets/Zeldasine201.png}
 		\caption{Wykres funkcji Zeldasine (d=20)}
 		\label{fig:zeldasine1}
 	\end{center}
@@ -645,32 +655,32 @@ http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Zeldasine20.h
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine202.png} % 
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa mutacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine202.png}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od prawdopodobieństwa mutacji}
 		\label{fig:zeldasine2}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine203.png}
-		\caption{Wartość znalezionego optimum w zależności od prawdopodobieństwa krzyżowania}
+		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine203.png}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od prawdopodobieństwa krzyżowania}
 		\label{fig:zeldasine3}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine204.png}
-		\caption{Wartość znalezionego optimum w zależności od rozmiarów populacji}
+		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine204.png}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od rozmiarów populacji}
 		\label{fig:zeldasine4}
 	\end{center}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine205.png}
-		\caption{Wartość znalezionego optimum w zależności od ilości iteracji}
+		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine205.png}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od ilości iteracji}
 		\label{fig:zeldasine5}
 	\end{center}
 \end{figure}
@@ -678,8 +688,8 @@ http://www.gamsworld.org/performance/selconglobal/htm/selconglobal/Zeldasine20.h
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=0.9\textwidth]{./assets/Zeldasine206.png}
-		\caption{Wartość znalezionego optimum w zależności od przyjętego elityzmu}
+		\includegraphics[width=0.85\textwidth]{./assets/Zeldasine206.png}
+		\caption{Wartość znalezionego minimum dla funkcji Zeldasine w zależności od przyjętego elityzmu}
 		\label{fig:zeldasine6}
 	\end{center}
 \end{figure}
@@ -697,6 +707,9 @@ Wartość prawdopodobieństwa mutacji i krzyżowania zdaje się odgrywać drugor
 
 \fbi
 Najlepszym ustawieniem dla elityzmu jest prawdopodobieństwo rzędu 0,5.
+
+\fbi
+Z pewnością należałoby zwiększyć ilość prób poddawanych uśrednianiu gdyż dla przyjętych 20 wyniki ciągle są niestabilne. Warto by również rozważyć pomijanie kilku najlepszych i najgorszych wyników przed uśrednianiem.
 
 \newpage
 \begin{thebibliography}{40}
