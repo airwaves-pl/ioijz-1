@@ -107,11 +107,29 @@ Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w języku R
 
 \lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w języku R wykorzystany do badań,firstline=1,lastline=300]{./assets/skrypt_lab12.R}
 
-\subsection{Parametryzacja skryptu}
-Parametryzacji podlega jedynie algorytm genetyczny.
-Wybór funkcji do optymalizacji odbywa się przez podanie jej nazwy.
-Pozostałe dane są odczytywane z pakietu ,,globalOptTests''.
-[todo: dopisać o pętli przechodzącej po wszystkich funkcjach oraz po wszystkich parametrach domyślnych]
+\fbi
+Skrypt przygotowano w sposób który umożliwia w pełni automatyczne przeprowadzenie wszystkich pomiarów. Jednocześnie wszystkie wykresy mogą być natychmiast podmienione w sprawozdaniu. Poniżej pokrótce omówiono podstawowe parametry.
+
+\begin{itemize}
+	\item nOfRuns
+	
+	Ilość powtórzeń dla każdego pomiaru w celu uśrednienia.
+	
+	\item colors, series
+	
+	Wektory kolorów i nazw kolejnych serii pomiarowych. 
+	
+	\item params
+	
+	Macierz parametrów domyślnych algorytmu dla każdej z serii. W każdym wierszu kolejno są zawarte: p. mutacji, p. krzyżowania, rozmiar populacji, ilość iteracji oraz kolor serii na wykresach.
+	
+	\item functions
+	
+	Wektor nazw funkcji dla których przeprowadzane są kolejno pomiary.
+	
+\end{itemize}
+
+Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest na podstawie nazwy funkcji z pakietu ,,globalOptTests''. Są to: rozmiar problemu (ilość parametrów), domyślne ograniczenia, wartość w danym punkcie oraz optimum dla domyślnych ograniczeń.
 
 \newpage
 \section{Przebieg badań}
@@ -130,9 +148,9 @@ Do badań zostały wybrane funkcje o różnych wymiarach zaczynając na 2 kończ
 \end{itemize}
 
 \fbi
-Każdy pomiar przeprowadzano 20-krotnie wyniki uśredniając co oznacza, że wartości widoczne na wykresach dla każdej serii z osobna są uśrednione po osobnych 20 przebiegach. Domyślne parametry każdej z serii przedstawiono poniżej (tabela~\ref{tab:parametry}). Zmianie ulegają wartości  prawdopodobieństwa mutacji i krzyżowania by zbadać znaczenie ich obecności podczas optymalizacji.
+Każdy pomiar przeprowadzono 20-krotnie wyniki uśredniając co oznacza, że wartości widoczne na wykresach dla każdej serii z osobna są uśrednione po osobnych 20 przebiegach. Domyślne parametry każdej z serii przedstawiono poniżej (tabela~\ref{tab:parametry}). Zmianie ulegają wartości  prawdopodobieństwa mutacji i krzyżowania by zbadać znaczenie ich obecności podczas optymalizacji.
 
-\begin{table}[htbp]
+\begin{table}[H]
 	\centering
 	\caption{Parametry domyślne poszczególnych serii pomiarowych}
 	\label{tab:parametry}
@@ -155,7 +173,7 @@ Każdy pomiar przeprowadzano 20-krotnie wyniki uśredniając co oznacza, że war
 Zielone linie na wykresach oznaczają optima zawarte w pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas niniejszych pomiarów).
 
 \fbi
-Dla funkcji o ilości parametrów większej niż 2 pominięto ilustracje graficzne znalezionych optimów gdyż optymalizacji podlegają wszystkie wymiary a przedstawienie dwóch pierwszych nie niesie ze sobą przydatnej informacji.
+Dla funkcji o ilości parametrów większej niż 2 pominięto ilustracje graficzne znalezionych optimów gdyż optymalizacji podlegają wszystkie wymiary. Ilustracja dla dwóch pierwszych nie niesie ze sobą przydatnej informacji.
 
 \newpage
 \subsection{Branin (2 parametry)}
@@ -176,10 +194,10 @@ Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1})
 \end{figure}
 
 \fbi
-Powyższy wykres (rys.~\ref{fig:branin1}) pokazuje trójwymiarowy obraz funkcji Branin. Wynika z niego, że funkcja ta ma stosunkowo duży obszar w którym może znajdować się minimum oraz dwie strefy w których wartości są dużo większe.
+Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży obszar w którym może znajdować się minimum oraz dwie strefy w których wartości są dużo większe.
 
 \fbi
-Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego. Kolejno dokonano pomiarów dla różnych wartości: prawdopodobieństwa mutacji i krzyżowania, wielkości populacji, ilości iteracji oraz elityzmu. Wszystkie pomiary wykonano dla 4 różnych ustawień domyślnych parametrów.
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego. Kolejno dokonano pomiarów dla różnych wartości: prawdopodobieństwa mutacji i krzyżowania, wielkości populacji, ilości iteracji oraz elityzmu. Wszystkie pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1 -- 4).
 
 \newpage
 \begin{figure}[H]
