@@ -473,7 +473,7 @@ Wybranie elityzmu na poziomie niższym niż 0,2 powoduje otrzymywanie około dwu
 \newpage
 \subsection{Hartman6 (6 parametrów)}
 \paragraph{}
-Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:hartman6}) przedstawiono jej wykres dla pierwszych dwóch.
+Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:hartman61}) przedstawiono jej wykres dla pierwszych dwóch.
 
 \begin{equation}\label{eq:hartman6}
 f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{ij})^2]
@@ -505,6 +505,15 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{i
 	\end{center}
 \end{figure}
 
+\fbi
+Z wykresu(rys.~\ref{fig:hartman61}) odczytać można niski wpływ mutacji na osiągane wyniki. Dla wszystkich wartości mutacji otrzymywane wyniki zbliżone są do optimum funkcji.
+
+\fbi
+Warto zauważyć, że wszystkie serie posiadają jedną wartość mutacji, dla której następuje pogorszenie otrzymanego wyniku. Serie posiadają inne wartości domyślne dla funkcji. Oznacza to, że funkcja dla pewnej wartości, określonej przez wartości domyślne, zwraca gorsze wyniki.
+
+\fbi
+Wykres krzyżowania(rys.~\ref{fig:hartman62}) wskazuje wartość 0,6 jako graniczną dla otrzymywania optimum funkcji. Przed tą wartością otrzymane wyniki są niestabilne, nie można odczytać nich czy wyniki się poprawiają czy pogarszają.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Hartman64.png}
@@ -512,6 +521,7 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{i
 		\label{fig:hartman64}
 	\end{center}
 \end{figure}
+
 
 \begin{figure}[H]
 	\begin{center}
@@ -521,6 +531,12 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{i
 	\end{center}
 \end{figure}
 
+\fbi
+Wykres populacji(rys.~\ref{fig:hartman63}) wskazuje na logarytmiczną zbieżność wartości dla danej populacji do optimum funkcji. Wynika z tego, że funkcja ta osiąga optimum dla dowolnych parametrów mutacji i krzyżowania, lecz dużej populacji.
+
+\fbi
+Ilość iteracji dąży do optimum dla więcej niż 50 iteracji. Wartość ta jest wartością graniczną. Wyniki znajdujące się przed nią są ponad dwuktornie gorsze niż wyniki po niej. Zauważalne są również dwa skoki (dla wartości 110 i 160) pokazujące pogorszenie rezultatu, wskazują one na budowę funkcji, która dla tych wartości zwraca gorsze wyniki.
+
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.85\textwidth]{./assets/Hartman66.png}
@@ -528,6 +544,9 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{i
 		\label{fig:hartman66}
 	\end{center}
 \end{figure}
+
+\fbi
+Zwiększenie elityzmu logartymicznie dąży do wartości optymalnej. Wartości, które zostały w ten sposób osiągnięte, są bliskie optimum, lecz jego nie osiągają. Oznacza to, że samym elityzmem nie można dla danej funkcji osiągnąć wartości optymalnej, a tylko się do niej zbliżyć.
 
 \newpage
 \subsection{PriceTransistor (9 parametrów)}
@@ -770,6 +789,18 @@ https://cran.r-project.org/web/packages/GA/vignettes/GA.html
 
 \bibitem{test3}
 Surjanovic, S. \& Bingham, D. (2013). Virtual Library of Simulation Experiments: Test Functions and Datasets. Retrieved April 3, 2017, from http://www.sfu.ca/~ssurjano.
+
+\bibitem{test4}
+Momin Jamil and Xin-She Yang "A literature survey of benchmark functions for
+global optimization problems'', Int. Journal of Mathematical Modelling and
+Numerical Optimisation, Vol. 4, No. 2, pp. 150–194. (2013)
+
+\bibitem{test5}
+Ajith Abraham,Aboul-Ella Hassanien,Patrick Siarry,Andries Engelbrecht,
+"Foundations of Computational Intelligence Volume 3'' (2009)
+
+\bibitem{test6}
+Onay Urfalioglu, Orhan Arikan "Self-adaptive randomized and rank-based differential evolution for multimodal problems'' (2011)
 
 \end{thebibliography}
 
