@@ -170,7 +170,7 @@ Każdy pomiar przeprowadzono 20-krotnie wyniki uśredniając co oznacza, że war
 \end{table}
 
 \fbi
-Zielone linie na wykresach oznaczają optima zawarte w~pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas niniejszych pomiarów).
+Zielone, poziomie linie na wykresach oznaczają optima zawarte w~pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas niniejszych pomiarów).
 
 \fbi
 Dla funkcji o~ilości parametrów większej niż 2 pominięto ilustracje graficzne znalezionych optimów gdyż optymalizacji podlegają wszystkie wymiary. Ilustracja dla dwóch pierwszych nie niesie ze sobą przydatnej informacji.
@@ -245,7 +245,7 @@ Wykres (rys.~\ref{fig:branin5}) wskazuje wyraźną zmianę jakości rozwiązań 
 \end{figure}
 
 \fbi
-Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0.4. Jego ustawienie poniżej tej wartości powoduje obniżenie się jakości rezultatów.
+Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0.35. Jego ustawienie poniżej tej wartości powoduje obniżenie się jakości rezultatów.
 
 \begin{figure}[H]
 	\centering
@@ -412,6 +412,9 @@ Zauważalne są tutaj pogroszenia się wyników dla wszystkich serii, gdy iloś�
 	\end{center}
 \end{figure}
 
+\fbi
+W przypadku funkcji CosMix elityzm ma znaczący wpływ na otrzymane wyniki. Przy elityźmie mniejszym od 0,3 otrzymane wartości są znacząco oddalone od optimum. Dla elityzmu na większego od 0,3 wartości utrzymują się blisko optimum.
+
 \newpage
 \subsection{EMichalewicz (5 parametrów)}
 \paragraph{}
@@ -526,13 +529,13 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{i
 \end{figure}
 
 \fbi
-Z wykresu(rys.~\ref{fig:hartman61}) odczytać można niski wpływ mutacji na osiągane wyniki. Dla wszystkich wartości mutacji otrzymywane wyniki zbliżone są do optimum funkcji.
+Z wykresu (rys.~\ref{fig:hartman62}) odczytać można niski wpływ mutacji na osiągane wyniki. Dla wszystkich wartości mutacji otrzymywane wyniki zbliżone są do optimum funkcji.
 
 \fbi
 Warto zauważyć, że wszystkie serie posiadają jedną wartość mutacji, dla której następuje pogorszenie otrzymanego wyniku. Serie posiadają inne wartości domyślne dla funkcji. Oznacza to, że funkcja dla pewnej wartości, określonej przez wartości domyślne, zwraca gorsze wyniki.
 
 \fbi
-Wykres krzyżowania(rys.~\ref{fig:hartman62}) wskazuje wartość 0,6 jako graniczną dla otrzymywania optimum funkcji. Przed tą wartością otrzymane wyniki są niestabilne, nie można odczytać nich czy wyniki się poprawiają czy pogarszają.
+Wykres krzyżowania(rys.~\ref{fig:hartman63}) wskazuje wartość 0,6 jako graniczną dla otrzymywania optimum funkcji. Przed tą wartością otrzymane wyniki są niestabilne, nie można odczytać nich czy wyniki się poprawiają czy pogarszają.
 
 \begin{figure}[H]
 	\begin{center}
@@ -552,7 +555,7 @@ Wykres krzyżowania(rys.~\ref{fig:hartman62}) wskazuje wartość 0,6 jako granic
 \end{figure}
 
 \fbi
-Wykres populacji(rys.~\ref{fig:hartman63}) wskazuje na logarytmiczną zbieżność wartości dla danej populacji do optimum funkcji. Wynika z~tego, że funkcja ta osiąga optimum dla dowolnych parametrów mutacji i~krzyżowania, lecz dużej populacji.
+Wykres populacji(rys.~\ref{fig:hartman64}) wskazuje na logarytmiczną zbieżność wartości dla danej populacji do optimum funkcji. Wynika z tego, że funkcja ta osiąga optimum dla dowolnych parametrów mutacji i~krzyżowania, lecz dużej populacji.
 
 \fbi
 Ilość iteracji dąży do optimum dla więcej niż 50 iteracji. Wartość ta jest wartością graniczną. Wyniki znajdujące się przed nią są ponad dwuktornie gorsze niż wyniki po niej. Zauważalne są również dwa skoki (dla wartości 110 i~160) pokazujące pogorszenie rezultatu, wskazują one na budowę funkcji, która dla tych wartości zwraca gorsze wyniki.
