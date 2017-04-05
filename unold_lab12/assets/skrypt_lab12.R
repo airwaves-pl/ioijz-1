@@ -1,18 +1,22 @@
-
+# clean old data
 rm(list=ls())
 dev.off(dev.list()["RStudioGD"])
 
+# load libraries
 require("GA")
 require("globalOptTests")
 require("rgl")
 
 # Settings ----
 
-nOfRuns <- 20 # number of runs to calc average
+nOfRuns <- 20 # number of runs to calc avg scores
 
+# colors and titles for plot series
 colors <- c("red", "blue", "purple", "black")
 series <- c("Seria 1", "Seria 2", "Seria 3", "Seria 4")
 
+# default parameters for measurements
+# each row is a different serie
 # [mutations,crossovers,populations,iterations,color]
 params = matrix(
   c(0, 0, 50, 100, 1,
@@ -21,12 +25,15 @@ params = matrix(
     0.1, 0.8, 50, 100, 4),
   nrow=4, ncol=5, byrow = TRUE)
 
+# names of functions from globalOptTests package
 functions <- c("Branin", "Gulf", "CosMix4", "EMichalewicz", 
 	"Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
 
-graphs <- TRUE
-quality <- 100 #graph resolutions
+# graph settings
+graphs <- TRUE #true if you want to print graphs
+quality <- 100 #number of probes
 
+# sequences of parameters for each serie
 mutationTests <- seq(0, 1, 0.1)
 crossoverTests <- seq(0, 1, 0.1)
 populationTests <- seq(10, 100, 5)
@@ -40,6 +47,7 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
   gMin <- .Machine$integer.max
   gBest <- NA
   
+  # main measurement loop (for each serie and sequence calculate average results)
   temp <- c()
   for (defRow in 1:nrow(params)) {
     averages <- c()
@@ -71,6 +79,8 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
               na="", col.names=FALSE, sep=";")
   
   if (graphs) {
+    
+    # save graph with measurement series to file
     png(file = paste(funcName, graphName, ".png", sep=""), width=600, height=400, units="px")
     plot(0, 0, main=main,
          ylim=c(min(c(temp,globalOpt)),max(c(temp,globalOpt))),
@@ -87,7 +97,10 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
     }
     legend("topright", seriesNames, lwd=rep(2,nrow(params)), lty=rep(1,nrow(params)), col=colorNames)
     dev.off()
+    
     summary(gBest)
+    
+    # save overview of best found minimum to file
     png(file = paste(funcName, graphName, mType, ".png", sep=""), width=600, height=400, units="px")
     filled.contour(x, y, z, color.palette = jet.colors, nlevels = 24, 
          plot.axes = { axis(1); axis(2);
@@ -96,16 +109,17 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
          }
     )
     dev.off()
+    
+    # save best fitness graph to file
     png(file = paste(funcName, graphName, mType, "fitness", ".png", sep=""), width=600, height=400, units="px")
     plot(gBest)
     dev.off()
   }
-  
 }
-
 
 for (funcName in functions) {
 
+  # get data from globalOptTests package
 	dim <- getProblemDimen(funcName)
 	B <- matrix(unlist(getDefaultBounds(funcName)),ncol=dim,byrow=TRUE)
 	f <- function(xx) goTest(par=c(xx, rep(0, dim-length(xx))), 
@@ -113,7 +127,7 @@ for (funcName in functions) {
 	globalOpt <- getGlobalOpt(funcName)
 
 	if (graphs) {
-
+	  # prepare two versions of graphs (interactive and static)
 	  xprobes <- abs(B[2,1] - B[1,1]) / quality
 	  yprobes <- abs(B[2,2] - B[1,2]) / quality
 	  x <- seq(B[1,1], B[2,1], by = xprobes)
@@ -128,22 +142,17 @@ for (funcName in functions) {
 	  png(file = paste(funcName, "1.png", sep=""), width=600, height=400, units="px")
 	  persp3D(x, y, z, theta = -45, phi = 20, color.palette = jet.colors)
 	  dev.off()
-	  
 	}
-
+	
+	# for each function perform set of measurements
 	customMeasure("resultsMutations.csv", "2", mutationTests, "mut", 
 		"p. mutacji", "Znalezione minimum dla roznych prawdopodobienstw mutacji")
-
 	customMeasure("resultsCrossover.csv", "3", crossoverTests, "crs", 
 		"p. krzyzowania", "Znalezione minimum dla roznych prawdopodobienstw krzyzowania")
-
 	customMeasure("resultsPopulation.csv", "4", populationTests, "pop", 
 		"rozmiar populacji", "Znalezione minimum dla roznych rozmiarow populacji")
-
 	customMeasure("resultsIterations.csv", "5", iterationTests, "itr",
 		"ilosc iteracji", "Znalezione minimum dla roznych ilosci iteracji")
-
 	customMeasure("resultsElitism.csv", "6", elitismTests, "elt", 
 		"elityzm", "Znalezione minimum dla roznych wartosci elityzmu")
-
 }
