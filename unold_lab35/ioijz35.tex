@@ -1,0 +1,308 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{amsmath} 
+\usepackage{listings}
+\usepackage{color}
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{tabularx}
+
+\geometry{margin=1.2in}
+\usepackage[final]{pdfpages}
+
+\newcommand{\fbi}{\leavevmode{\parindent=1em\indent}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+	frame=tblr,
+	language=R,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	mathescape=false,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\renewcommand\lstlistingname{Listing}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}}
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}
+  {3.25ex \@plus1ex \@minus.2ex}
+  {-0em}
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}
+  {3.25ex \@plus1ex \@minus .2ex}
+  {-1em}
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\hypersetup{pageanchor=false}
+
+\setlength\parindent{3pt}
+
+\renewcommand{\labelenumi}{\alph{enumi}.} 
+
+\date{\today}
+
+\begin{document}
+
+\input{./ioijz35title.tex}
+
+\tableofcontents
+
+\newpage
+\section{Wprowadzenie}
+\paragraph{}
+Algorytm genetyczny – algorytm heurystyczny, który swoim działaniem przypomina działanie ewolucji w~naturze. Osobniki będące zbyt słabe zostają wyeliminowane z~populacji w~kolejnych pokoleniach, a~na ich miejsce przyjmowane są lepsze, silniejsze, bardziej podatne adaptacji. Algorytmy te zakładają możliwość mutacji i~krzyżowania wśród potomków, przez co nie zawsze są oni silniejsi od poprzednio wyeliminowanych członków. Dodatkowo wprowadzają pojęcie elity, która jest bezpośrednio przenoszona do następnego - teoretycznie lepszego pokolenia.
+
+
+
+\textit{dla wybranej funkcji wlasne funkcje krzyzowania (dla branina)
+dla tsp (np--trudny) genetyczny -- tsplib wykorzystać do badań (2--3 instancje srednie male duze) z wlasnym operatorem z domyslnym
+algorytm ga z lokalnym wyszukiwaniem, dla komiwojażera, założyć czy ma lepsze wartości, czy szybciej zbiega, jak operatory się zachowują,
+psoptim, dla jednej funkcji i komiwojażera}
+
+
+
+\fbi
+W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla różnych parametrów. Jako benchmark oceny należało użyć pakietu ,,getGlobalOpts'' oraz języka R.
+
+\fbi
+Pomiary wykonywano na 2 różnych jednostkach roboczych. Ich parametry nie są istotne z~punktu widzenia analizy i~możliwości porównania rezultatów.
+
+\section{Implementacja}
+\paragraph{}
+Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w~języku R przygotowany w~celu umożliwienia przeprowadzenia pomiarów.
+
+\lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w~języku R wykorzystany do badań,firstline=1,lastline=300]{./assets/skrypt_lab35.R}
+
+\fbi
+Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowadzenie wszystkich pomiarów. Jednocześnie wszystkie wykresy mogą być natychmiast podmienione w~sprawozdaniu. Poniżej pokrótce omówiono podstawowe parametry.
+
+\begin{itemize}
+	\item nOfRuns
+	
+	Ilość powtórzeń dla każdego pomiaru w~celu uśrednienia.
+	
+	\item colors, series
+	
+	Wektory kolorów i~nazw kolejnych serii pomiarowych. 
+	
+	\item params
+	
+	Macierz parametrów domyślnych algorytmu dla każdej z~serii. W każdym wierszu kolejno są zawarte: p. mutacji, p. krzyżowania, rozmiar populacji, ilość iteracji oraz kolor serii na wykresach.
+	
+	\item functions
+	
+	Wektor nazw funkcji dla których przeprowadzane są kolejno pomiary.
+	
+\end{itemize}
+
+Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest na podstawie nazwy funkcji z~pakietu ,,globalOptTests''. Są to: rozmiar problemu (ilość parametrów), domyślne ograniczenia, wartość w~danym punkcie oraz optimum dla domyślnych ograniczeń.
+
+\newpage
+\section{Przebieg badań}
+\paragraph{}
+Do badań zostały wybrane funkcje o~różnych wymiarach zaczynając na 2 kończąc na 20. Poniżej wymieniono te funkcje wraz z~ilością wymiarów podaną w~nawiasie.
+
+\begin{itemize}
+	\item Branin (2)
+	\item Gulf (3)
+	\item CosMix4 (4)
+	\item EMichalewicz (5)
+	\item Hartman6 (6)
+	\item PriceTransistor (9)
+	\item Schwefel (10)
+	\item Zeldasine20 (20)
+\end{itemize}
+
+\fbi
+Każdy pomiar przeprowadzono 20-krotnie wyniki uśredniając co oznacza, że wartości widoczne na wykresach dla każdej serii z~osobna są uśrednione po osobnych 20 przebiegach. Domyślne parametry każdej z~serii przedstawiono poniżej (tabela~\ref{tab:parametry}). Zmianie ulegają wartości  prawdopodobieństwa mutacji i~krzyżowania by zbadać znaczenie ich obecności podczas optymalizacji.
+
+\begin{table}[H]
+	\centering
+	\caption{Parametry domyślne poszczególnych serii pomiarowych}
+	\label{tab:parametry}
+	\begin{tabularx}{\textwidth}{|X|c|c|c|c|}
+		\hline
+		- & Seria 1 & Seria 2 & Seria 3 & Seria 4\\ 
+		\hline
+		Rozmiar populacji & 50 & 50 & 50 & 50 \\ 
+		\hline 
+		Rozmiar iteracji & 100 & 100 & 100 & 100 \\ 
+		\hline 
+		Prawdopodobieństwo mutacji & 0 & 0 & 0.1 & 0.1 \\ 
+		\hline 
+		Prawdopodobieństwo krzyżowania & 0 & 0.8 & 0 & 0.8 \\ 
+		\hline 
+	\end{tabularx} 
+\end{table}
+
+\fbi
+Zielone, poziomie linie na wykresach oznaczają optima zawarte w~pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas niniejszych pomiarów).
+
+\fbi
+Dla funkcji o~ilości parametrów większej niż 2 pominięto ilustracje graficzne znalezionych optimów gdyż optymalizacji podlegają wszystkie wymiary. Ilustracja dla dwóch pierwszych nie niesie ze sobą przydatnej informacji.
+
+\newpage
+\subsection{Branin (2 parametry)}
+\paragraph{}
+Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}) \cite{test4}.
+
+\begin{equation}\label{eq:branin}
+	f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
+\end{equation}
+
+, gdzie $ x_1 \in [-5, 10] $ oraz $ x_2 \in [0, 15] $.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/test.png}
+	\caption{Wykres funkcji Branin}
+	\label{fig:branin1}
+\end{figure}
+
+\fbi
+Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
+
+\fbi
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego. Kolejno dokonano pomiarów dla różnych wartości: prawdopodobieństwa mutacji i~krzyżowania, wielkości populacji, ilości iteracji oraz elityzmu. Wszystkie pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1~--~4).
+
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./assets/test.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od prawdopodobieństwa mutacji}
+	\label{fig:branin2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./assets/test.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od prawdopodobieństwa krzyżowania}
+	\label{fig:branin3}
+\end{figure}
+
+\fbi
+Na wykresie (rys.~\ref{fig:branin2}) można zauważyć niski wpływ ustawienia mutacji na znalezione rozwiązania. Przy wszystkich parametrach domyślnych funkcja znajduje się w~pobliżu optymalnej wartości. Miejscowe odchylenia są tu najprawdopodobniej związane z~charakterem algorytmu i~zbyt małą ilością prób poddanych uśrednieniu. Nie możemy tutaj określić czy przy wyłączonej zarówno mutacji jak i~krzyżowaniu wyniki ulegają pogorszeniu, gdyż nie ma w~tym obszarze spójności. Podobne wnioski możemy wskazać dla wykresu krzyżowania (rys.~\ref{fig:branin3}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./assets/test.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od rozmiaru populacji}
+	\label{fig:branin4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./assets/test.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od ilości iteracji}
+	\label{fig:branin5}
+\end{figure}
+
+\fbi
+Z wykresu (rys.~\ref{fig:branin4}) można odczytać podatność funkcji na zmiany rozmiaru populacji. Wyniki zbliżone do oczekiwanych zostały uzyskane dla wartości wynoszącej 45 jednostek. Widać również, że przy małej populacji znaczenie mutacji i~krzyżowania jest większe. Zauważalny jest wzrost jakości rozwiązania wraz ze wzrostem ilości jednostek populacji.
+
+\fbi
+Wykres (rys.~\ref{fig:branin5}) wskazuje wyraźną zmianę jakości rozwiązań dla 60 i~więcej iteracji. Poniżej tej wartości uzyskiwane wyniki są niestabilne, powyżej osiągają wartość zbliżoną do oczekiwanej szczególnie dla serii 4 (czyli z~włączoną mutacją i~krzyżowaniem).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./assets/test.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od przyjętego elityzmu}
+	\label{fig:branin6}
+\end{figure}
+
+\fbi
+Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0,35. Jego ustawienie poniżej tej wartości powoduje obniżenie się jakości rezultatów.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./assets/test.png}
+	\caption{Poglądowa lokalizacja najlepszego znalezionego minimum funkcji Branin dla pomiarów przy zmianach elityzmu}
+	\label{fig:branin6elt}
+\end{figure}
+
+\newpage
+\section{Podsumowanie}
+\paragraph{}
+W trakcie prowadzonych badań przetestowano algorytm genetyczny w~zadaniu optymalizacji dla 9 funkcji testowych. Analizie poddano wpływ zmiany każdego z~parametrów dla 4 różnych konfiguracji pozostałych wartości domyślnych.
+
+\fbi
+Wartość prawdopodobieństwa mutacji i~krzyżowania zdaje się odgrywać drugorzędną rolę. Istotne jednak by chociaż jedna z~nich była włączona z~prawdopodobieństwem większym niż 0.
+
+\fbi
+Najlepszym ustawieniem dla elityzmu jest prawdopodobieństwo rzędu 0,5.
+
+\fbi
+Z pewnością należałoby zwiększyć ilość prób poddawanych uśrednianiu gdyż dla przyjętych 20 wyniki ciągle są niestabilne. Warto by również rozważyć pomijanie kilku najlepszych i~najgorszych wyników przed uśrednianiem.
+
+\fbi
+Co ciekawe wyniki są widocznie gorsze przy konfiguracji w~której krzyżowanie jest wyłączone a~p. mutacji wynosi 0,5. Taka prawidłowość objawia się dla wszystkich badanych funkcji.
+
+\newpage
+\begin{thebibliography}{40}
+
+\bibitem{test1}
+Artur Suchwałko ,,Wprowadzenie do R dla programistów innych języków'' https://cran.r-project.org/doc/contrib/R-dla-programistow-innych-jezykow.pdf
+
+
+\bibitem{test2}
+Luca Scrucca ,,Package GA''
+https://cran.r-project.org/web/packages/GA/GA.pdf
+
+\bibitem{test3}
+Surjanovic, S. \& Bingham, D. (2013). ,,Virtual Library of Simulation Experiments: Test Functions and Datasets.'' Retrieved April 3, 2017, from http://www.sfu.ca/~ssurjano.
+
+\bibitem{test4}
+Momin Jamil, Xin-She Yang ,,A literature survey of benchmark functions for global optimization problems'', Int. Journal of Mathematical Modelling and Numerical Optimisation, Vol. 4, No. 2, pp. 150–194. (2013)
+
+\bibitem{test5}
+Ajith Abraham, Aboul-Ella Hassanien, Patrick Siarry, Andries Engelbrecht, ,,Foundations of Computational Intelligence Volume 3'' (2009)
+
+\bibitem{test6}
+Onay Urfalioglu, Orhan Arikan ,,Self-adaptive randomized and rank-based differential evolution for multimodal problems'' (2011)
+
+\end{thebibliography}
+
+\end{document}

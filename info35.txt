@@ -1,5 +1,0 @@
-b) dla wybranej funkcji wlasne funkcje krzyzowania (dla branina)
-c) dla tsp (np-trudny) genetyczny - tsplib wykorzystaæ do badañ (2-3 instancje srednie male duze) z wlasnym operatorem z domyslnym
-d) algorytm ga z lokalnym wyszukiwaniem, dla komiwoja¿era, za³o¿yæ czy ma lepsze wartoœci, czy szybciej zbiega, jak operatory siê zachowuj¹,
-
-e) psoptim, dla jednej funkcji i komiwoja¿era
