@@ -41,7 +41,28 @@
 	breaklines=true,
 	mathescape=false,
 	breakatwhitespace=true,
-	tabsize=3
+	tabsize=3,
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=
+	{ą}{{\k{a}}}1
+	{Ą}{{\k{A}}}1
+	{ę}{{\k{e}}}1
+	{Ę}{{\k{E}}}1
+	{ó}{{\'o}}1
+	{Ó}{{\'O}}1
+	{ś}{{\'s}}1
+	{Ś}{{\'S}}1
+	{ł}{{\l{}}}1
+	{Ł}{{\L{}}}1
+	{ż}{{\.z}}1
+	{Ż}{{\.Z}}1
+	{ź}{{\'z}}1
+	{Ź}{{\'Z}}1
+	{ć}{{\'c}}1
+	{Ć}{{\'C}}1
+	{ń}{{\'n}}1
+	{Ń}{{\'N}}1
 }
 
 \renewcommand\lstlistingname{Listing}
@@ -197,8 +218,8 @@ Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1})
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/test.png}
-	\caption{Wykres funkcji Branin}
+	\includegraphics[width=0.95\textwidth]{./assets/tsp_results.png}
+	\caption{Jakość wyników}
 	\label{fig:branin1}
 \end{figure}
 
@@ -211,7 +232,7 @@ Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości para
 \newpage
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.85\textwidth]{./assets/test.png}
+	\includegraphics[width=0.95\textwidth]{./assets/overview_u2319.png}
 	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od prawdopodobieństwa mutacji}
 	\label{fig:branin2}
 \end{figure}
