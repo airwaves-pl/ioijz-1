@@ -1,3 +1,4 @@
+# initialize ----
 # clean old data
 rm(list=ls())
 dev.off(dev.list()["RStudioGD"])
@@ -6,10 +7,45 @@ dev.off(dev.list()["RStudioGD"])
 require("GA")
 require("globalOptTests")
 require("rgl")
+require("parallel")
+require("doParallel")
+
+# custom functions ----
+# mutation function
+myMutationFunction <- function(object, parent) {
+  # get GA population
+  population <- parent <- as.vector(object@population[parent, ])
+  
+  # calculate randoms
+  rnd <- sample(1:length(population), 1)
+  rndMinOrMax <- sample(1:2, 1)
+  
+  # get min and max from population vector
+  max_value <- which.max(population)
+  min_value <- which.min(population)
+  
+  # if rndMinOrMax is 0 switch random value to min, else switch to max
+  if (rndMinOrMax == 0)
+  {
+    population[rnd] <- min_value;
+  } else
+  {
+    population[rnd] <- max_value;
+  }
+ 
+  
+  return (population);
+}
+# crossover function
+myCrossoverFunction <- function(object, parent) {
+  
+}
 
 # Settings ----
 
-nOfRuns <- 20 # number of runs to calc avg scores
+nOfRuns <- 1 # number of runs to calc avg scores
+
+numOfCores <- FALSE # number of cores to use (FALSE, 1 - n)
 
 # colors and titles for plot series
 colors <- c("red", "blue", "purple", "black")
@@ -26,8 +62,8 @@ params = matrix(
   nrow=4, ncol=5, byrow = TRUE)
 
 # names of functions from globalOptTests package
-functions <- c("Branin", "Gulf", "CosMix4", "EMichalewicz", 
-	"Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
+functions <- c("Branin", "Gulf")#, "CosMix4", "EMichalewicz", 
+	#"Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
 
 # graph settings
 graphs <- TRUE #true if you want to print graphs
@@ -55,13 +91,16 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
       sum <- 0
       for (i in 1:nOfRuns) {
         GAmin <- ga(type = "real-valued",
+            mutation = myMutationFunction,
+            #crossover = myCrossoverFunction,
             fitness =  function(xx) -f(xx),
             min = c(B[1,]), max = c(B[2,]),
             popSize = if (mType == "pop") value else params[defRow,3],
             maxiter = if (mType == "itr") value else params[defRow,4],
             pmutation = if (mType == "mut") value else params[defRow,1], 
             pcrossover = if (mType == "crs") value else params[defRow,2],
-            elitism = if (mType == "elt") value else max(1, round(params[defRow,3] * 0.05)))
+            elitism = if (mType == "elt") value else max(1, round(params[defRow,3] * 0.05)),
+            parallel = numOfCores)
         solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
         eval <- f(solution[1,])
         if (eval < gMin) {
