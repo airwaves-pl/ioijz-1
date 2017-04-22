@@ -1,8 +1,4 @@
-
-# whole source code is located here:
-# https://github.com/cran/GA/tree/master/R
-
-
+# initialize ----
 # clean old data
 rm(list=ls())
 dev.off(dev.list()["RStudioGD"])
@@ -11,10 +7,45 @@ dev.off(dev.list()["RStudioGD"])
 require("GA")
 require("globalOptTests")
 require("rgl")
+require("parallel")
+require("doParallel")
+
+# custom functions ----
+# mutation function
+myMutationFunction <- function(object, parent) {
+  # get GA population
+  population <- parent <- as.vector(object@population[parent, ])
+  
+  # calculate randoms
+  rnd <- sample(1:length(population), 1)
+  rndMinOrMax <- sample(1:2, 1)
+  
+  # get min and max from population vector
+  max_value <- which.max(population)
+  min_value <- which.min(population)
+  
+  # if rndMinOrMax is 0 switch random value to min, else switch to max
+  if (rndMinOrMax == 0)
+  {
+    population[rnd] <- min_value;
+  } else
+  {
+    population[rnd] <- max_value;
+  }
+ 
+  
+  return (population);
+}
+# crossover function
+myCrossoverFunction <- function(object, parent) {
+  
+}
 
 # Settings ----
 
-nOfRuns <- 2 # number of runs to calc avg scores
+nOfRuns <- 1 # number of runs to calc avg scores
+
+numOfCores <- FALSE # number of cores to use (FALSE, 1 - n)
 
 # colors and titles for plot series
 colors <- c("red", "blue", "purple", "black")
@@ -31,7 +62,8 @@ params = matrix(
   nrow=4, ncol=5, byrow = TRUE)
 
 # names of functions from globalOptTests package
-functions <- c("Branin")
+functions <- c("Branin", "Gulf")#, "CosMix4", "EMichalewicz", 
+	#"Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
 
 # graph settings
 graphs <- TRUE #true if you want to print graphs
@@ -43,37 +75,6 @@ crossoverTests <- seq(0, 1, 0.1)
 populationTests <- seq(10, 100, 5)
 iterationTests <- seq(10, 200, 10)
 elitismTests <- seq(0, 1, 0.1)
-
-# Custom operators (to be done) ----
-
-gareal_laCrossover_custom <- function(object, parents, ...)
-{
-  # Local arithmetic crossover
-  parents <- object@population[parents,,drop = FALSE]
-  n <- ncol(parents)
-  children <- matrix(as.double(NA), nrow = 2, ncol = n)
-  a <- runif(n)
-  children[1,] <- a*parents[1,] + (1-a)*parents[2,]
-  children[2,] <- a*parents[2,] + (1-a)*parents[1,]
-  out <- list(children = children, fitness = rep(NA,2))
-  return(out)
-}
-
-gareal_sigmaSelection <- function(object, ...)
-{
-  # Fitness proportional selection with Goldberg's Sigma Truncation Scaling
-  popSize <- object@popSize
-  mf <- mean(object@fitness, na.rm = TRUE)
-  sf <- sd(object@fitness, na.rm = TRUE)
-  fscaled <- pmax(object@fitness - (mf - 2*sf), 0, na.rm = TRUE)
-  prob <- abs(fscaled)/sum(abs(fscaled))
-  sel <- sample(1:object@popSize, size = object@popSize,
-                prob = pmin(pmax(0, prob), 1, na.rm = TRUE),
-                replace = TRUE)
-  out <- list(population = object@population[sel,,drop=FALSE],
-              fitness = object@fitness[sel])
-  return(out)
-}
 
 # Processing ----
 
@@ -90,6 +91,8 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
       sum <- 0
       for (i in 1:nOfRuns) {
         GAmin <- ga(type = "real-valued",
+            mutation = myMutationFunction,
+            #crossover = myCrossoverFunction,
             fitness =  function(xx) -f(xx),
             min = c(B[1,]), max = c(B[2,]),
             popSize = if (mType == "pop") value else params[defRow,3],
@@ -97,9 +100,7 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
             pmutation = if (mType == "mut") value else params[defRow,1], 
             pcrossover = if (mType == "crs") value else params[defRow,2],
             elitism = if (mType == "elt") value else max(1, round(params[defRow,3] * 0.05)),
-            crossover = gareal_laCrossover_custom, 
-            optim = FALSE #hybrid ga off
-            )
+            parallel = numOfCores)
         solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
         eval <- f(solution[1,])
         if (eval < gMin) {
@@ -171,6 +172,12 @@ for (funcName in functions) {
 	  x <- seq(B[1,1], B[2,1], by = xprobes)
 	  y <- seq(B[1,2], B[2,2], by = yprobes)
 	  z <- outer(x, y, Vectorize(function(x,y) f(c(x,y))))
+	  nbcol = 100
+	  color = rev(rainbow(nbcol, start = 0/6, end = 4/6))
+	  zcol  = cut(z, nbcol)
+	  persp3d(x, y, z, theta=50, phi=25, expand=0.75, col=color[zcol],
+			  ticktype="detailed",axes=TRUE)
+	  
 	  png(file = paste(funcName, "1.png", sep=""), width=600, height=400, units="px")
 	  persp3D(x, y, z, theta = -45, phi = 20, color.palette = jet.colors)
 	  dev.off()
@@ -189,104 +196,5 @@ for (funcName in functions) {
 		"elityzm", "Znalezione minimum dla roznych wartosci elityzmu")
 }
 
-
-
-
-
-# Leaflet test ----
-
-library(leaflet)
-
-m <- leaflet() %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
-m  # Print the map
-
-
-# ATSP example ----
-
-require(GA)
-
-data("eurodist", package = "datasets")
-D <- as.matrix(eurodist)
-N <- max(dim(D))
-
-tourLength <- function(tour, distMatrix) {
-  tour <- c(tour, tour[1])
-  route <- embed(tour, 2)[,2:1]
-  sum(distMatrix[route])
-}
-
-fit <- function(tour, distMatrix) 1/tourLength(tour, distMatrix)
-
-GA <- ga(type = "permutation", fitness = fit, distMatrix = D, min = 1, max = N, maxiter=2000, pmutation=0.2, run=500)
-
-summary(GA)
-
-apply(GA@solution, 1, tourLength, D)
-
-mds <- cmdscale(eurodist)
-x <- mds[, 1]
-y <- -mds[, 2]
-plot(x, y, type = "n", asp = 1, xlab = "", ylab = "")
-tour <- GA@solution[1, ]
-tour <- c(tour, tour[1])
-n <- length(tour)
-arrows(x[tour[-n]], y[tour[-n]], x[tour[-1]], y[tour[-1]],length = 0.15, angle = 25, col = "steelblue", lwd = 2)
-text(x, y, labels(eurodist), cex=0.8)
-
-
-
-# TSP tests ----
-
-require(TSP)
-
-instances <- c("u159", "u574", "u724", "u1060", "u1432", "u1817", "u2152", "u2319")
-best_solutions <- c(42080, 36905, 41910, 224094, 152970, 57201, 64253, 234256)
-found_solutions <- c()
-solutions_quality <- c()
-
-for (i in 1:length(instances)) {
-  
-  fileName = paste("examples/", instances[i], ".tsp", sep="")
-  graphTitle = paste("TSPLIB: ", instances[i], sep="")
-  
-  ## Drilling problem from TSP
-  drill <- read_TSPLIB(system.file(fileName, package = "TSP"))
-  tour <- solve_TSP(drill, method = "nn", two_opt = TRUE)
-  plot(drill, tour, cex=.6, col = "red", pch= 3, main = graphTitle)
-  
-  tl <- tour_length(tour)
-  ol <- best_solutions[i]
-  
-  found_solutions <- c(found_solutions, tl)
-  solutions_quality <- c(solutions_quality, ol/tl)
-
-}
-
-#png(file = "tsp_results.png", width=600, height=400, units="px")
-plot(1:length(instances), xaxt = "n", solutions_quality, col="red", main="Summary", type="l", xlab="instancje", ylab="jakość rozwiązań")
-axis(1, at=1:length(instances), labels=instances)
-#dev.off()
-
-
-
-# PSO tests ----
-
-require(psoptim)
-
-n <- 50
-m.l <- 50
-w <- 0.95
-c1 <- 0.2
-c2 <- 0.2
-xmin <- c(-5.12, -5.12)
-xmax <- c(5.12, 5.12)
-vmax <- c(4, 4)
-
-g <- function(x){  
-  -(20 + x[,1]^2 + x[,2]^2 - 10*(cos(2*pi*x[,1]) + cos(2*pi*x[,2])))
-}
-
-psoptim(FUN=g, n=n, max.loop=m.l, w=w, c1=c1, c2=c2,
-        xmin=xmin, xmax=xmax, vmax=vmax, seed=5, anim=FALSE)
+# whole source code is located here:
+# https://github.com/cran/GA/tree/master/R

@@ -1,0 +1,26 @@
+P.T. Studenci,
+
+podsylam do wiadomosci wszystkich "garsc" informacji uzupelniajacych instrukcje laboratoryjna do laboratoriow 3-5
+
+pkt b)
+- prosze wybrac do testow tylko JEDNA z testowanych wczesniej funkcji wielomodalnych
+- testy dzialania GA prosze wykonac dla roznych wartosci podmienionej funkcji (krzyzowania i/lub mutacji i/lub/ selekcji)
+- porownac zmieniona GA z domyslna; uzyc wykresow zbiorczych, przedstawiajacych zmiane wybranego parametru w funkcji celu
+- w przypadku podmiany wiecej niz jednej funkcji, mozna zastosowac tzw. wykres "temperaturowy", ktory pokazuje zmiennosc dwoch parametrow, a kolorem oznacza wartosc funkcji celu
+- wynikac pokazywac tylko usrednione co najmniej z 30 przebiegow
+
+pkt c, d, e)
+- dotycza juz tylko problemu komiwojazera
+- wybrac 3 przykladowe instancje problemow z TSPLib, sugeruje instancje nie wieksze od 100 miast ze wzgledu na czasochlonnosc obliczen
+- wynikac pokazywac tylko usrednione co najmniej z 30 przebiegow
+
+pkt c)
+- zbadac algorytm GA dla zmienianych co najwyzej 2 roznych parametrow (wybieramy z prawdop. mutacji, krzyzowania, rozmiaru populacji, elitaryzmu)
+
+pkt d, e)
+- zbadac zachowanie algorytmow tylko dla roznych wartosci ich unikalnych parametrow
+
+Pzdr
+O. Unold
+
+i zycze Radosnego Alleluja!
