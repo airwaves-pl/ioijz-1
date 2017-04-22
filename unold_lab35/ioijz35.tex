@@ -118,7 +118,7 @@ Algorytm genetyczny – algorytm heurystyczny, który swoim działaniem przypomi
 
 
 
-\textit{dla wybranej funkcji wlasne funkcje krzyzowania (dla branina)
+\textit{dla wybranej funkcji własnej funkcje krzyżowania (dla branina)
 dla tsp (np--trudny) genetyczny -- tsplib wykorzystać do badań (2--3 instancje srednie male duze) z wlasnym operatorem z domyslnym
 algorytm ga z lokalnym wyszukiwaniem, dla komiwojażera, założyć czy ma lepsze wartości, czy szybciej zbiega, jak operatory się zachowują,
 psoptim, dla jednej funkcji i komiwojażera}
@@ -131,11 +131,114 @@ W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla
 \fbi
 Pomiary wykonywano na 2 różnych jednostkach roboczych. Ich parametry nie są istotne z~punktu widzenia analizy i~możliwości porównania rezultatów.
 
+
+\newpage
+\section{Cel ćwiczeń}
+\paragraph{}
+Celem jest
+
+\newpage
+\section{Opis wykorzystanych funkcji}
+\paragraph{}
+Gulf, TSP, hybrydowy
+
+\fbi
+Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}) \cite{test4}.
+
+\begin{equation}\label{eq:branin}
+f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
+\end{equation}
+
+, gdzie $ x_1 \in [-5, 10] $ oraz $ x_2 \in [0, 15] $.
+
+
+\newpage
+\section{Opis własnych funkcji}
+\paragraph{}
+Opisać jak działa własna funkcja mutacji
+
+\newpage
+\section{Wykorzystane narzędzia i biblioteki}
+\paragraph{}
+
+\subsection{RStudio}
+\paragraph{}
+
+\subsection{GlobalOptTest}
+\paragraph{}
+
+\subsection{DoParallel}
+\paragraph{}
+
+\subsection{Rgl}
+\paragraph{}
+
+\subsection{GA}
+\paragraph{}
+
+\newpage
+\section{Przebieg badań}
+\paragraph{}
+Do badań wykorzystano następujące funkcje.
+
+\subsection{Gulf}
+\paragraph{}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/tsp_results.png}
+	\caption{Jakość wyników}
+	\label{fig:branin1}
+\end{figure}
+
+\fbi
+Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
+
+\fbi
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości prawdopodobieństwa mutacji dla zmienionej i niezmienionej funkcji mutacji. Pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1~--~4).
+
+\newpage
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/test.png}
+	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od prawdopodobieństwa mutacji}
+	\label{fig:branin2}
+\end{figure}
+
+\subsection{TSP1}
+\paragraph{}
+
+\subsection{TSP2}
+\paragraph{}
+
+\subsection{TSP3}
+\paragraph{}
+
+\subsection{Hybrydowy}
+\paragraph{}
+
+\newpage
+\section{Podsumowanie}
+\paragraph{}
+W trakcie prowadzonych badań przetestowano algorytm genetyczny w~zadaniu optymalizacji dla 9 funkcji testowych. Analizie poddano wpływ zmiany każdego z~parametrów dla 4 różnych konfiguracji pozostałych wartości domyślnych.
+
+\fbi
+Wartość prawdopodobieństwa mutacji i~krzyżowania zdaje się odgrywać drugorzędną rolę. Istotne jednak by chociaż jedna z~nich była włączona z~prawdopodobieństwem większym niż 0.
+
+\fbi
+Najlepszym ustawieniem dla elityzmu jest prawdopodobieństwo rzędu 0,5.
+
+\fbi
+Z pewnością należałoby zwiększyć ilość prób poddawanych uśrednianiu gdyż dla przyjętych 20 wyniki ciągle są niestabilne. Warto by również rozważyć pomijanie kilku najlepszych i~najgorszych wyników przed uśrednianiem.
+
+\fbi
+Co ciekawe wyniki są widocznie gorsze przy konfiguracji w~której krzyżowanie jest wyłączone a~p. mutacji wynosi 0,5. Taka prawidłowość objawia się dla wszystkich badanych funkcji.
+
 \section{Implementacja}
 \paragraph{}
 Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w~języku R przygotowany w~celu umożliwienia przeprowadzenia pomiarów.
 
-\lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w~języku R wykorzystany do badań,firstline=1,lastline=300]{./assets/skrypt_lab35.R}
+\lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w~języku R wykorzystany do badań,firstline=1,lastline=300]{./assets/skrypt_lab35_funkcja.R}
 
 \fbi
 Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowadzenie wszystkich pomiarów. Jednocześnie wszystkie wykresy mogą być natychmiast podmienione w~sprawozdaniu. Poniżej pokrótce omówiono podstawowe parametry.
@@ -160,146 +263,6 @@ Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowad
 \end{itemize}
 
 Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest na podstawie nazwy funkcji z~pakietu ,,globalOptTests''. Są to: rozmiar problemu (ilość parametrów), domyślne ograniczenia, wartość w~danym punkcie oraz optimum dla domyślnych ograniczeń.
-
-\newpage
-\section{Przebieg badań}
-\paragraph{}
-Do badań zostały wybrane funkcje o~różnych wymiarach zaczynając na 2 kończąc na 20. Poniżej wymieniono te funkcje wraz z~ilością wymiarów podaną w~nawiasie.
-
-\begin{itemize}
-	\item Branin (2)
-	\item Gulf (3)
-	\item CosMix4 (4)
-	\item EMichalewicz (5)
-	\item Hartman6 (6)
-	\item PriceTransistor (9)
-	\item Schwefel (10)
-	\item Zeldasine20 (20)
-\end{itemize}
-
-\fbi
-Każdy pomiar przeprowadzono 20-krotnie wyniki uśredniając co oznacza, że wartości widoczne na wykresach dla każdej serii z~osobna są uśrednione po osobnych 20 przebiegach. Domyślne parametry każdej z~serii przedstawiono poniżej (tabela~\ref{tab:parametry}). Zmianie ulegają wartości  prawdopodobieństwa mutacji i~krzyżowania by zbadać znaczenie ich obecności podczas optymalizacji.
-
-\begin{table}[H]
-	\centering
-	\caption{Parametry domyślne poszczególnych serii pomiarowych}
-	\label{tab:parametry}
-	\begin{tabularx}{\textwidth}{|X|c|c|c|c|}
-		\hline
-		- & Seria 1 & Seria 2 & Seria 3 & Seria 4\\ 
-		\hline
-		Rozmiar populacji & 50 & 50 & 50 & 50 \\ 
-		\hline 
-		Rozmiar iteracji & 100 & 100 & 100 & 100 \\ 
-		\hline 
-		Prawdopodobieństwo mutacji & 0 & 0 & 0.1 & 0.1 \\ 
-		\hline 
-		Prawdopodobieństwo krzyżowania & 0 & 0.8 & 0 & 0.8 \\ 
-		\hline 
-	\end{tabularx} 
-\end{table}
-
-\fbi
-Zielone, poziomie linie na wykresach oznaczają optima zawarte w~pakiecie ,,globalOptTests'' dla danej funkcji przy domyślnych ograniczeniach (tych samych dla których wykonywana jest optymalizacja podczas niniejszych pomiarów).
-
-\fbi
-Dla funkcji o~ilości parametrów większej niż 2 pominięto ilustracje graficzne znalezionych optimów gdyż optymalizacji podlegają wszystkie wymiary. Ilustracja dla dwóch pierwszych nie niesie ze sobą przydatnej informacji.
-
-\newpage
-\subsection{Branin (2 parametry)}
-\paragraph{}
-Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}) \cite{test4}.
-
-\begin{equation}\label{eq:branin}
-	f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
-\end{equation}
-
-, gdzie $ x_1 \in [-5, 10] $ oraz $ x_2 \in [0, 15] $.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/tsp_results.png}
-	\caption{Jakość wyników}
-	\label{fig:branin1}
-\end{figure}
-
-\fbi
-Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
-
-\fbi
-Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów algorytmu genetycznego. Kolejno dokonano pomiarów dla różnych wartości: prawdopodobieństwa mutacji i~krzyżowania, wielkości populacji, ilości iteracji oraz elityzmu. Wszystkie pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1~--~4).
-
-\newpage
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/overview_u2319.png}
-	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od prawdopodobieństwa mutacji}
-	\label{fig:branin2}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\textwidth]{./assets/test.png}
-	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od prawdopodobieństwa krzyżowania}
-	\label{fig:branin3}
-\end{figure}
-
-\fbi
-Na wykresie (rys.~\ref{fig:branin2}) można zauważyć niski wpływ ustawienia mutacji na znalezione rozwiązania. Przy wszystkich parametrach domyślnych funkcja znajduje się w~pobliżu optymalnej wartości. Miejscowe odchylenia są tu najprawdopodobniej związane z~charakterem algorytmu i~zbyt małą ilością prób poddanych uśrednieniu. Nie możemy tutaj określić czy przy wyłączonej zarówno mutacji jak i~krzyżowaniu wyniki ulegają pogorszeniu, gdyż nie ma w~tym obszarze spójności. Podobne wnioski możemy wskazać dla wykresu krzyżowania (rys.~\ref{fig:branin3}).
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\textwidth]{./assets/test.png}
-	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od rozmiaru populacji}
-	\label{fig:branin4}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\textwidth]{./assets/test.png}
-	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od ilości iteracji}
-	\label{fig:branin5}
-\end{figure}
-
-\fbi
-Z wykresu (rys.~\ref{fig:branin4}) można odczytać podatność funkcji na zmiany rozmiaru populacji. Wyniki zbliżone do oczekiwanych zostały uzyskane dla wartości wynoszącej 45 jednostek. Widać również, że przy małej populacji znaczenie mutacji i~krzyżowania jest większe. Zauważalny jest wzrost jakości rozwiązania wraz ze wzrostem ilości jednostek populacji.
-
-\fbi
-Wykres (rys.~\ref{fig:branin5}) wskazuje wyraźną zmianę jakości rozwiązań dla 60 i~więcej iteracji. Poniżej tej wartości uzyskiwane wyniki są niestabilne, powyżej osiągają wartość zbliżoną do oczekiwanej szczególnie dla serii 4 (czyli z~włączoną mutacją i~krzyżowaniem).
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\textwidth]{./assets/test.png}
-	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od przyjętego elityzmu}
-	\label{fig:branin6}
-\end{figure}
-
-\fbi
-Z wykonanych pomiarów (rys.~\ref{fig:branin6}) wynika, że dla uzyskania optymalnego rozwiązania należy zastosować wartość elityzmu na poziomie przynajmniej 0,35. Jego ustawienie poniżej tej wartości powoduje obniżenie się jakości rezultatów.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{./assets/test.png}
-	\caption{Poglądowa lokalizacja najlepszego znalezionego minimum funkcji Branin dla pomiarów przy zmianach elityzmu}
-	\label{fig:branin6elt}
-\end{figure}
-
-\newpage
-\section{Podsumowanie}
-\paragraph{}
-W trakcie prowadzonych badań przetestowano algorytm genetyczny w~zadaniu optymalizacji dla 9 funkcji testowych. Analizie poddano wpływ zmiany każdego z~parametrów dla 4 różnych konfiguracji pozostałych wartości domyślnych.
-
-\fbi
-Wartość prawdopodobieństwa mutacji i~krzyżowania zdaje się odgrywać drugorzędną rolę. Istotne jednak by chociaż jedna z~nich była włączona z~prawdopodobieństwem większym niż 0.
-
-\fbi
-Najlepszym ustawieniem dla elityzmu jest prawdopodobieństwo rzędu 0,5.
-
-\fbi
-Z pewnością należałoby zwiększyć ilość prób poddawanych uśrednianiu gdyż dla przyjętych 20 wyniki ciągle są niestabilne. Warto by również rozważyć pomijanie kilku najlepszych i~najgorszych wyników przed uśrednianiem.
-
-\fbi
-Co ciekawe wyniki są widocznie gorsze przy konfiguracji w~której krzyżowanie jest wyłączone a~p. mutacji wynosi 0,5. Taka prawidłowość objawia się dla wszystkich badanych funkcji.
 
 \newpage
 \begin{thebibliography}{40}
