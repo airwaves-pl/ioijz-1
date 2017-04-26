@@ -2,7 +2,7 @@
 # clean old data
 rm(list=ls())
 dev.off(dev.list()["RStudioGD"])
-
+ 
 # load libraries
 require("GA")
 require("globalOptTests")

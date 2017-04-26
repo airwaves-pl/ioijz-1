@@ -1,7 +1,7 @@
 # clean old data
 rm(list=ls())
 dev.off(dev.list()["RStudioGD"])
-
+ 
 # load libraries
 require("GA")
 require("globalOptTests")
@@ -9,7 +9,7 @@ require("rgl")
 require("TSP")
 require("psoptim")
 
-numberOfMeasurements <- 2
+numberOfMeasurements <- 2 #30
 
 
 # TSP with GA ----
@@ -47,23 +47,27 @@ performTest <- function(testName, graphMain, graphXLab,
     
     solution_quality <- c()
     
-    for (i in 1:length(sequence)) {
+    bestTour <- NA
+    bestTourLength <- .Machine$integer.max
+    averageLength <- 0
+    
+    for (s in 1:length(sequence)) {
       
-      bestTour <- NA
-      bestTourLength <- .Machine$integer.max
-      averageLength <- 0
-      
-      for (i in 1:numberOfMeasurements) {
+      for (n in 1:numberOfMeasurements) {
+        
+        message(paste("Instancja: ", i))
+        message(paste("Sekwencja: ", s))
+        message(paste("Pomiar: ", n))
         
         GA <- ga(type = "permutation", 
                  fitness = fit, 
                  distMatrix = D, 
                  min = 1, 
                  max = N, 
-                 popSize = if (sequenceType == "popsize") sequence[i] else popsize, 
-                 pcrossover = if (sequenceType == "pcrossover") sequence[i] else pcrossover, 
-                 pmutation = if (sequenceType == "pmutation") sequence[i] else pmutation, 
-                 maxiter = if (sequenceType == "maxiter") sequence[i] else maxiter,
+                 popSize = if (sequenceType == "popsize") sequence[s] else popsize, 
+                 pcrossover = if (sequenceType == "pcrossover") sequence[s] else pcrossover, 
+                 pmutation = if (sequenceType == "pmutation") sequence[s] else pmutation, 
+                 maxiter = if (sequenceType == "maxiter") sequence[s] else maxiter,
                  optim = optim)
         
         tour <- GA@solution[1, ]
@@ -74,17 +78,17 @@ performTest <- function(testName, graphMain, graphXLab,
           bestTour <- tour
         }
         
-        averageLength <- averageLength + (tl - averageLength) / i
+        averageLength <- averageLength + (tl - averageLength) / n
         
       }
-      
-      plot(drill, tour, cex=.6, col = "red", pch=3, main = graphTitle)
       
       solution_quality <- c(solution_quality, 
                             (best_solutions[i]/averageLength) * 100)
       
     }
 
+    plot(drill, bestTour, cex=.6, col = "red", pch=3, main = graphTitle)
+    
     solution_qualities <- c(solution_qualities, solution_quality)
     
   }
@@ -98,7 +102,7 @@ performTest <- function(testName, graphMain, graphXLab,
   plot(0, 0, main=graphMain, 
        ylim=c(0,100),
        xlim=c(min(sequence),max(sequence)),
-       type="n", xlab=graphXLab, ylab="jakoœæ rozwi¹zañ [%]")
+       type="n", xlab=graphXLab, ylab="jakoÅ›Ä‡ rozwiÄ…zaÅ„ [%]")
   for (i in 1:length(instances)) {
     lines(sequence, qualities[i,], col = colors[i], type = 'l')
   }
@@ -108,23 +112,23 @@ performTest <- function(testName, graphMain, graphXLab,
 }
 
 performTest(testName = "tsp_pop", 
-            graphMain = "Pomiary dla ró¿nych rozmiarów populacji", 
+            graphMain = "Pomiary dla rÃ³Å¼nych rozmiarÃ³w populacji", 
             graphXLab = "rozmiar populacji", 
-            sequenceType = "popsize", sequence = seq(10, 100, 5))
+            sequenceType = "popsize", sequence = seq(50, 500, 50))
 
 performTest(testName = "tsp_pop_hyb", 
-            graphMain = "Pomiary dla ró¿nych rozmiarów populacji (hybrydowy)", 
+            graphMain = "Pomiary dla rÃ³Å¼nych rozmiarÃ³w populacji (hybrydowy)", 
             graphXLab = "rozmiar populacji", 
-            sequenceType = "popsize", sequence = seq(10, 100, 5), optim = TRUE)
+            sequenceType = "popsize", sequence = seq(50, 500, 50), optim = TRUE)
 
 performTest(testName = "tsp_mut", 
-            graphMain = "Pomiary dla ró¿nych p. mutacji", 
+            graphMain = "Pomiary dla rÃ³Å¼nych p. mutacji", 
             graphXLab = "p. mutacji", 
             sequenceType = "pmutation", sequence = seq(0, 1, 0.1))
 
 performTest(testName = "tsp_cross", 
-            graphMain = "Pomiary dla ró¿nych p. krzy¿owania", 
-            graphXLab = "p. krzy¿owania", 
+            graphMain = "Pomiary dla rÃ³Å¼nych p. krzyÅ¼owania", 
+            graphXLab = "p. krzyÅ¼owania", 
             sequenceType = "pcrossover", sequence = seq(0, 1, 0.1))
 
 
