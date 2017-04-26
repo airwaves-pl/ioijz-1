@@ -2,7 +2,7 @@
 # clean old data
 rm(list=ls())
 dev.off(dev.list()["RStudioGD"])
-
+ 
 # load libraries
 require("GA")
 require("globalOptTests")
@@ -207,7 +207,7 @@ for (funcName in functions) {
 	customMeasure("resultsIterations.csv", "5", iterationTests, "itr",
 		"ilosc iteracji", "Znalezione minimum dla roznych ilosci iteracji")
 	customMeasure("resultsElitism.csv", "6", elitismTests, "elt", 
-		"elityzm", "Znalezione minimum dla roznych wartosci elityzmu")
+		"elityzm", "Znalezione minimum dla roznych wartości elityzmu")
 }
 
 # whole source code is located here:

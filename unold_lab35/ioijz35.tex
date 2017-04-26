@@ -184,12 +184,6 @@ Do badań wykorzystano następujące funkcje.
 \subsection{Gulf}
 \paragraph{}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/tsp_results.png}
-	\caption{Jakość wyników}
-	\label{fig:branin1}
-\end{figure}
 
 \fbi
 Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
@@ -197,13 +191,6 @@ Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży ob
 \fbi
 Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości prawdopodobieństwa mutacji dla zmienionej i niezmienionej funkcji mutacji. Pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1~--~4).
 
-\newpage
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/test.png}
-	\caption{Wartość znalezionego minimum funkcji Branin w~zależności od prawdopodobieństwa mutacji}
-	\label{fig:branin2}
-\end{figure}
 
 \newpage
 \section{Przebieg badań dla problemu komiwojażera}
@@ -213,8 +200,23 @@ Do badań wykorzystano następujące funkcje.
 \subsection{Algorytm genetyczny}
 \paragraph{}
 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/tsp_pop.png}
+	\caption{Jakość rozwiązań dla różnych rozmiarów populacji}
+	\label{fig:tsppop}
+\end{figure}
+
 \subsection{Algorytm hybrydowy}
 \paragraph{}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/tsp_pop_hyb.png}
+	\caption{Jakość rozwiązań dla różnych rozmiarów populacji algorytmu hybrydowego}
+	\label{fig:tsppophyb}
+\end{figure}
 
 \subsection{Optymalizacja rojem cząstek}
 \paragraph{}
@@ -247,6 +249,7 @@ Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w~języku R
 \fbi
 Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowadzenie wszystkich pomiarów. Jednocześnie wszystkie wykresy mogą być natychmiast podmienione w~sprawozdaniu. Poniżej pokrótce omówiono podstawowe parametry.
 
+
 \begin{itemize}
 	\item nOfRuns
 	
@@ -267,6 +270,10 @@ Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowad
 \end{itemize}
 
 Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest na podstawie nazwy funkcji z~pakietu ,,globalOptTests''. Są to: rozmiar problemu (ilość parametrów), domyślne ograniczenia, wartość w~danym punkcie oraz optimum dla domyślnych ograniczeń.
+
+
+\lstinputlisting[label=lst:skryptKomiwojazer,caption=Skrypt w~języku R wykorzystany do badań dla problemu komiwojażera,firstline=1,lastline=300]{./assets/skrypt_lab35_komiwojazer.R}
+
 
 \newpage
 \begin{thebibliography}{40}
