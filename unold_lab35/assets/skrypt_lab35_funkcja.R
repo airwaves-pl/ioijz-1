@@ -36,7 +36,7 @@ myCrossoverFunction <- function(object, parent) {
 
 # Settings ----
 
-nOfRuns <- 2 # number of runs to calc avg scores
+nOfRuns <- 30 # number of runs to calc avg scores
 
 numOfCores <- FALSE # number of cores to use (FALSE, 1 - n)
 
@@ -47,16 +47,16 @@ series <- c("Seria 1", "Seria 2", "Seria 3", "Seria 4")
 # default parameters for measurements
 # each row is a different serie
 # [mutations,crossovers,populations,iterations,color]
-#params = matrix(
-#  c(0, 0, 50, 100, 1,
-#    0, 0.8, 50, 100, 2,
-#    0.1, 0, 50, 100, 3,
-#    0.1, 0.8, 50, 100, 4),
-#  nrow=4, ncol=5, byrow = TRUE)
-
 params = matrix(
-  c(0.1, 0.8, 50, 100, 4),
-  nrow=1, ncol=5, byrow = TRUE)
+  c(0, 0, 50, 100, 1,
+    0, 0.8, 50, 100, 2,
+    0.1, 0, 50, 100, 3,
+    0.1, 0.8, 50, 100, 4),
+  nrow=4, ncol=5, byrow = TRUE)
+
+#params = matrix(
+#  c(0.1, 0.8, 50, 100, 4),
+#  nrow=1, ncol=5, byrow = TRUE)
 
 # names of functions from globalOptTests package
 functions <- c("Branin")#, "Gulf", "CosMix4", "EMichalewicz", 
@@ -81,7 +81,7 @@ iterationTests <- c(5)
 elitismTests <- c(0.05)
 
 # hybrid algorithm
-hybrid = TRUE
+hybrid = FALSE
 poptim = 0.05 #a value [0,1] specifying the probability of performing a local search at each iteration of GA (def 0.1)
 pressel = 0.5 #a value [0,1] specifying the pressure selection (def 0.5)
 
@@ -200,14 +200,14 @@ for (funcName in functions) {
 	# for each function perform set of measurements
 	customMeasure("resultsMutations.csv", "2", mutationTests, "mut", 
 		"p. mutacji", "Znalezione minimum dla roznych prawdopodobienstw mutacji")
-	customMeasure("resultsCrossover.csv", "3", crossoverTests, "crs", 
-		"p. krzyzowania", "Znalezione minimum dla roznych prawdopodobienstw krzyzowania")
-	customMeasure("resultsPopulation.csv", "4", populationTests, "pop", 
-		"rozmiar populacji", "Znalezione minimum dla roznych rozmiarow populacji")
-	customMeasure("resultsIterations.csv", "5", iterationTests, "itr",
-		"ilosc iteracji", "Znalezione minimum dla roznych ilosci iteracji")
-	customMeasure("resultsElitism.csv", "6", elitismTests, "elt", 
-		"elityzm", "Znalezione minimum dla roznych wartosci elityzmu")
+	#customMeasure("resultsCrossover.csv", "3", crossoverTests, "crs", 
+	#	"p. krzyzowania", "Znalezione minimum dla roznych prawdopodobienstw krzyzowania")
+	#customMeasure("resultsPopulation.csv", "4", populationTests, "pop", 
+	#	"rozmiar populacji", "Znalezione minimum dla roznych rozmiarow populacji")
+	#customMeasure("resultsIterations.csv", "5", iterationTests, "itr",
+	#	"ilosc iteracji", "Znalezione minimum dla roznych ilosci iteracji")
+	#customMeasure("resultsElitism.csv", "6", elitismTests, "elt", 
+	#	"elityzm", "Znalezione minimum dla roznych wartosci elityzmu")
 }
 
 # whole source code is located here:
