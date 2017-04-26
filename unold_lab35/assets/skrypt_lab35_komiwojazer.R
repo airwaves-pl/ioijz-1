@@ -9,7 +9,7 @@ require("rgl")
 require("TSP")
 require("psoptim")
 
-numberOfMeasurements <- 2 #30
+numberOfMeasurements <- 2 #15
 
 
 # TSP with GA ----

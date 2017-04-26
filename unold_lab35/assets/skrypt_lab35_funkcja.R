@@ -36,7 +36,7 @@ myCrossoverFunction <- function(object, parent) {
 
 # Settings ----
 
-nOfRuns <- 30 # number of runs to calc avg scores
+nOfRuns <- 1 # 15 number of runs to calc avg scores
 
 numOfCores <- FALSE # number of cores to use (FALSE, 1 - n)
 
@@ -47,16 +47,16 @@ series <- c("Seria 1", "Seria 2", "Seria 3", "Seria 4")
 # default parameters for measurements
 # each row is a different serie
 # [mutations,crossovers,populations,iterations,color]
-params = matrix(
+'params = matrix(
   c(0, 0, 50, 100, 1,
     0, 0.8, 50, 100, 2,
     0.1, 0, 50, 100, 3,
     0.1, 0.8, 50, 100, 4),
-  nrow=4, ncol=5, byrow = TRUE)
+  nrow=4, ncol=5, byrow = TRUE)'
 
-#params = matrix(
-#  c(0.1, 0.8, 50, 100, 4),
-#  nrow=1, ncol=5, byrow = TRUE)
+params = matrix(
+  c(0.1, 0.8, 50, 100, 4),
+  nrow=1, ncol=5, byrow = TRUE)
 
 # names of functions from globalOptTests package
 functions <- c("Branin")#, "Gulf", "CosMix4", "EMichalewicz", 
