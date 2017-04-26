@@ -18,22 +18,15 @@ myMutationFunction <- function(object, parent) {
   
   # calculate randoms
   rnd <- sample(1:length(population), 1)
-  rndMinOrMax <- sample(1:2, 1)
+  rndMinOrMax <- sample(1:10, 1)
   
   # get min and max from population vector
   max_value <- which.max(population)
   min_value <- which.min(population)
-  
-  # if rndMinOrMax is 0 switch random value to min, else switch to max
-  if (rndMinOrMax == 0)
-  {
-    population[rnd] <- min_value;
-  } else
-  {
-    population[rnd] <- max_value;
-  }
  
-  
+  # set random element to min value 
+  population[rnd] = min_value
+ 
   return (population);
 }
 # crossover function
@@ -43,7 +36,7 @@ myCrossoverFunction <- function(object, parent) {
 
 # Settings ----
 
-nOfRuns <- 1 # number of runs to calc avg scores
+nOfRuns <- 2 # number of runs to calc avg scores
 
 numOfCores <- FALSE # number of cores to use (FALSE, 1 - n)
 
@@ -54,15 +47,19 @@ series <- c("Seria 1", "Seria 2", "Seria 3", "Seria 4")
 # default parameters for measurements
 # each row is a different serie
 # [mutations,crossovers,populations,iterations,color]
+#params = matrix(
+#  c(0, 0, 50, 100, 1,
+#    0, 0.8, 50, 100, 2,
+#    0.1, 0, 50, 100, 3,
+#    0.1, 0.8, 50, 100, 4),
+#  nrow=4, ncol=5, byrow = TRUE)
+
 params = matrix(
-  c(0, 0, 50, 100, 1,
-    0, 0.8, 50, 100, 2,
-    0.1, 0, 50, 100, 3,
-    0.1, 0.8, 50, 100, 4),
-  nrow=4, ncol=5, byrow = TRUE)
+  c(0.1, 0.8, 50, 100, 4),
+  nrow=1, ncol=5, byrow = TRUE)
 
 # names of functions from globalOptTests package
-functions <- c("Branin", "Gulf")#, "CosMix4", "EMichalewicz", 
+functions <- c("Branin")#, "Gulf", "CosMix4", "EMichalewicz", 
 	#"Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
 
 # graph settings
@@ -70,11 +67,23 @@ graphs <- TRUE #true if you want to print graphs
 quality <- 100 #number of probes
 
 # sequences of parameters for each serie
-mutationTests <- seq(0, 1, 0.1)
-crossoverTests <- seq(0, 1, 0.1)
-populationTests <- seq(10, 100, 5)
-iterationTests <- seq(10, 200, 10)
-elitismTests <- seq(0, 1, 0.1)
+#mutationTests <- seq(0, 1, 0.1)
+#crossoverTests <- seq(0, 1, 0.1)
+#populationTests <- seq(10, 100, 5)
+#iterationTests <- seq(10, 200, 10)
+#elitismTests <- seq(0, 1, 0.1)
+
+# test only mutation (precisely)
+mutationTests <- seq(0, 1, 0.01)
+crossoverTests <- c(0.2)
+populationTests <- c(30)
+iterationTests <- c(5)
+elitismTests <- c(0.05)
+
+# hybrid algorithm
+hybrid = TRUE
+poptim = 0.05 #a value [0,1] specifying the probability of performing a local search at each iteration of GA (def 0.1)
+pressel = 0.5 #a value [0,1] specifying the pressure selection (def 0.5)
 
 # Processing ----
 
@@ -100,7 +109,12 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
             pmutation = if (mType == "mut") value else params[defRow,1], 
             pcrossover = if (mType == "crs") value else params[defRow,2],
             elitism = if (mType == "elt") value else max(1, round(params[defRow,3] * 0.05)),
-            parallel = numOfCores)
+            parallel = numOfCores,
+            #hybrid algorithm
+            optim = hybrid,
+            optimArgs = list (
+              poptim = poptim, 
+              pressel = pressel))
         solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
         eval <- f(solution[1,])
         if (eval < gMin) {
