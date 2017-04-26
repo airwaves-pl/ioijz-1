@@ -2,7 +2,7 @@
 # clean old data
 rm(list=ls())
 dev.off(dev.list()["RStudioGD"])
- 
+
 # load libraries
 require("GA")
 require("globalOptTests")
@@ -99,6 +99,11 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
     for (value in values) {
       sum <- 0
       for (i in 1:nOfRuns) {
+        
+        message(paste("Wartoœci domyœlne: ", defRow))
+        message(paste("Sekwencja: ", value))
+        message(paste("Przebieg: ", i))
+        
         GAmin <- ga(type = "real-valued",
             mutation = myMutationFunction,
             #crossover = myCrossoverFunction,
