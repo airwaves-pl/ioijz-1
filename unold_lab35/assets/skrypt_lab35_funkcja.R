@@ -100,7 +100,7 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
       sum <- 0
       for (i in 1:nOfRuns) {
         
-        message(paste("Wartoœci domyœlne: ", defRow))
+        message(paste("WartoÅ›ci domyÅ›lne: ", defRow))
         message(paste("Sekwencja: ", value))
         message(paste("Przebieg: ", i))
         
@@ -217,3 +217,25 @@ for (funcName in functions) {
 
 # whole source code is located here:
 # https://github.com/cran/GA/tree/master/R
+
+
+# PSO tests ----
+
+n <- 500
+m.l <- 50
+w <- 0.95
+c1 <- 0.2
+c2 <- 0.2
+xmin <- c(-5.12, -5.12)
+xmax <- c(5.12, 5.12)
+vmax <- c(4, 4)
+
+g <- function(x){  
+  -(200 + x[,1]^2 + x[,2]^2 + cos(2*pi*x[,2]))
+}
+
+psoptim(FUN=g, n=n, max.loop=m.l, w=w, c1=c1, c2=c2,
+        xmin=xmin, xmax=xmax, vmax=vmax, seed=NULL, anim=TRUE)
+
+
+
