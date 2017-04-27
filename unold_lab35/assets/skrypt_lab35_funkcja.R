@@ -29,10 +29,6 @@ myMutationFunction <- function(object, parent) {
  
   return (population);
 }
-# crossover function
-myCrossoverFunction <- function(object, parent) {
-  
-}
 
 # Settings ----
 
@@ -42,21 +38,17 @@ numOfCores <- FALSE # number of cores to use (FALSE, 1 - n)
 
 # colors and titles for plot series
 colors <- c("red", "blue", "purple", "black")
-series <- c("Seria 1", "Seria 2", "Seria 3", "Seria 4")
+series <- c("Seria 1 (GA)", "Seria 2 (hybrydowy)", "Seria 3 (pso)", "Seria 4 (GA*)")
 
 # default parameters for measurements
 # each row is a different serie
 # [mutations,crossovers,populations,iterations,color]
-'params = matrix(
-  c(0, 0, 50, 100, 1,
-    0, 0.8, 50, 100, 2,
-    0.1, 0, 50, 100, 3,
-    0.1, 0.8, 50, 100, 4),
-  nrow=4, ncol=5, byrow = TRUE)'
-
 params = matrix(
-  c(0.1, 0.8, 50, 100, 4),
-  nrow=1, ncol=5, byrow = TRUE)
+  c(0.1, 0.8, 50, 100, 1,
+    0.1, 0.8, 50, 100, 2,
+    0.1, 0.8, 50, 100, 3,
+    0.1, 0.8, 50, 100, 4),
+  nrow=4, ncol=5, byrow = TRUE)
 
 # names of functions from globalOptTests package
 functions <- c("Branin")#, "Gulf", "CosMix4", "EMichalewicz", 
@@ -67,11 +59,8 @@ graphs <- TRUE #true if you want to print graphs
 quality <- 100 #number of probes
 
 # sequences of parameters for each serie
-#mutationTests <- seq(0, 1, 0.1)
-#crossoverTests <- seq(0, 1, 0.1)
-#populationTests <- seq(10, 100, 5)
-#iterationTests <- seq(10, 200, 10)
-#elitismTests <- seq(0, 1, 0.1)
+mutationTests <- seq(0, 1, 0.1)
+crossoverTests <- seq(0, 1, 0.1)
 
 # test only mutation (precisely)
 mutationTests <- seq(0, 1, 0.01)
@@ -221,8 +210,8 @@ for (funcName in functions) {
 
 # PSO tests ----
 
-n <- 500
-m.l <- 50
+n <- 500 #ilosc czastek
+m.l <- 50 #ilosc przebiegow
 w <- 0.95
 c1 <- 0.2
 c2 <- 0.2
@@ -230,12 +219,21 @@ xmin <- c(-5.12, -5.12)
 xmax <- c(5.12, 5.12)
 vmax <- c(4, 4)
 
-g <- function(x){  
+g <- function(x) {  
   -(200 + x[,1]^2 + x[,2]^2 + cos(2*pi*x[,2]))
 }
 
 psoptim(FUN=g, n=n, max.loop=m.l, w=w, c1=c1, c2=c2,
         xmin=xmin, xmax=xmax, vmax=vmax, seed=NULL, anim=TRUE)
 
+
+#wykresy:
+'
+1 poglądowy wygląd funkcji
+2 dla psoptim (c1,c2)
+2 dla hybrydowego (potpim, pressel)
+1 dla GA dla p. mutacji (2 serie z i bez własnej funkcji mutacji)
+
+'
 
 

@@ -9,7 +9,7 @@ require("rgl")
 require("TSP")
 require("psoptim")
 
-numberOfMeasurements <- 2 #15
+numberOfMeasurements <- 1 #15
 
 
 # TSP with GA ----
@@ -30,8 +30,7 @@ fit <- function(tour, distMatrix) 1/tourLength(tour, distMatrix)
 performTest <- function(testName, graphMain, graphXLab, 
                         sequenceType, sequence, 
                         popsize=50, pcrossover=0.8, 
-                        pmutation=0.1, maxiter=100,
-                        optim=FALSE) {
+                        pmutation=0.1, maxiter=100) {
   
   solution_qualities <- c()
   
@@ -67,8 +66,7 @@ performTest <- function(testName, graphMain, graphXLab,
                  popSize = if (sequenceType == "popsize") sequence[s] else popsize, 
                  pcrossover = if (sequenceType == "pcrossover") sequence[s] else pcrossover, 
                  pmutation = if (sequenceType == "pmutation") sequence[s] else pmutation, 
-                 maxiter = if (sequenceType == "maxiter") sequence[s] else maxiter,
-                 optim = optim)
+                 maxiter = if (sequenceType == "maxiter") sequence[s] else maxiter)
         
         tour <- GA@solution[1, ]
         tl <- tourLength(tour, D)
@@ -87,7 +85,9 @@ performTest <- function(testName, graphMain, graphXLab,
       
     }
 
+    png(file = paste(testName, "_", instances[i], ".png", sep=""), width=600, height=400, units="px")
     plot(drill, bestTour, cex=.6, col = "red", pch=3, main = graphTitle)
+    dev.off()
     
     solution_qualities <- c(solution_qualities, solution_quality)
     
@@ -115,11 +115,6 @@ performTest(testName = "tsp_pop",
             graphMain = "Pomiary dla różnych rozmiarów populacji", 
             graphXLab = "rozmiar populacji", 
             sequenceType = "popsize", sequence = seq(50, 500, 50))
-
-performTest(testName = "tsp_pop_hyb", 
-            graphMain = "Pomiary dla różnych rozmiarów populacji (hybrydowy)", 
-            graphXLab = "rozmiar populacji", 
-            sequenceType = "popsize", sequence = seq(50, 500, 50), optim = TRUE)
 '
 performTest(testName = "tsp_mut", 
             graphMain = "Pomiary dla różnych p. mutacji", 
