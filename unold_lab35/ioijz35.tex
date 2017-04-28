@@ -132,119 +132,12 @@ W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla
 Pomiary wykonywano na 2 różnych jednostkach roboczych. Ich parametry nie są istotne z~punktu widzenia analizy i~możliwości porównania rezultatów.
 
 
-\newpage
-\section{Cel ćwiczeń}
-\paragraph{}
-Celem jest
-
-\newpage
-\section{Opis wykorzystanych funkcji}
-\paragraph{}
-Gulf, TSP, hybrydowy
-
-\fbi
-Branin jest funkcją z~dwoma parametrami. Na ilustracji (rys.~\ref{fig:branin1}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}) \cite{test4}.
-
-\begin{equation}\label{eq:branin}
-f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
-\end{equation}
-
-, gdzie $ x_1 \in [-5, 10] $ oraz $ x_2 \in [0, 15] $.
-
-
-\newpage
-\section{Opis własnych funkcji}
-\paragraph{}
-Opisać jak działa własna funkcja mutacji
-
-\newpage
-\section{Wykorzystane narzędzia i biblioteki}
-\paragraph{}
-
-\subsection{RStudio}
-\paragraph{}
-
-\subsection{GlobalOptTest}
-\paragraph{}
-
-\subsection{DoParallel}
-\paragraph{}
-
-\subsection{Rgl}
-\paragraph{}
-
-\subsection{GA}
-\paragraph{}
-
-\newpage
-\section{Przebieg badań dla problemu optymalizacji rzeczywistej}
-\paragraph{}
-Do badań wykorzystano następujące funkcje.
-
-\subsection{Gulf}
-\paragraph{}
-
-
-\fbi
-Z wykresu (rys.~\ref{fig:branin1}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
-
-\fbi
-Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości prawdopodobieństwa mutacji dla zmienionej i niezmienionej funkcji mutacji. Pomiary wykonano dla 4 różnych ustawień domyślnych parametrów (serie 1~--~4).
-
-
-\newpage
-\section{Przebieg badań dla problemu komiwojażera}
-\paragraph{}
-Do badań wykorzystano następujące funkcje.
-
-\subsection{Algorytm genetyczny}
-\paragraph{}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/tsp_pop.png}
-	\caption{Jakość rozwiązań dla różnych rozmiarów populacji}
-	\label{fig:tsppop}
-\end{figure}
-
-\subsection{Algorytm hybrydowy}
-\paragraph{}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/tsp_pop_hyb.png}
-	\caption{Jakość rozwiązań dla różnych rozmiarów populacji algorytmu hybrydowego}
-	\label{fig:tsppophyb}
-\end{figure}
-
-\subsection{Optymalizacja rojem cząstek}
-\paragraph{}
-
-
-
-\newpage
-\section{Podsumowanie}
-\paragraph{}
-W trakcie prowadzonych badań przetestowano algorytm genetyczny w~zadaniu optymalizacji dla 9 funkcji testowych. Analizie poddano wpływ zmiany każdego z~parametrów dla 4 różnych konfiguracji pozostałych wartości domyślnych.
-
-\fbi
-Wartość prawdopodobieństwa mutacji i~krzyżowania zdaje się odgrywać drugorzędną rolę. Istotne jednak by chociaż jedna z~nich była włączona z~prawdopodobieństwem większym niż 0.
-
-\fbi
-Najlepszym ustawieniem dla elityzmu jest prawdopodobieństwo rzędu 0,5.
-
-\fbi
-Z pewnością należałoby zwiększyć ilość prób poddawanych uśrednianiu gdyż dla przyjętych 20 wyniki ciągle są niestabilne. Warto by również rozważyć pomijanie kilku najlepszych i~najgorszych wyników przed uśrednianiem.
-
-\fbi
-Co ciekawe wyniki są widocznie gorsze przy konfiguracji w~której krzyżowanie jest wyłączone a~p. mutacji wynosi 0,5. Taka prawidłowość objawia się dla wszystkich badanych funkcji.
 
 \section{Implementacja}
 \paragraph{}
-Poniżej (listing ~\ref{lst:skryptGlowny}) zamieszczono kod napisany w~języku R przygotowany w~celu umożliwienia przeprowadzenia pomiarów.
+Poniżej zamieszczono kody skryptów w~języku R przygotowanych w~celu umożliwienia przeprowadzenia pomiarów.
 
-\lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w~języku R wykorzystany do badań,firstline=1,lastline=300]{./assets/skrypt_lab35_funkcja.R}
+\lstinputlisting[label=lst:skryptGlowny,caption=Skrypt w~języku R wykorzystany do badań optymalizacji funkcji,firstline=1,lastline=500]{./assets/skrypt_lab35_funkcja.R}
 
 \fbi
 Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowadzenie wszystkich pomiarów. Jednocześnie wszystkie wykresy mogą być natychmiast podmienione w~sprawozdaniu. Poniżej pokrótce omówiono podstawowe parametry.
@@ -271,8 +164,98 @@ Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowad
 
 Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest na podstawie nazwy funkcji z~pakietu ,,globalOptTests''. Są to: rozmiar problemu (ilość parametrów), domyślne ograniczenia, wartość w~danym punkcie oraz optimum dla domyślnych ograniczeń.
 
+\fbi
+Poniżej skrypt wykorzystany dla problemu komiwojażera.
 
-\lstinputlisting[label=lst:skryptKomiwojazer,caption=Skrypt w~języku R wykorzystany do badań dla problemu komiwojażera,firstline=1,lastline=300]{./assets/skrypt_lab35_komiwojazer.R}
+\lstinputlisting[label=lst:skryptKomiwojazer,caption=Skrypt w~języku R wykorzystany do badań dla problemu komiwojażera,firstline=1,lastline=500]{./assets/skrypt_lab35_komiwojazer.R}
+
+
+\subsection{Opis własnych operatorów}
+\paragraph{}
+Opisać jak działa własna funkcja mutacji[TODO]
+
+
+\section{Przebieg badań dla problemu optymalizacji rzeczywistej (może jednak Hartman6?)}
+\paragraph{}
+Badania przeprowadzono dla algorytmu genetycznego w wersji podstawowej oraz hybrydowej a także dla optymalizacji rojem cząstek (PSO).
+
+\fbi
+Funkcja którą poddawano optymalizacji to Branin. Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:Branin_overview}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}) \cite{test4}.
+
+\begin{equation}\label{eq:branin}
+f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
+\end{equation}
+
+, gdzie $ x_1 \in [-5, 10] $ oraz $ x_2 \in [0, 15] $.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/Branin_overview.png}
+	\caption{Wykres funkcji Branin}
+	\label{fig:Branin_overview}
+\end{figure}
+
+\fbi
+Z wykresu (rys.~\ref{fig:Branin_overview}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
+
+\fbi
+Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów kolejnych algorytmów. Pomiary przeprowadzano dla różnych wartości prawdopodobieństwa mutacji i~wielkości populacji.
+
+
+
+
+\newpage
+\section{Przebieg badań dla problemu komiwojażera}
+\paragraph{}
+Przeprowadzono badania z zakresu optymalizacji marszruty dla problemu komiwojażera. Wykorzystano trzy instancje problemu z biblioteki TSPLIB:
+
+\begin{itemize}
+	\item eil51
+	\item eil76
+	\item eil101
+\end{itemize}
+
+\fbi
+Jakość rozwiązań wyraża się wzorem:
+
+\begin{equation}\label{eq:tspquality}
+quality\ of\ solution = \frac{shortest\ known \ path}{found\ path} * 100\%
+\end{equation}
+
+\fbi
+Na ilustracji (rys.~\ref{fig:tsppop}) przedstawiono wyniki pomiarów dla różnych rozmiarów populacji.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/tsp_pop.png}
+	\caption{Jakość rozwiązań dla różnych rozmiarów populacji}
+	\label{fig:tsppop}
+\end{figure}
+
+\fbi
+Na ilustracji (rys.~\ref{fig:tspmut}) przedstawiono wyniki pomiarów dla różnych wartości p. mutacji.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/tsp_mut.png}
+	\caption{Jakość rozwiązań dla różnych wartości p. mutacji}
+	\label{fig:tspmut}
+\end{figure}
+
+\fbi
+Na ilustracji (rys.~\ref{fig:tspmutcust}) przedstawiono wyniki pomiarów dla różnych wartości p. mutacji z niestandardowym operatorem.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/tsp_mut_custom.png}
+	\caption{Jakość rozwiązań dla różnych wartości p. mutacji (dla własnego operatora)}
+	\label{fig:tspmutcust}
+\end{figure}
+
+\newpage
+\section{Podsumowanie}
+\paragraph{}
+W trakcie prowadzonych badań przetestowano algorytm genetyczny w~zadaniu optymalizacji dla... [TODO]
 
 
 \newpage
@@ -280,7 +263,6 @@ Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest 
 
 \bibitem{test1}
 Artur Suchwałko ,,Wprowadzenie do R dla programistów innych języków'' https://cran.r-project.org/doc/contrib/R-dla-programistow-innych-jezykow.pdf
-
 
 \bibitem{test2}
 Luca Scrucca ,,Package GA''

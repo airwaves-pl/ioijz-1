@@ -11,9 +11,6 @@ require("psoptim")
 
 numberOfMeasurements <- 1 #15
 
-
-# TSP with GA ----
-
 # instances to test and best known solutions
 instances <- c("eil51", "eil76", "eil101")
 best_solutions <- c(426, 538, 629)
@@ -27,10 +24,40 @@ tourLength <- function(tour, distMatrix) {
 
 fit <- function(tour, distMatrix) 1/tourLength(tour, distMatrix)
 
+customMutation <- function(object, parent, ...) {
+  
+  # Insertion mutation
+  parent <- as.vector(object@population[parent,])
+  n <- length(parent)
+  m <- sample(1:n, size = 1)
+  pos <- sample(1:(n-1), size = 1)
+  i <- c(setdiff(1:pos,m), m, setdiff((pos+1):n,m))
+  mutate <- parent[i]
+
+  # Displacement mutation
+  parent <- mutate
+  m <- sort(sample(1:n, size = 2))
+  m <- seq(m[1], m[2], by = 1)
+  l <- max(m)-min(m)+1
+  pos <- sample(1:max(1,(n-l)), size = 1)
+  i <- c(setdiff(1:n,m)[1:pos], m, setdiff(1:n,m)[-(1:pos)])
+  mutate <- parent[na.omit(i)]
+  
+  # Scramble mutation
+  parent <- mutate
+  m <- sort(sample(1:n, size = 2))
+  m <- seq(min(m), max(m), by = 1)
+  m <- sample(m, replace = FALSE)
+  i <- c(setdiff(1:min(m),m), m, setdiff(max(m):n,m))
+  mutate <- parent[i]
+  return(mutate)
+  
+} 
+
 performTest <- function(testName, graphMain, graphXLab, 
                         sequenceType, sequence, 
                         popsize=50, pcrossover=0.8, 
-                        pmutation=0.1, maxiter=100) {
+                        pmutation=0.1, maxiter=100, mutation = NULL) {
   
   solution_qualities <- c()
   
@@ -66,7 +93,8 @@ performTest <- function(testName, graphMain, graphXLab,
                  popSize = if (sequenceType == "popsize") sequence[s] else popsize, 
                  pcrossover = if (sequenceType == "pcrossover") sequence[s] else pcrossover, 
                  pmutation = if (sequenceType == "pmutation") sequence[s] else pmutation, 
-                 maxiter = if (sequenceType == "maxiter") sequence[s] else maxiter)
+                 maxiter = if (sequenceType == "maxiter") sequence[s] else maxiter,
+                 mutation = if (is.null(mutation)) gaControl("permutation")$mutation else mutation) 
         
         tour <- GA@solution[1, ]
         tl <- tourLength(tour, D)
@@ -110,18 +138,19 @@ performTest <- function(testName, graphMain, graphXLab,
   dev.off()
   
 }
-'
+
 performTest(testName = "tsp_pop", 
             graphMain = "Pomiary dla różnych rozmiarów populacji", 
             graphXLab = "rozmiar populacji", 
             sequenceType = "popsize", sequence = seq(50, 500, 50))
-'
+
 performTest(testName = "tsp_mut", 
             graphMain = "Pomiary dla różnych p. mutacji", 
             graphXLab = "p. mutacji", 
             sequenceType = "pmutation", sequence = seq(0, 1, 0.1))
 
-performTest(testName = "tsp_cross", 
-            graphMain = "Pomiary dla różnych p. krzyżowania", 
-            graphXLab = "p. krzyżowania", 
-            sequenceType = "pcrossover", sequence = seq(0, 1, 0.1))
+performTest(testName = "tsp_mut_custom", 
+            graphMain = "Pomiary dla różnych p. mutacji (własny op. mutacji)", 
+            graphXLab = "p. mutacji", 
+            sequenceType = "pmutation", sequence = seq(0, 1, 0.1), mutation = customMutation)
+

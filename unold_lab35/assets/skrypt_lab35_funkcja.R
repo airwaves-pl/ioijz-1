@@ -7,8 +7,7 @@ dev.off(dev.list()["RStudioGD"])
 require("GA")
 require("globalOptTests")
 require("rgl")
-require("parallel")
-require("doParallel")
+require("psoptim")
 
 # custom functions ----
 # mutation function
@@ -32,103 +31,55 @@ myMutationFunction <- function(object, parent) {
 
 # Settings ----
 
-nOfRuns <- 1 # 15 number of runs to calc avg scores
-
-numOfCores <- FALSE # number of cores to use (FALSE, 1 - n)
+nOfRuns <- 1 # 30 number of runs to calc avg scores
 
 # colors and titles for plot series
-colors <- c("red", "blue", "purple", "black")
-series <- c("Seria 1 (GA)", "Seria 2 (hybrydowy)", "Seria 3 (pso)", "Seria 4 (GA*)")
+colors <- c("red", "purple")
+series <- c("GA", "GA + własna mutacja")
 
-# default parameters for measurements
-# each row is a different serie
-# [mutations,crossovers,populations,iterations,color]
-params = matrix(
-  c(0.1, 0.8, 50, 100, 1,
-    0.1, 0.8, 50, 100, 2,
-    0.1, 0.8, 50, 100, 3,
-    0.1, 0.8, 50, 100, 4),
-  nrow=4, ncol=5, byrow = TRUE)
-
-# names of functions from globalOptTests package
-functions <- c("Branin")#, "Gulf", "CosMix4", "EMichalewicz", 
-	#"Hartman6", "PriceTransistor", "Schwefel", "Zeldasine20")
+# name of function from globalOptTests package
+funcName <- "Hartman6"
 
 # graph settings
 graphs <- TRUE #true if you want to print graphs
 quality <- 100 #number of probes
 
-# sequences of parameters for each serie
-mutationTests <- seq(0, 1, 0.1)
-crossoverTests <- seq(0, 1, 0.1)
-
-# test only mutation (precisely)
-mutationTests <- seq(0, 1, 0.01)
-crossoverTests <- c(0.2)
-populationTests <- c(30)
-iterationTests <- c(5)
-elitismTests <- c(0.05)
-
-# hybrid algorithm
-hybrid = FALSE
-poptim = 0.05 #a value [0,1] specifying the probability of performing a local search at each iteration of GA (def 0.1)
-pressel = 0.5 #a value [0,1] specifying the pressure selection (def 0.5)
-
 # Processing ----
 
-customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
-  
-  gMin <- .Machine$integer.max
-  gBest <- NA
+customGAMeasure <- function(values, mType, xlab, main) {
   
   # main measurement loop (for each serie and sequence calculate average results)
   temp <- c()
-  for (defRow in 1:nrow(params)) {
+  for (serie in 1:length(series)) {
     averages <- c()
     for (value in values) {
       sum <- 0
       for (i in 1:nOfRuns) {
         
-        message(paste("Wartości domyślne: ", defRow))
+        message(paste("Seria: ", serie))
         message(paste("Sekwencja: ", value))
         message(paste("Przebieg: ", i))
         
         GAmin <- ga(type = "real-valued",
-            mutation = myMutationFunction,
-            #crossover = myCrossoverFunction,
+            mutation = if (serie == 2) myMutationFunction else gaControl("real-valued")$mutation,
             fitness =  function(xx) -f(xx),
             min = c(B[1,]), max = c(B[2,]),
-            popSize = if (mType == "pop") value else params[defRow,3],
-            maxiter = if (mType == "itr") value else params[defRow,4],
-            pmutation = if (mType == "mut") value else params[defRow,1], 
-            pcrossover = if (mType == "crs") value else params[defRow,2],
-            elitism = if (mType == "elt") value else max(1, round(params[defRow,3] * 0.05)),
-            parallel = numOfCores,
-            #hybrid algorithm
-            optim = hybrid,
-            optimArgs = list (
-              poptim = poptim, 
-              pressel = pressel))
+            popSize = if (mType == "pop") value else 50,
+            pmutation = if (mType == "mut") value else 0.1)
         solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
         eval <- f(solution[1,])
-        if (eval < gMin) {
-          gMin <- eval
-          gBest <- GAmin
-        }
         sum <- sum + eval
       }
       averages <- c(averages, (sum / nOfRuns))
     }
     temp <- c(temp, averages)
   }
-  result <- matrix(c(temp),nrow = nrow(params),ncol = length(values))
-  write.table(result, file = paste(funcName, fileName, sep=""), row.names=FALSE, 
-              na="", col.names=FALSE, sep=";")
+  result <- matrix(c(temp), nrow = length(series), ncol = length(values))
   
   if (graphs) {
     
     # save graph with measurement series to file
-    png(file = paste(funcName, graphName, ".png", sep=""), width=600, height=400, units="px")
+    png(file = paste(funcName, mType, ".png", sep=""), width=600, height=400, units="px")
     plot(0, 0, main=main,
          ylim=c(min(c(temp,globalOpt)),max(c(temp,globalOpt))),
          xlim=c(min(values),max(values)),
@@ -136,79 +87,142 @@ customMeasure <- function(fileName, graphName, values, mType, xlab, main) {
     abline(globalOpt,0, col="green")
     colorNames <- c()
     seriesNames <- c()
-    for (i in 1:nrow(params)) {
-      color <- colors[params[i,5]]
+    for (i in 1:length(series)) {
+      color <- colors[i]
       colorNames <- c(colorNames, color)
-      seriesNames <- c(seriesNames, series[params[i,5]])
+      seriesNames <- c(seriesNames, series[i])
       lines(values, result[i,], col = color, type = 'l')
     }
-    legend("topright", seriesNames, lwd=rep(2,nrow(params)), lty=rep(1,nrow(params)), col=colorNames)
+    legend("topright", seriesNames, lwd=rep(2,length(series)), lty=rep(1,length(series)), col=colorNames)
     dev.off()
     
-    summary(gBest)
+  }
+}
+
+
+# get data from globalOptTests package
+dim <- getProblemDimen(funcName)
+B <- matrix(unlist(getDefaultBounds(funcName)),ncol=dim,byrow=TRUE)
+f <- function(xx) goTest(par=c(xx, rep(0, dim-length(xx))), 
+						 fnName=funcName, checkDim = TRUE)
+globalOpt <- getGlobalOpt(funcName)
+
+if (graphs) {
+  # prepare overview graph
+  xprobes <- abs(B[2,1] - B[1,1]) / quality
+  yprobes <- abs(B[2,2] - B[1,2]) / quality
+  x <- seq(B[1,1], B[2,1], by = xprobes)
+  y <- seq(B[1,2], B[2,2], by = yprobes)
+  z <- outer(x, y, Vectorize(function(x,y) f(c(x,y))))
+  png(file = paste(funcName, "_overview.png", sep=""), width=600, height=400, units="px")
+  persp3D(x, y, z, theta = -45, phi = 20, color.palette = jet.colors)
+  dev.off()
+}
+
+# perform set of measurements
+customGAMeasure(seq(0, 1, 0.1), "mut", 
+	"p. mutacji", "Znalezione minimum dla różnych p. mutacji")
+customGAMeasure(seq(10, 100, 10), "pop", 
+	"rozmiar populacji", "Znalezione minimum dla różnych rozmiarów populacji")
+
+
+
+# hybrid algorithm ----
+poptim = 0.05 #a value [0,1] specifying the probability of performing a local search at each iteration of GA (def 0.1)
+pressel = 0.5 #a value [0,1] specifying the pressure selection (def 0.5)
+
+customHybridMeasure <- function(values, mType, xlab, main) {
+
+  averages <- c()
+  for (value in values) {
+    sum <- 0
+    for (i in 1:nOfRuns) {
+      
+      message(paste("Sekwencja: ", value))
+      message(paste("Przebieg: ", i))
+      
+      GAmin <- ga(type = "real-valued",
+                  fitness =  function(xx) -f(xx),
+                  min = c(B[1,]), max = c(B[2,]),
+                  optim = TRUE,
+                  optimArgs = list (
+                    poptim = if (mType == "poptim") value else 0.05, 
+                    pressel = if (mType == "pressel") value else 0.5))
+      solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
+      eval <- f(solution[1,])
+      sum <- sum + eval
+    }
+    averages <- c(averages, (sum / nOfRuns))
+  }
+
+  if (graphs) {
     
-    # save overview of best found minimum to file
-    png(file = paste(funcName, graphName, mType, ".png", sep=""), width=600, height=400, units="px")
-    filled.contour(x, y, z, color.palette = jet.colors, nlevels = 24, 
-         plot.axes = { axis(1); axis(2);
-           points(solution[1,1], solution[1,2], 
-                  pch = 3, cex = 5, col = "black", lwd = 2) 
-         }
-    )
-    dev.off()
-    
-    # save best fitness graph to file
-    png(file = paste(funcName, graphName, mType, "fitness", ".png", sep=""), width=600, height=400, units="px")
-    plot(gBest)
+    # save graph with measurement series to file
+    png(file = paste(funcName, mType, ".png", sep=""), width=600, height=400, units="px")
+    plot(0, 0, main=main,
+         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))),
+         xlim=c(min(values),max(values)),
+         type="n", xlab=xlab, ylab="wartość")
+    abline(globalOpt,0, col="green")
+    lines(values, averages, col = "red", type = 'l')
+    legend("topright", c("memetyczny"), lwd=rep(2,1), lty=rep(1,1), col=c("red"))
     dev.off()
   }
 }
 
-for (funcName in functions) {
-
-  # get data from globalOptTests package
-	dim <- getProblemDimen(funcName)
-	B <- matrix(unlist(getDefaultBounds(funcName)),ncol=dim,byrow=TRUE)
-	f <- function(xx) goTest(par=c(xx, rep(0, dim-length(xx))), 
-							 fnName=funcName, checkDim = TRUE)
-	globalOpt <- getGlobalOpt(funcName)
-
-	if (graphs) {
-	  # prepare two versions of graphs (interactive and static)
-	  xprobes <- abs(B[2,1] - B[1,1]) / quality
-	  yprobes <- abs(B[2,2] - B[1,2]) / quality
-	  x <- seq(B[1,1], B[2,1], by = xprobes)
-	  y <- seq(B[1,2], B[2,2], by = yprobes)
-	  z <- outer(x, y, Vectorize(function(x,y) f(c(x,y))))
-	  nbcol = 100
-	  color = rev(rainbow(nbcol, start = 0/6, end = 4/6))
-	  zcol  = cut(z, nbcol)
-	  persp3d(x, y, z, theta=50, phi=25, expand=0.75, col=color[zcol],
-			  ticktype="detailed",axes=TRUE)
-	  
-	  png(file = paste(funcName, "1.png", sep=""), width=600, height=400, units="px")
-	  persp3D(x, y, z, theta = -45, phi = 20, color.palette = jet.colors)
-	  dev.off()
-	}
-	
-	# for each function perform set of measurements
-	customMeasure("resultsMutations.csv", "2", mutationTests, "mut", 
-		"p. mutacji", "Znalezione minimum dla roznych prawdopodobienstw mutacji")
-	#customMeasure("resultsCrossover.csv", "3", crossoverTests, "crs", 
-	#	"p. krzyzowania", "Znalezione minimum dla roznych prawdopodobienstw krzyzowania")
-	#customMeasure("resultsPopulation.csv", "4", populationTests, "pop", 
-	#	"rozmiar populacji", "Znalezione minimum dla roznych rozmiarow populacji")
-	#customMeasure("resultsIterations.csv", "5", iterationTests, "itr",
-	#	"ilosc iteracji", "Znalezione minimum dla roznych ilosci iteracji")
-	#customMeasure("resultsElitism.csv", "6", elitismTests, "elt", 
-	#	"elityzm", "Znalezione minimum dla roznych wartosci elityzmu")
-}
-
-# whole source code is located here:
-# https://github.com/cran/GA/tree/master/R
+customHybridMeasure(seq(0, 1, 0.05), "poptim", 
+                "p. lokalnego searcha", "Znalezione minimum dla różnych poptimów")
+customHybridMeasure(seq(0, 1, 0.1), "pressel", 
+                    "ciśnienie", "Znalezione minimum dla różnych ciśnień")
 
 
 # PSO tests ----
+
+
+nOfRuns = 1 # zostaje bo niby nie można uśredniać?
+
+
+#TODO
+customPSOMeasure <- function(values, mType, xlab, main) {
+  
+  averages <- c()
+  for (value in values) {
+    sum <- 0
+    for (i in 1:nOfRuns) {
+      
+      message(paste("Sekwencja: ", value))
+      message(paste("Przebieg: ", i))
+      
+      GAmin <- ga(type = "real-valued",
+                  fitness =  function(xx) -f(xx),
+                  min = c(B[1,]), max = c(B[2,]),
+                  optim = TRUE,
+                  optimArgs = list (
+                    poptim = if (mType == "poptim") value else 0.05, 
+                    pressel = if (mType == "pressel") value else 0.5))
+      
+      solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
+      eval <- f(solution[1,])
+      sum <- sum + eval
+    }
+    averages <- c(averages, (sum / nOfRuns))
+  }
+  
+  if (graphs) {
+    
+    # save graph with measurement series to file
+    png(file = paste(funcName, mType, ".png", sep=""), width=600, height=400, units="px")
+    plot(0, 0, main=main,
+         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))),
+         xlim=c(min(values),max(values)),
+         type="n", xlab=xlab, ylab="wartość")
+    abline(globalOpt,0, col="green")
+    lines(values, averages, col = "red", type = 'l')
+    legend("topright", c("memetyczny"), lwd=rep(2,1), lty=rep(1,1), col=c("red"))
+    dev.off()
+  }
+}
+
 
 n <- 500 #ilosc czastek
 m.l <- 50 #ilosc przebiegow
@@ -219,21 +233,12 @@ xmin <- c(-5.12, -5.12)
 xmax <- c(5.12, 5.12)
 vmax <- c(4, 4)
 
+#inaczej są parametry podawane, trzeba zrobić dodatkowego wrappera na f()
 g <- function(x) {  
   -(200 + x[,1]^2 + x[,2]^2 + cos(2*pi*x[,2]))
 }
 
 psoptim(FUN=g, n=n, max.loop=m.l, w=w, c1=c1, c2=c2,
-        xmin=xmin, xmax=xmax, vmax=vmax, seed=NULL, anim=TRUE)
-
-
-#wykresy:
-'
-1 poglądowy wygląd funkcji
-2 dla psoptim (c1,c2)
-2 dla hybrydowego (potpim, pressel)
-1 dla GA dla p. mutacji (2 serie z i bez własnej funkcji mutacji)
-
-'
+        xmin=xmin, xmax=xmax, vmax=vmax, seed=NULL, anim=FALSE)
 
 
