@@ -37,12 +37,19 @@ nOfRuns <- 1 # 30 number of runs to calc avg scores
 colors <- c("red", "purple")
 series <- c("GA", "GA + własna mutacja")
 
+GAWithHybridSeries <- c("GA", "GA + własna mutacja", "Mem", "Mem + własna mutacja")
+GAWithHybridColors <- c("red", "purple", "blue", "orange")
+
 # name of function from globalOptTests package
 funcName <- "Hartman6"
 
 # graph settings
 graphs <- TRUE #true if you want to print graphs
 quality <- 100 #number of probes
+
+#hybrid algorithm settings
+poptim = 0.05 #a value [0,1] specifying the probability of performing a local search at each iteration of GA (def 0.1)
+pressel = 0.5 #a value [0,1] specifying the pressure selection (def 0.5)
 
 # Processing ----
 
@@ -99,7 +106,82 @@ customGAMeasure <- function(values, mType, xlab, main) {
   }
 }
 
+customMeasureGAWithHybrid <- function(values, mType, xlab, main) {
+  
+  # main measurement loop (for each serie and sequence calculate average results)
+  temp <- c()
+  for (serie in 1:length(GAWithHybridSeries)) {
+    averages <- c()
+    for (value in values) {
+      sum <- 0
+      for (i in 1:nOfRuns) {
+        
+        message(paste("Seria: ", GAWithHybridSeries[serie]))
+        message(paste("Sekwencja: ", value))
+        message(paste("Przebieg: ", i))
+        
+        if(GAWithHybridSeries[serie] == "GA" || GAWithHybridSeries[serie] == "GA + własna funkcja")
+        {
+          GAmin <- ga(type = "real-valued",
+                      mutation = if (serie == 2) myMutationFunction else gaControl("real-valued")$mutation,
+                      fitness =  function(xx) -f(xx),
+                      min = c(B[1,]), max = c(B[2,]),
+                      popSize = if (mType == "pop") value else 50,
+                      pmutation = if (mType == "mut") value else 0.1)
+        }
+        else
+        {
+          GAmin <- ga(type = "real-valued",
+                      mutation = if (serie == 4) myMutationFunction else gaControl("real-valued")$mutation,
+                      fitness =  function(xx) -f(xx),
+                      min = c(B[1,]), max = c(B[2,]),
+                      optim = TRUE,
+                      optimArgs = list (
+                        poptim = if (mType == "poptim") value else 0.05, 
+                        pressel = if (mType == "pressel") value else 0.5))
+        }
+        
+        solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
+        eval <- f(solution[1,])
+        sum <- sum + eval
+      }
+      averages <- c(averages, (sum / nOfRuns))
+    }
+    temp <- c(temp, averages)
+  }
+  result <- matrix(c(temp), nrow = length(GAWithHybridSeries), ncol = length(values))
+  
+  if (graphs) {
+    # create standalone graph for each serie
+    for (serie in 1:length(GAWithHybridSeries)) {
+      legendColors <- rep("darkslateblue", length(GAWithHybridSeries))
+      legendColors[serie] = "red"
+      # save graph with measurement series to file
+      png(file = paste(funcName, mType, serie, ".png", sep=""), width=600, height=400, units="px")
+      plot(0, 0, main=main,
+           ylim=c(min(c(temp,globalOpt)),max(c(temp,globalOpt))),
+           xlim=c(min(values),max(values)),
+           type="n", xlab=xlab, ylab="wartosc")
+      abline(globalOpt,0, col="green")
+      
+      lastLine <- NA
+      seriesNames <- c()
+      for (i in 1:length(GAWithHybridSeries)) {
+        seriesNames <- c(seriesNames, GAWithHybridSeries[i])
+        if (i != serie)
+        {
+          lines(values, result[i,], col = "darkslateblue", type = 'l', lwd = 2)
+        }
+      }
+      lines(values, result[serie,], col = "red", type = 'l', lwd = 2)
+      
+      legend("topright", seriesNames, lwd=rep(2,length(GAWithHybridSeries)), lty=rep(1,length(GAWithHybridSeries)), col = legendColors)
+      dev.off()
+    }
+  }
+}
 
+{
 # get data from globalOptTests package
 dim <- getProblemDimen(funcName)
 B <- matrix(unlist(getDefaultBounds(funcName)),ncol=dim,byrow=TRUE)
@@ -118,8 +200,12 @@ if (graphs) {
   persp3D(x, y, z, theta = -45, phi = 20, color.palette = jet.colors)
   dev.off()
 }
+}
 
-# perform set of measurements
+
+# perform set of measurements ----
+customMeasureGAWithHybrid(seq(0, 1, 0.1), "mut", "p.mutacji", "Znalezione minimum dla różnych p. mutacji")
+
 customGAMeasure(seq(0, 1, 0.1), "mut", 
 	"p. mutacji", "Znalezione minimum dla różnych p. mutacji")
 customGAMeasure(seq(10, 100, 10), "pop", 
@@ -128,8 +214,6 @@ customGAMeasure(seq(10, 100, 10), "pop",
 
 
 # hybrid algorithm ----
-poptim = 0.05 #a value [0,1] specifying the probability of performing a local search at each iteration of GA (def 0.1)
-pressel = 0.5 #a value [0,1] specifying the pressure selection (def 0.5)
 
 customHybridMeasure <- function(values, mType, xlab, main) {
 
