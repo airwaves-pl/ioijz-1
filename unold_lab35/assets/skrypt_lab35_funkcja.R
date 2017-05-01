@@ -31,7 +31,7 @@ myMutationFunction <- function(object, parent) {
 
 # Settings ----
 
-nOfRuns <- 1 # 30 number of runs to calc avg scores
+nOfRuns <- 15 # 30 number of runs to calc avg scores
 
 # colors and titles for plot series
 colors <- c("red", "purple")
@@ -204,7 +204,7 @@ if (graphs) {
 
 
 # perform set of measurements ----
-customMeasureGAWithHybrid(seq(0, 1, 0.1), "mut", "p.mutacji", "Znalezione minimum dla różnych p. mutacji")
+customMeasureGAWithHybrid(seq(0, 1, 0.01), "mut", "p.mutacji", "Znalezione minimum dla różnych p. mutacji")
 
 customGAMeasure(seq(0, 1, 0.1), "mut", 
 	"p. mutacji", "Znalezione minimum dla różnych p. mutacji")
