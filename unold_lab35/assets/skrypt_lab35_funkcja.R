@@ -17,10 +17,8 @@ myMutationFunction <- function(object, parent) {
   
   # calculate randoms
   rnd <- sample(1:length(population), 1)
-  rndMinOrMax <- sample(1:10, 1)
   
   # get min and max from population vector
-  max_value <- which.max(population)
   min_value <- which.min(population)
  
   # set random element to min value 

@@ -172,36 +172,75 @@ Poniżej skrypt wykorzystany dla problemu komiwojażera.
 
 \subsection{Opis własnych operatorów}
 \paragraph{}
-Opisać jak działa własna funkcja mutacji[TODO]
-
-
-\section{Przebieg badań dla problemu optymalizacji rzeczywistej (może jednak Hartman6?)}
-\paragraph{}
-Badania przeprowadzono dla algorytmu genetycznego w wersji podstawowej oraz hybrydowej a także dla optymalizacji rojem cząstek (PSO).
+Własna funkcja mutacji została utworzona w taki sposób by nie doprowadzić do sytuacji, w której przekroczona zostanie minimalna lub maksymalna wartość populacji. 
 
 \fbi
-Funkcja którą poddawano optymalizacji to Branin. Branin jest funkcją z dwoma parametrami. Na ilustracji (rys.~\ref{fig:Branin_overview}) przedstawiono jej wykres a~poniżej jej wzór (\ref{eq:branin}) \cite{test4}.
+Jej działanie opiera się na wybraniu minimalnej jednostki z populacji i podmianie innej, losowej na znaleziona minimalną. Gwarantuje to niepojawienie się z populacji wartości nieoczekiwanej, lecz tylko te otrzymane podczas działania algorytmu.
 
-\begin{equation}\label{eq:branin}
-f(\boldsymbol{x}) = a(x_2 - bx_1^2 + cx_1 - r)^2 + s(1 - t)\cos(x_1) + s
+
+\section{Przebieg badań dla problemu optymalizacji rzeczywistej Hartman6}
+\paragraph{}
+Badania przeprowadzono dla algorytmu genetycznego w wersji podstawowej, ze zmienioną funkcją mutacji oraz hybrydowej, a także dla optymalizacji rojem cząstek (PSO).
+
+\fbi
+Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:hartman61}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:hartman6}).
+
+\begin{equation}\label{eq:hartman6}
+f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{ij})^2]
 \end{equation}
 
-, gdzie $ x_1 \in [-5, 10] $ oraz $ x_2 \in [0, 15] $.
+, gdzie $ x_i \in [0, 1] $, $ i~\in \{1, ..., 6\} $.
+
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/Branin_overview.png}
-	\caption{Wykres funkcji Branin}
-	\label{fig:Branin_overview}
+	\includegraphics[width=0.95\textwidth]{./assets/Hartman6_overview.png}
+	\caption{Wykres funkcji Hartman6}
+	\label{fig:Hartman6_overview}
 \end{figure}
 
 \fbi
-Z wykresu (rys.~\ref{fig:Branin_overview}) wynika, że funkcja ta ma stosunkowo duży obszar w~którym może znajdować się minimum oraz dwie strefy w~których wartości są dużo większe.
+Na kolejnych stronach zamieszczono wyniki badań porównawczych mutacji przeprowadzonych na algorytmie.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/Hartman6mut1.png}
+	\caption{Wykres funkcji Hartman6}
+	\label{fig:Hartman6mut1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/Hartman6mut2.png}
+	\caption{Wykres funkcji Hartman6}
+	\label{fig:Hartman6mut2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/Hartman6mut3.png}
+	\caption{Wykres funkcji Hartman6}
+	\label{fig:Hartman6mut3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/Hartman6mut4.png}
+	\caption{Wykres funkcji Hartman6}
+	\label{fig:Hartman6mut4}
+\end{figure}
 
 \fbi
-Na kolejnych stronach zamieszczono wyniki pomiarów dla różnych wartości parametrów kolejnych algorytmów. Pomiary przeprowadzano dla różnych wartości prawdopodobieństwa mutacji i~wielkości populacji.
+Z wykresów badań można odczytać zbliżone wyniki dla różnych funkcji mutacji.
 
+\fbi
+Żadna z funkcji nie osiągnęła minimum co świadczy o tym, że sama mutacja do tego nie wystarczy.
 
+\fbi
+Zauważalny jest również niski wpływ własnej funkcji mutacji na otrzymywane wyniki. Pod względem jakości rozwiązań nie odstaje ona od istniejących implementacji.
+
+\fbi
+Na wykresach można zauważyć znaczące pogorszenie się wyników dla funkcji memetycznej z domyślną funkcją mutacji. W przedziale 0.5-0.8 wygenerowała ona wyniki oddalone od średniej pozostałych.
 
 
 \newpage
