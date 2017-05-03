@@ -29,7 +29,7 @@ myMutationFunction <- function(object, parent) {
 
 # Settings ----
 
-nOfRuns <- 10 # 30 number of runs to calc avg scores
+nOfRuns <- 1 # 30 number of runs to calc avg scores
 
 # colors and titles for plot series
 colors <- c("red", "purple")
@@ -285,7 +285,7 @@ customPSOMeasure <- function(values, valueType, xLabel, title) {
     # save graph with measurement series to file
     png(file = paste(funcName, valueType, ".png", sep=""), width=600, height=400, units="px")
     plot(0, 0, main=title,
-         ylim=c(min(c(averages)),max(c(averages))),
+         ylim=c(min(c(averages), globalOpt),max(c(averages),  globalOpt)),
          xlim=c(min(values),max(values)),
          type="n", xlab=xLabel, ylab="wartość")
     abline(globalOpt,0, col="green")
@@ -318,5 +318,5 @@ customMeasureGAWithHybrid(seq(0, 1, 0.01), "mut",
 
 
 # PSO
-customPSOMeasure(seq(0, 1, 0.01), "c1" ,
+customPSOMeasure(seq(0, 1, 0.1), "c1" ,
                  "c1", "Znalezione minimum dla różnych wartości c1")
