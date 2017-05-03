@@ -252,9 +252,9 @@ customHybridMeasure <- function(values, mType, xlab, main) {
   }
 }
 
-customHybridMeasure(seq(0, 1, 0.05), "poptim", 
+customHybridMeasure(seq(0, 1, 0.01), "poptim", 
                 "p. lokalnego searcha", "Znalezione minimum dla różnych poptimów")
-customHybridMeasure(seq(0, 1, 0.1), "pressel", 
+customHybridMeasure(seq(0, 1, 0.01), "pressel", 
                     "ciśnienie", "Znalezione minimum dla różnych ciśnień")
 
 
@@ -265,27 +265,42 @@ nOfRuns = 1 # zostaje bo niby nie można uśredniać?
 
 
 #TODO
-customPSOMeasure <- function(values, mType, xlab, main) {
+  
+customPSOMeasure <- function(values, valueType, xLabel, title)
+{
+  n <- 500 #ilosc czastek
+  m.l <- 50 #ilosc przebiegow
+  w <- 0.95
+  xmin <- c(-5.12, -5.12)
+  xmax <- c(5.12, 5.12)
+  vmax <- c(4, 4)
+  g <- function(x) {  
+    -(200 + x[,1]^2 + x[,2]^2 + cos(2*pi*x[,2]))
+  }
   
   averages <- c()
-  for (value in values) {
+  for (value in values)
+  {
     sum <- 0
-    for (i in 1:nOfRuns) {
-      
+    for (i in 1:nOfRuns)
+    {
       message(paste("Sekwencja: ", value))
       message(paste("Przebieg: ", i))
       
-      GAmin <- ga(type = "real-valued",
-                  fitness =  function(xx) -f(xx),
-                  min = c(B[1,]), max = c(B[2,]),
-                  optim = TRUE,
-                  optimArgs = list (
-                    poptim = if (mType == "poptim") value else 0.05, 
-                    pressel = if (mType == "pressel") value else 0.5))
+      result <- psoptim(FUN=g,
+                        n=n,
+                        max.loop=m.l,
+                        w=w,
+                        c1=if (valueType == "c1") value else 0.2,
+                        c2=if (valueType == "c2") value else 0.2,
+                        xmin=xmin,
+                        xmax=xmax,
+                        vmax=vmax,
+                        seed=NULL,
+                        anim=FALSE)
       
-      solution <- matrix(unlist(GAmin@solution),ncol=dim,byrow=TRUE)
-      eval <- f(solution[1,])
-      sum <- sum + eval
+      sum <- sum + result$val
+      
     }
     averages <- c(averages, (sum / nOfRuns))
   }
@@ -293,34 +308,16 @@ customPSOMeasure <- function(values, mType, xlab, main) {
   if (graphs) {
     
     # save graph with measurement series to file
-    png(file = paste(funcName, mType, ".png", sep=""), width=600, height=400, units="px")
-    plot(0, 0, main=main,
-         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))),
+    png(file = paste(funcName, valueType, ".png", sep=""), width=600, height=400, units="px")
+    plot(0, 0, main=title,
+         ylim=c(min(c(averages)),max(c(averages))),
          xlim=c(min(values),max(values)),
-         type="n", xlab=xlab, ylab="wartość")
+         type="n", xlab=xLabel, ylab="wartość")
     abline(globalOpt,0, col="green")
     lines(values, averages, col = "red", type = 'l')
-    legend("topright", c("memetyczny"), lwd=rep(2,1), lty=rep(1,1), col=c("red"))
+    legend("topright", c("PSO"), lwd=rep(2,1), lty=rep(1,1), col=c("red"))
     dev.off()
   }
 }
-
-
-n <- 500 #ilosc czastek
-m.l <- 50 #ilosc przebiegow
-w <- 0.95
-c1 <- 0.2
-c2 <- 0.2
-xmin <- c(-5.12, -5.12)
-xmax <- c(5.12, 5.12)
-vmax <- c(4, 4)
-
-#inaczej są parametry podawane, trzeba zrobić dodatkowego wrappera na f()
-g <- function(x) {  
-  -(200 + x[,1]^2 + x[,2]^2 + cos(2*pi*x[,2]))
-}
-
-psoptim(FUN=g, n=n, max.loop=m.l, w=w, c1=c1, c2=c2,
-        xmin=xmin, xmax=xmax, vmax=vmax, seed=NULL, anim=FALSE)
-
-
+  
+customPSOMeasure(seq(0, 1, 0.01), "c1" ,"c1", "Znalezione minimum dla różnych wartości c1")
