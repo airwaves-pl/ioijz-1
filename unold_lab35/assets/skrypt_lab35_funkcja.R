@@ -29,7 +29,7 @@ myMutationFunction <- function(object, parent) {
 
 # Settings ----
 
-nOfRuns <- 10 # 30 number of runs to calc avg scores
+nOfRuns <- 30 # 30 number of runs to calc avg scores
 
 # colors and titles for plot series
 colors <- c("red", "purple")
@@ -246,13 +246,21 @@ customPSOMeasure <- function(values, valueType, xLabel, title) {
   n <- 500 #ilosc czastek
   m.l <- 50 #ilosc przebiegow
   w <- 0.95
-  xmin <- c(-5.12, -5.12)
-  xmax <- c(5.12, 5.12)
-  vmax <- c(4, 4)
-  g <- function(x) {  
-    -(200 + x[,1]^2 + x[,2]^2 + cos(2*pi*x[,2]))
-  }
   
+  xmin = c(B[1,])
+  xmax = c(B[2,])
+
+  vmax <- c(rep(4, length(xmin)))
+  
+  g <- function(x) {
+    vec <- c()
+    for (row in 1:length(x[,1])) {
+      val <- -f(x[row,])
+      vec <- c(vec, val)
+    }
+    vec
+  }
+
   averages <- c()
   for (value in values)
   {
@@ -274,7 +282,7 @@ customPSOMeasure <- function(values, valueType, xLabel, title) {
                         seed=NULL,
                         anim=FALSE)
       
-      sum <- sum + result$val
+      sum <- sum + f(result$sol)
       
     }
     averages <- c(averages, (sum / nOfRuns))
@@ -285,7 +293,7 @@ customPSOMeasure <- function(values, valueType, xLabel, title) {
     # save graph with measurement series to file
     png(file = paste(funcName, valueType, ".png", sep=""), width=600, height=400, units="px")
     plot(0, 0, main=title,
-         ylim=c(min(c(averages)),max(c(averages))),
+         ylim=c(min(c(averages,globalOpt)),max(c(averages,globalOpt))),
          xlim=c(min(values),max(values)),
          type="n", xlab=xLabel, ylab="wartość")
     abline(globalOpt,0, col="green")
@@ -320,3 +328,7 @@ customMeasureGAWithHybrid(seq(0, 1, 0.01), "mut",
 # PSO
 customPSOMeasure(seq(0, 1, 0.01), "c1" ,
                  "c1", "Znalezione minimum dla różnych wartości c1")
+
+customPSOMeasure(seq(0, 1, 0.01), "c2" ,
+                 "c2", "Znalezione minimum dla różnych wartości c2")
+

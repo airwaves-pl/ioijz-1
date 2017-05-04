@@ -165,6 +165,10 @@ Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowad
 Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest na podstawie nazwy funkcji z~pakietu ,,globalOptTests''. Są to: rozmiar problemu (ilość parametrów), domyślne ograniczenia, wartość w~danym punkcie oraz optimum dla domyślnych ograniczeń.
 
 \fbi
+Dodatkowo warto wspomnieć, iż algorytm ,,psoptim'' w trochę inny sposób niż genetyczny przekazuje parametry do ewaluowanej funkcji. W tym przypadku jest to macierz w której kolumny to kolejne parametry natomiast wiersze odpowiadają kolejnym cząstkom. Zatem wymagane jest by funkcja umożliwiała wektorową ewaluację parametrów.Z uwagi na wykorzystywanie funkcji z pakietu ,,globalOptTests'' wymagało to utworzenia odpowiedniego wrappera.
+
+
+\fbi
 Poniżej skrypt wykorzystany dla problemu komiwojażera.
 
 \lstinputlisting[label=lst:skryptKomiwojazer,caption=Skrypt w~języku R wykorzystany do badań dla problemu komiwojażera,firstline=1,lastline=500]{./assets/skrypt_lab35_komiwojazer.R}
