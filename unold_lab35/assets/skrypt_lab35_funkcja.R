@@ -326,7 +326,7 @@ customMeasureGAWithHybrid(seq(0, 1, 0.01), "mut",
 
 
 # PSO
-customPSOMeasure(seq(0, 1, 0.01), "c1" ,
+customPSOMeasure(seq(0, 1, 0.1), "c1" ,
                  "c1", "Znalezione minimum dla różnych wartości c1")
 
 customPSOMeasure(seq(0, 1, 0.01), "c2" ,

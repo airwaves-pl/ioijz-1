@@ -298,28 +298,67 @@ Na ilustracji (rys.~\ref{fig:tspmutcust}) przedstawiono wyniki pomiarów dla ró
 \newpage
 \section{Badania algorytmów dla różnych wartości ich unikalnych parametrów}
 \paragraph{}
-Wstęp[todo]
+Algorytmy memetyczny i PSO posiadają własne wartości unikalne, których zmiana może wpłynąć na otrzymywane wyniki. Poniżej przedstawiono wykresy przedstawiające otrzymane wartości dla zmieniających się wybranych parametrów.
+
+\fbi
+Badania przeprowadzono w przedziale 0-1 z krokiem co 0,01. Otrzymane wyniki są uśrednionymi z 15 iteracji.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/Hartman6poptim.png}
-	\caption{Jakość rozwiązań dla różnych wartości poptimum}
-	\label{fig:tspmut}
+	\caption{Jakość rozwiązań dla różnych wartości poptimum algorytmu hybrydowego}
+	\label{fig:hybridpoptimum}
 \end{figure}
+
+\fbi
+Z wykresu (rys.~\ref{fig:hybridpoptimum}) można odczytać niski wpływ wartości poptimum na otrzymane wyniki. Otrzymywane wartości różnią się nie więcej niż o 0,30. Zauważalne są 4 skoki zawyżające skalę rezultatów spowodowane heurystyką algorytmu.
+
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/Hartman6pressel.png}
-	\caption{Jakość rozwiązań dla różnych wartości ciśnienia}
-	\label{fig:tspmut}
+	\caption{Jakość rozwiązań dla różnych wartości ciśnienia algorytmu hybrydowego}
+	\label{fig:hybridpressel}
 \end{figure}
 
+\fbi
+Wartości na wykresie (rys.~\ref{fig:hybridpressel}) różnią się od siebie o nie więcej niż 0,06. Oznacza to niski wpływ ciśnienia na rezultat algorytmu. Nie zauważalne są trendy wartości wraz ze wzrostem ciśnienia.
 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/Hartman6c1.png}
+	\caption{Jakość rozwiązań dla różnych wartości c1 algorytmu PSO}
+	\label{fig:psoc1}
+\end{figure}
+
+\fbi
+Z wykresu (rys.~\ref{fig:psoc1}) odczytać można logarytmiczny trend wzrostowy, osiągający swoje maksimum w okolicy wartości c1 równej 1. Wartości te jednak różnią się na poziomie 0,0001 co oznacza ich minimalny wpływ na rezultat.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/Hartman6c2.png}
+	\caption{Jakość rozwiązań dla różnych wartości c2 algorytmu PSO}
+	\label{fig:psoc2}
+\end{figure}
+
+\fbi
+Na wykresie (rys.~\ref{fig:psoc2}) najlepsze rezultaty otrzymywane są dla wartości z przedziału 0,1-0,2. Dalej widoczny jest trend spadkowy jakości rozwiązań. Otrzymane wartości nie różnią się o więcej niż 0.0020 co mówi o bardzo niskim wpływie na wyniki.
 
 \newpage
 \section{Podsumowanie}
 \paragraph{}
-W trakcie prowadzonych badań przetestowano algorytm genetyczny w~zadaniu optymalizacji dla... [TODO]
+W trakcie prowadzonych badań przetestowano algorytmy w wariantach genetyczny prosty, genetyczny prosty z własną funkcją mutacji, hybrydowy prosty wraz z własną funkcją, TSP oraz PSO.
+
+\fbi
+Zmiana funkcji mutacji nie spowodowała znaczących zmian w jakości otrzymywanych rozwiązań. Jej działanie jest porównywalne z zaimplementowaną funkcją.
+
+\fbi
+Własna funkcja mutacji dla problemu TSP pogorszyła rezultaty o ok. 10 punktów procentowych.
+
+\fbi
+Sprawdzane unikalne parametry funkcji hybrydowej nie wskazują jednoznacznie najlepszego rozwiązania, oznacza to ich niski wpływ na działanie wybranej funkcji. Podobnie jest w przypadku parametrów c1, c2 dla PSO, których zmiana nieznacznie wpływa na wyniki.
 
 
 \newpage
