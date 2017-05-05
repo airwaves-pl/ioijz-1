@@ -114,6 +114,7 @@
 \newpage
 \section{Wprowadzenie}
 \paragraph{}
+[todo]
 Algorytm genetyczny – algorytm heurystyczny, który swoim działaniem przypomina działanie ewolucji w~naturze. Osobniki będące zbyt słabe zostają wyeliminowane z~populacji w~kolejnych pokoleniach, a~na ich miejsce przyjmowane są lepsze, silniejsze, bardziej podatne adaptacji. Algorytmy te zakładają możliwość mutacji i~krzyżowania wśród potomków, przez co nie zawsze są oni silniejsi od poprzednio wyeliminowanych członków. Dodatkowo wprowadzają pojęcie elity, która jest bezpośrednio przenoszona do następnego - teoretycznie lepszego pokolenia.
 
 
@@ -182,6 +183,7 @@ Własna funkcja mutacji została utworzona w taki sposób by nie doprowadzić do
 Jej działanie opiera się na wybraniu minimalnej jednostki z populacji i podmianie innej, losowej na znaleziona minimalną. Gwarantuje to niepojawienie się z populacji wartości nieoczekiwanej, lecz tylko te otrzymane podczas działania algorytmu.
 
 
+\newpage
 \section{Przebieg badań dla problemu optymalizacji rzeczywistej Hartman6}
 \paragraph{}
 Badania przeprowadzono dla algorytmu genetycznego w wersji podstawowej, ze zmienioną funkcją mutacji oraz hybrydowej, a także dla optymalizacji rojem cząstek (PSO).
@@ -333,7 +335,7 @@ Wartości na wykresie (rys.~\ref{fig:hybridpressel}) różnią się od siebie o 
 \end{figure}
 
 \fbi
-Z wykresu (rys.~\ref{fig:psoc1}) odczytać można logarytmiczny trend wzrostowy, osiągający swoje maksimum w okolicy wartości c1 równej 1. Wartości te jednak różnią się na poziomie 0,0001 co oznacza ich minimalny wpływ na rezultat.
+[todo]
 
 
 \begin{figure}[H]
@@ -344,7 +346,7 @@ Z wykresu (rys.~\ref{fig:psoc1}) odczytać można logarytmiczny trend wzrostowy,
 \end{figure}
 
 \fbi
-Na wykresie (rys.~\ref{fig:psoc2}) najlepsze rezultaty otrzymywane są dla wartości z przedziału 0,1-0,2. Dalej widoczny jest trend spadkowy jakości rozwiązań. Otrzymane wartości nie różnią się o więcej niż 0.0020 co mówi o bardzo niskim wpływie na wyniki.
+[todo]
 
 \newpage
 \section{Podsumowanie}
@@ -357,8 +359,6 @@ Zmiana funkcji mutacji nie spowodowała znaczących zmian w jakości otrzymywany
 \fbi
 Własna funkcja mutacji dla problemu TSP pogorszyła rezultaty o ok. 10 punktów procentowych.
 
-\fbi
-Sprawdzane unikalne parametry funkcji hybrydowej nie wskazują jednoznacznie najlepszego rozwiązania, oznacza to ich niski wpływ na działanie wybranej funkcji. Podobnie jest w przypadku parametrów c1, c2 dla PSO, których zmiana nieznacznie wpływa na wyniki.
 
 
 \newpage
