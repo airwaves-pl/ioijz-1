@@ -115,24 +115,22 @@
 \section{Wprowadzenie}
 \paragraph{}
 [todo]
+\fbi
 Algorytm genetyczny – algorytm heurystyczny, który swoim działaniem przypomina działanie ewolucji w~naturze. Osobniki będące zbyt słabe zostają wyeliminowane z~populacji w~kolejnych pokoleniach, a~na ich miejsce przyjmowane są lepsze, silniejsze, bardziej podatne adaptacji. Algorytmy te zakładają możliwość mutacji i~krzyżowania wśród potomków, przez co nie zawsze są oni silniejsi od poprzednio wyeliminowanych członków. Dodatkowo wprowadzają pojęcie elity, która jest bezpośrednio przenoszona do następnego - teoretycznie lepszego pokolenia.
 
-
-
-\textit{dla wybranej funkcji własnej funkcje krzyżowania (dla branina)
-dla tsp (np--trudny) genetyczny -- tsplib wykorzystać do badań (2--3 instancje srednie male duze) z wlasnym operatorem z domyslnym
-algorytm ga z lokalnym wyszukiwaniem, dla komiwojażera, założyć czy ma lepsze wartości, czy szybciej zbiega, jak operatory się zachowują,
-psoptim, dla jednej funkcji i komiwojażera}
-
-
+\fbi
+Problem komiwojażera - jest zagadnieniem optymalizacyjnym, w~którym optymalizowana jest długość trasy między miastami, tak by odnaleźć najkrótszą drogę nie omijając żadnego z nich.
 
 \fbi
-W ramach laboratorium należało przeprowadzić testy algorytmu genetycznego dla różnych parametrów. Jako benchmark oceny należało użyć pakietu ,,getGlobalOpts'' oraz języka R.
+Algorytm memetyczny - hybrydowy algorytm ewolucyjny będący uzupełnieniem algorytmu genetycznego o dodatkowe, poza krzyżowaniem i mutacją, operatory generowania osobników kolejnej generacji.
 
+\fbi
+Algorytm PSO - algorytm optymalizacji rojem cząstek. [todo]
+
+\fbi
+W ramach laboratorium należało przeprowadzić testy algorytmów porównując działanie domyślnej i własnej funkcji mutacji. Dodatkowo należało wykonać testy unikalnych parametrów algorytmu memetycznego i PSO.
 \fbi
 Pomiary wykonywano na 2 różnych jednostkach roboczych. Ich parametry nie są istotne z~punktu widzenia analizy i~możliwości porównania rezultatów.
-
-
 
 \section{Implementacja}
 \paragraph{}
@@ -189,7 +187,7 @@ Jej działanie opiera się na wybraniu minimalnej jednostki z populacji i podmia
 Badania przeprowadzono dla algorytmu genetycznego w wersji podstawowej, ze zmienioną funkcją mutacji oraz hybrydowej, a także dla optymalizacji rojem cząstek (PSO).
 
 \fbi
-Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:hartman61}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:hartman6}).
+Hartman6 jest funkcją określoną dla ilości parametrów równej 6. Na ilustracji (rys.~\ref{fig:Hartman6_overview}) przedstawiono jej wykres dla pierwszych dwóch. Poniżej zamieszczono jej wzór (\ref{eq:hartman6}).
 
 \begin{equation}\label{eq:hartman6}
 f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{ij})^2]
@@ -361,7 +359,7 @@ Z przeprowadzonych badań najlepsze rezultaty otrzymano dla wartości c1 przekra
 \end{figure}
 
 \fbi
-Tak jak w przypadku parametru c1 najlepsze rezultaty uzyskano po przekroczeniu wartości 0,2. Jednak w tym wypadku można zauważyć powolne pogorszanie się wyników im większy parametr c2. 
+Tak jak w przypadku parametru c1 najlepsze rezultaty uzyskano po przekroczeniu wartości 0,2. Jednak w tym wypadku można zauważyć powolne pogorszenia się wyników im większy parametr c2. 
 
 \newpage
 \section{Podsumowanie}
@@ -374,6 +372,8 @@ Zmiana funkcji mutacji nie spowodowała znaczących zmian w jakości otrzymywany
 \fbi
 Własna funkcja mutacji dla problemu TSP pogorszyła rezultaty o ok. 10 punktów procentowych.
 
+\fbi
+Z przeprowadzonych badań wynika brak lub niski wpływ zmodyfikowanej funkcji mutacji na działanie badanych algorytmów.
 
 
 \newpage
