@@ -129,6 +129,7 @@ Algorytm PSO - algorytm optymalizacji rojem cząstek. [todo]
 
 \fbi
 W ramach laboratorium należało przeprowadzić testy algorytmów porównując działanie domyślnej i własnej funkcji mutacji. Dodatkowo należało wykonać testy unikalnych parametrów algorytmu memetycznego i PSO.
+
 \fbi
 Pomiary wykonywano na 2 różnych jednostkach roboczych. Ich parametry nie są istotne z~punktu widzenia analizy i~możliwości porównania rezultatów.
 
@@ -147,17 +148,17 @@ Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowad
 	
 	Ilość powtórzeń dla każdego pomiaru w~celu uśrednienia.
 	
-	\item colors, series
+	\item colors, series, GAWithHybridSeries, GAWithHybridColors
 	
 	Wektory kolorów i~nazw kolejnych serii pomiarowych. 
 	
-	\item params
+	\item funcName
 	
-	Macierz parametrów domyślnych algorytmu dla każdej z~serii. W każdym wierszu kolejno są zawarte: p. mutacji, p. krzyżowania, rozmiar populacji, ilość iteracji oraz kolor serii na wykresach.
+	Nazwa funkcji dla których przeprowadzane są kolejno pomiary.
 	
-	\item functions
+	\item poptim, pressel
 	
-	Wektor nazw funkcji dla których przeprowadzane są kolejno pomiary.
+	Parametry algorytmu hybrydowego
 	
 \end{itemize}
 
@@ -171,6 +172,28 @@ Dodatkowo warto wspomnieć, iż algorytm ,,psoptim'' w trochę inny sposób niż
 Poniżej skrypt wykorzystany dla problemu komiwojażera.
 
 \lstinputlisting[label=lst:skryptKomiwojazer,caption=Skrypt w~języku R wykorzystany do badań dla problemu komiwojażera,firstline=1,lastline=500]{./assets/skrypt_lab35_komiwojazer.R}
+
+Poniżej pokrótce omówiono podstawowe parametry.
+
+
+\begin{itemize}
+	\item numberOfMeasurements
+	
+	Ilość powtórzeń dla każdego pomiaru w~celu uśrednienia.
+	
+	\item instances
+	
+	Instancje problemu TSP, dla których przeprowadzane są testy.
+	
+	\item best\_solutions
+	
+	Wektor zawierający optymalne rozwiązania dla instancji.
+	
+	\item colors
+	
+	Kolory dla wykresu.
+	
+\end{itemize}
 
 
 \subsection{Opis własnych operatorów}
