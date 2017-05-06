@@ -166,7 +166,7 @@ Skrypt przygotowano w~sposób który umożliwia w~pełni automatyczne przeprowad
 Całość informacji niezbędnych do przeprowadzenia obliczeń odczytywana jest na podstawie nazwy funkcji z~pakietu ,,globalOptTests''. Są to: rozmiar problemu (ilość parametrów), domyślne ograniczenia, wartość w~danym punkcie oraz optimum dla domyślnych ograniczeń.
 
 \fbi
-Dodatkowo warto wspomnieć, iż algorytm ,,psoptim'' w trochę inny sposób niż genetyczny przekazuje parametry do ewaluowanej funkcji. W tym przypadku jest to macierz w której kolumny to kolejne parametry natomiast wiersze odpowiadają kolejnym cząstkom. Zatem wymagane jest by funkcja umożliwiała wektorową ewaluację parametrów.Z uwagi na wykorzystywanie funkcji z pakietu ,,globalOptTests'' wymagało to utworzenia odpowiedniego wrappera.
+Dodatkowo warto wspomnieć, iż algorytm ,,psoptim'' w trochę inny sposób niż genetyczny przekazuje parametry do ewaluowanej funkcji. W tym przypadku jest to macierz w której kolumny to kolejne parametry natomiast wiersze odpowiadają kolejnym cząstkom. Zatem wymagane jest by funkcja umożliwiała wektorową ewaluację parametrów. Z~uwagi na wykorzystywanie funkcji z pakietu ,,globalOptTests'' wymagało to utworzenia odpowiedniego wrappera.
 
 
 \fbi
@@ -278,6 +278,10 @@ Na ilustracji (rys.~\ref{fig:tsppop}) przedstawiono wyniki pomiarów dla różny
 \end{figure}
 
 \fbi
+Dla wszystkich badanych instancji zwiększenie populacji wpłynęło pozytywnie na jakość otrzymanego rozwiązania, co najbardziej obrazuje instancja "eli51", która poprawiła się o~ok. 20 punktów procentowych w badanym obszarze.
+
+
+\fbi
 Na ilustracji (rys.~\ref{fig:tspmut}) przedstawiono wyniki pomiarów dla różnych wartości p. mutacji.
 
 \begin{figure}[H]
@@ -288,7 +292,11 @@ Na ilustracji (rys.~\ref{fig:tspmut}) przedstawiono wyniki pomiarów dla różny
 \end{figure}
 
 \fbi
-Na ilustracji (rys.~\ref{fig:tspmutcust}) przedstawiono wyniki pomiarów dla różnych wartości p. mutacji z niestandardowym operatorem.
+Z powyższego wykresu nie można ustalić wpływu prawdopodobieństwa mutacji na jakość rozwiązań dla instancji "eli76" i "eli101". Dla instancji "eli51" jakość niestabilnie spada wraz ze wzrostem prawdopodobieństwa mutacji.
+
+
+\fbi
+Na ilustracji (rys.~\ref{fig:tspmutcust}) przedstawiono wyniki pomiarów dla różnych wartości p. mutacji z~niestandardowym operatorem.
 
 \begin{figure}[H]
 	\centering
@@ -296,6 +304,10 @@ Na ilustracji (rys.~\ref{fig:tspmutcust}) przedstawiono wyniki pomiarów dla ró
 	\caption{Jakość rozwiązań dla różnych wartości p. mutacji (dla własnego operatora)}
 	\label{fig:tspmutcust}
 \end{figure}
+
+\fbi
+W przypadku własnej funkcji mutacji jakość rozwiązań problemu komiwojażera widocznie pogarsza u wszystkich instancji wraz ze wzrostem prawdopodobieństwa mutacji. W~przypadku "eli51" jest to nawet 20 punktów procentowych.
+
 
 \newpage
 \section{Badania algorytmów dla różnych wartości ich unikalnych parametrów}
@@ -313,7 +325,10 @@ Badania przeprowadzono w przedziale 0-1 z krokiem co 0,01. Otrzymane wyniki są 
 \end{figure}
 
 \fbi
-Z wykresu (rys.~\ref{fig:hybridpoptimum}) można odczytać niski wpływ wartości poptimum na otrzymane wyniki. Otrzymywane wartości różnią się nie więcej niż o 0,30. Zauważalne są 4 skoki zawyżające skalę rezultatów spowodowane heurystyką algorytmu.
+Z wykresu (rys.~\ref{fig:hybridpoptimum}) można odczytać niski wpływ wartości poptimum na otrzymane wyniki. Otrzymywane wartości różnią się nie więcej niż o 0,30. 
+
+\fbi
+Zauważalne są 4 skoki zawyżające skalę rezultatów spowodowane heurystyką algorytmu.
 
 
 \begin{figure}[H]
@@ -335,7 +350,7 @@ Wartości na wykresie (rys.~\ref{fig:hybridpressel}) różnią się od siebie o 
 \end{figure}
 
 \fbi
-[todo]
+Z przeprowadzonych badań najlepsze rezultaty otrzymano dla wartości c1 przekraczających 0,2. Po jej różnice spowodowane są heurystyką algorytmu, a nie parametrem.
 
 
 \begin{figure}[H]
@@ -346,7 +361,7 @@ Wartości na wykresie (rys.~\ref{fig:hybridpressel}) różnią się od siebie o 
 \end{figure}
 
 \fbi
-[todo]
+Tak jak w przypadku parametru c1 najlepsze rezultaty uzyskano po przekroczeniu wartości 0,2. Jednak w tym wypadku można zauważyć powolne pogorszanie się wyników im większy parametr c2. 
 
 \newpage
 \section{Podsumowanie}
