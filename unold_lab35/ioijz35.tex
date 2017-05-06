@@ -154,7 +154,7 @@ f(\boldsymbol{x}) = - \sum_{i=1}^{4} c_i \exp[- \sum_{j=1}^{6} a_{ij}(x_j - p_{i
 Badania przeprowadzono dla algorytmu genetycznego w wersji podstawowej, ze zmienioną funkcją mutacji oraz hybrydowej, a także dla algorytmu optymalizacji rojem cząstek (PSO). W tym punkcie zamieszczono wyniki dotyczące wpływu własnej funkcji mutacji na poziom optymalizacji.
 
 \fbi
-Własna funkcja mutacji została utworzona w taki sposób by nie doprowadzić do sytuacji, w której przekroczona zostanie minimalna lub maksymalna wartość populacji. Jej działanie opiera się na wybraniu minimalnej jednostki z populacji i podmianie innej, losowej na znaleziona minimalną. Gwarantuje to niepojawienie się w populacji wartości uznawanej przez algorytm za niepoprawną.
+Własna funkcja mutacji została utworzona w taki sposób by nie doprowadzić do sytuacji, w której przekroczona zostanie minimalna lub maksymalna wartość populacji. Jej działanie opiera się na wybraniu minimalnej jednostki z populacji i podmianie innej, losowej na znalezioną minimalną. Gwarantuje to niepojawienie się w populacji wartości uznawanej przez algorytm za niepoprawną.
 
 \begin{figure}[H]
 	\centering
@@ -384,7 +384,7 @@ Poniżej pokrótce omówiono podstawowe parametry.
 W trakcie przeprowadzonych badań przetestowano algorytmy w wariantach: genetyczny domyślny, genetyczny z własną funkcją mutacji, hybrydowy domyślny oraz hybrydowy z własną funkcją mutacji a także algorytm optymalizacji rojem cząstek -- dla problemu optymalizacji rzeczywistej. Przeprowadzono także testy dla algorytmu genetycznego (domyślnego jak również ze zmodyfikowaną funkcją mutacji) dla problemu TSP.
 
 \fbi
-Zmiana funkcji mutacji dla optymalizacji rzeczywistej nie spowodowała znaczących różnic w jakości otrzymywanych rozwiązań. Jej działanie okazało się porównywalne z zaimplementowaną funkcją. Przygotowana funkcja mutacji będąca złożeniem kilku domyślnych funkcji mutacji okazała się gorsza od domyślnej (pogorszyła rezultaty o ok. 10 punktów procentowych).
+Zmiana funkcji mutacji dla optymalizacji rzeczywistej nie spowodowała znaczących różnic w jakości otrzymywanych rozwiązań. Jej działanie okazało się porównywalne z zaimplementowaną funkcją. W przypadku problemu TSP przygotowana funkcja mutacji będąca złożeniem kilku domyślnych funkcji mutacji okazała się gorsza od domyślnej (pogorszyła rezultaty o ok. 10 punktów procentowych).
 
 \fbi
 Z przeprowadzonych badań wynika brak lub niski wpływ dokonanych modyfikacji funkcji mutacji na działanie badanych algorytmów. Warto wspomnieć, że również w samym pakiecie GA jest możliwość wyboru spośród kilku dostępnych funkcji mutacji i krzyżowania.
