@@ -20,7 +20,13 @@ for i=(1:J)
     C = V(:,i);
     CC = reshape(C, [46, 56]);
     CC = CC';
-    subplot(round(sqrt(J)) + 1, round(sqrt(J)) + 1, i);
+    subplot(round(sqrt(J)), round(sqrt(J)) + 1, i);
     imagesc(CC);
+    title(i)
     colormap gray;
 end
+
+id = (1:J);
+result = kmeans(V', Persons/2);
+result = [id', result];
+sortrows(result, 2)
