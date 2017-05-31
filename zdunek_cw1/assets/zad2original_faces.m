@@ -1,7 +1,8 @@
+clear;
 clc;
+load FaceData_56_46;
 Persons = 3
 ImagesPerPerson = 10
-J = 20
 M = [];
 for p=(1:Persons)
     for i=(1:ImagesPerPerson)
@@ -12,23 +13,17 @@ for p=(1:Persons)
         M = [M temp];
     end
 end
-% subtract mean
-x = bsxfun(@minus, M, mean(M, 2));
-% calculate covariance
-s = cov(x');
-% obtain eigenvalue & eigenvector
-[V, D] = eigs(s, J);
 figure;
-for i=(1:J)
-    C = V(:,i);
+for i=(1:Persons*ImagesPerPerson)
+    C = M(:,i);
     CC = reshape(C, [46, 56]);
-    subplot(round(sqrt(J)), round(sqrt(J)) + 1, i);
+    subplot(round(sqrt(Persons*ImagesPerPerson)), round(sqrt(Persons*ImagesPerPerson)) + 1, i);
     imagesc(CC');
     title(i)
     colormap gray;
 end
 
-id = (1:J);
-result = kmeans(V', Persons);
-result = [id', result];
-sortrows(result, 2)
+id = (1:Persons*ImagesPerPerson);
+result = kmeans(M', Persons);
+result = [id', result]
+%sortrows(result, 2)
