@@ -1,7 +1,9 @@
+clear;
 clc;
+load FaceData_56_46;
 Persons = 3
 ImagesPerPerson = 10
-J = 20
+J = 10
 M = [];
 for p=(1:Persons)
     for i=(1:ImagesPerPerson)
@@ -18,6 +20,7 @@ x = bsxfun(@minus, M, mean(M, 2));
 s = cov(x');
 % obtain eigenvalue & eigenvector
 [V, D] = eigs(s, J);
+Z = (x') * V;
 figure;
 for i=(1:J)
     C = V(:,i);
@@ -29,6 +32,8 @@ for i=(1:J)
 end
 
 id = (1:J);
-result = kmeans(V', Persons);
-result = [id', result];
-sortrows(result, 2)
+result = kmeans(Z, Persons);
+result_original = kmeans(M', Persons);
+% groups = sortrows([id, result], 2)
+
+[acc, rand_index, match] = AccMeasure(result_original, result)
