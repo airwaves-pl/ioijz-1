@@ -1,3 +1,4 @@
+clc;
 %image(yalefaces(:,:,1))
 
 load yalefaces
