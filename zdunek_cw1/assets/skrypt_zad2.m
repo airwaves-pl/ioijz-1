@@ -1,13 +1,5 @@
+%image(yalefaces(:,:,1))
 
-image(FaceData(2,2).Image)
-
-%C = confusionmat(group,grouphat);
-
-X=[randn(200,2);randn(200,2)+6,;[randn(200,1)+12,randn(200,1)]]; T=[ones(200,1);ones(200,1).*2;ones(200,1).*3]; 
- idx=kmeans(X,3,'emptyaction','singleton','Replicates',5); 
-  [Acc,rand_index,match]=AccMeasure(T,idx)
-  
-close all;
 load yalefaces
 [h,w,n] = size(yalefaces);
 d = h*w;
@@ -33,3 +25,28 @@ for i = 1:15
 subplot(4,4,i+1)
 imagesc(reshape(V(:,i),h,w))
 end
+
+
+eigsum = sum(eigval);
+csum = 0;
+for i = 1:d
+csum = csum + eigval(i);
+tv = csum/eigsum;
+if tv > 0.95
+k95 = i;
+break
+end ;
+end;
+
+
+% 
+% 
+% image(faces(:,1))
+% 
+% C = confusionmat(group,grouphat);
+% 
+% X=[randn(200,2);randn(200,2)+6,;[randn(200,1)+12,randn(200,1)]]; T=[ones(200,1);ones(200,1).*2;ones(200,1).*3]; 
+%  idx=kmeans(X,3,'emptyaction','singleton','Replicates',5); 
+%   [Acc,rand_index,match]=AccMeasure(T,idx)
+%   
+
