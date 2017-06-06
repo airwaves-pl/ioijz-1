@@ -99,6 +99,9 @@ known_groups = [1 2 3 2 1 2 3 2 3 1];
 
 confusionmat_result = confusionmat(known_groups, kmeans_result);
 
+figure;
+plotconfusion(known_groups, kmeans_result')
+
 [acc_eigen, rand_index_eigen, match_eigen] = AccMeasure(known_groups, kmeans_result);
 
 kmeans_result_original = kmeans(M', Persons);
@@ -106,4 +109,6 @@ kmeans_result_original = kmeans(M', Persons);
 
 Class = knnclassify(V', M', Group);
 
+figure;
+plotconfusion(known_groups, Class')
 

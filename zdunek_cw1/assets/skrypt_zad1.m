@@ -8,5 +8,5 @@ hold on
 plot(x(1:1,:), x(2:2,:), 'or', pcs(:,1:1), pcs(:,2:2), 'ob')
 plotv(eigenvectors(:,1), '-r');
 plotv(eigenvectors(:,2), '-b');
-legend('dane oryginalne','sk≥adowe g≥Ûwne','wektor cechy 1','wektor cechy 2','Location','northwest','Orientation','vertical')
+legend('dane oryginalne','sk≈Çadowe g≈Ç√≥wne','wektor cechy 1','wektor cechy 2','Location','northwest','Orientation','vertical')
 hold off
