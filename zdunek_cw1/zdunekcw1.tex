@@ -16,6 +16,7 @@
 \usepackage{titlesec}
 \usepackage{hyperref}
 \usepackage{tabularx}
+\usepackage{amssymb}
 
 \geometry{margin=1.2in}
 \usepackage[final]{pdfpages}
@@ -28,7 +29,7 @@
 
 \lstset{
 	frame=tblr,
-	language=R,
+	language=Matlab,
 	aboveskip=3mm,
 	belowskip=3mm,
 	showstringspaces=false,
@@ -113,31 +114,44 @@
 \tableofcontents
 
 \newpage
-\section{Wprowadzenie}
-\paragraph{}
-Redukcja wymiarowości...
 
-\fbi
-Należało wykonać...
-
-\section{Wykonane zadania}
-
-\subsection{Zadanie 1}
+\section{Zadanie 1}
 \paragraph{}
 Dla danych:
-
-X = [2.5 0.5 2.2 1.9 3.1 2.3 2 1 1.5 1.1; 2.4 0.7 2.9 2.2 3 2.7 1.6 1.1 1.6 0.9];
-
+\begin{center}
+\(X = [2.5 0.5 2.2 1.9 3.1 2.3 2 1 1.5 1.1; 2.4 0.7 2.9 2.2 3 2.7 1.6 1.1 1.6 0.9];\)
+\end{center}
 \begin{enumerate}[a.]
-\item Zaimplementować metodę PCA w Matlabie. Do wyznaczenia par własnych macierzy kowariancji można zastosować wbudowaną funkcję eig(.) lub eigs(.).
-\item Wyznaczyć składowe główne i wektory cech.
-\item Pokazać na rysunku punkty obserwacji oraz wyznaczone wielkości.
+	\item Zaimplementować metodę PCA w Matlabie. Do wyznaczenia par własnych macierzy kowariancji można zastosować wbudowaną funkcję eig(.) lub eigs(.).
+	\item Wyznaczyć składowe główne i wektory cech.
+	\item Pokazać na rysunku punkty obserwacji oraz wyznaczone wielkości.
 \end{enumerate}
+
+\subsection{Opis metody}
+\paragraph{}
+Metoda PCA (ang. \textit{Principal Component Analysis}) jest jedną ze statystycznych metod analizy czynnikowej, która pozwala na odnajdywanie pewnych struktur w zbiorze zmiennych losowych. Wielowymiarowe dane z reguły nie są równomiernie rozrzucone wzdłuż wszystkich kierunków układu współrzędnych, ale koncentrują się w pewnych podprzestrzeniach oryginalnej przestrzeni. Analiza składowych głównych oparta jest na wykorzystaniu pojęć ze statystyki, jakimi są m.in. korelacja i wariancja. Celem PCA jest znalezienie tych podprzestrzeni w postaci składowych głównych, tzn. kierunków przy których wartość wariancji (lub korelacji) jest zmaksymalizowana. Analiza może być oparta albo na macierzy korelacji, albo macierzy kowariancji utworzonej ze zbioru wejściowego.
+
+\fbi
+Metoda PCA jest zazwyczaj używana do redukcji rozmiaru danych statystycznych, poprzez odrzucenie ostatnich czynników, tzn. takich, których wariancja jest najniższa. Oznacza to, że \textit{n}-wymiarowy zbiór danych możemy ograniczyć wyznaczając \textit{n}-wektorów własnych, z których wybieramy tylko \textit{k}-wektorów, tak aby $k  n$. Zrzutowanie danych na przestrzeń rozpiętą przez \textit{k}-wybranych wektorów pozwala zredukować wymiarowość danych.
+
+\subsection{Algorytm}
+\paragraph{}
+
+\subsection{Realizacja}
+\paragraph{}
 \fbi
 Rozwiązanie zadania polega kolejno na...
 
 \lstinputlisting[label=lst:zad1,caption=Skrypt w Matlabie,firstline=1,lastline=500]{./assets/skrypt_zad1.m}
 
+\fbi
+Powyższy kod przedstawia zaimplementowaną metodę PCA dla zadanego zbioru danych.
+
+\fbi
+W celu obliczenia par własnych macierzy kowariancji zastosowana została dwuargumentowa metoda eigs, w której pierwszym argumentem jest macierz danych, drugim ilość wektorów (wierszy macierzy).
+
+\subsection{Wyniki}
+\paragraph{}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad1.png}
@@ -146,24 +160,86 @@ Rozwiązanie zadania polega kolejno na...
 \end{figure}
 
 \fbi
-Z wykresu można...
+Na wykresie można zauważyć poprawne działanie funkcji PCA. Dane rozkładają się wzdłuż oznaczonych wektorów.
 
-\subsection{Zadanie 2}
+\section{Zadanie 2}
 \paragraph{}
-Dla obrazów twarzy z bazy ORL (lub podobnej) wyznaczyć cechy holistyczne (twarze własne) dla różnej liczby estymowanych komponentów głównych (J = 4, 10, 20, 30). Pogrupować obrazy stosując metodę k-średnich, do obrazów oryginalnych oraz redukowanych. Badania przeprowadzić dla różnej liczby grup. Porównać dokładność i czas grupowania. Następnie dokonać klasyfikacji obrazów w obu przestrzeniach (oryginalnej i zredukowanej) za pomocą klasyfikatora k-NN. Porównać efekty klasyfikacji z efektami grupowania.
+Dla obrazów twarzy z bazy ORL (lub podobnej) wyznaczyć cechy holistyczne (twarze własne) dla różnej liczby estymowanych komponentów głównych (\(J = 4, 10, 20, 30\)). Pogrupować obrazy stosując metodę \textit{k}-średnich, do obrazów oryginalnych oraz redukowanych. Badania przeprowadzić dla różnej liczby grup. Porównać dokładność i czas grupowania. Następnie dokonać klasyfikacji obrazów w obu przestrzeniach (oryginalnej i zredukowanej) za pomocą klasyfikatora \textit{k-NN}. Porównać efekty klasyfikacji z efektami grupowania.
 
-\fbi
-Skrypt...
+\subsection{Wczytanie obrazów twarzy}
+\paragraph{}
 
-\subsection{Zadanie 3}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_a.png}
+	\caption{Ilustracja twarzy wejściowych...}
+	\label{fig:zad2a}
+\end{figure}
+
+\subsection{Wyznaczenie cech holistycznych (twarzy własnych)}
+\paragraph{}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_b.png}
+	\caption{Ilustracja ejgenfejsów...}
+	\label{fig:zad2b}
+\end{figure}
+
+
+\subsection{Grupowanie metodą k-średnich}
+\paragraph{}
+
+\subsection{Klasyfikacja za pomocą klasyfikatora k-NN}
+\paragraph{}
+Zgodnie z dokumentacją metody knnclassify \cite{test3} umożliwia ona klasyfikację pewnej próbki danych na podstawie danych dla których klasyfikacja jest znana.
+
+\begin{equation}\label{eq:knnclasify}
+Class = knnclassify(Sample, Training, Group)
+\end{equation}
+
+, parametry $Training$ oraz $Group$ zawierają informację o podziale danych na grupy natomiast $Sample$ jest zbiorem którego klasyfikację pragniemy przeprowadzić. Wynikiem jest $Class$ będący tego samego typu co $Group$ tzn. dziedzina klasyfikacji jest taka sama.
+
+Poniżej zamieszczono..
+
+\lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=1,lastline=500]{./assets/skrypt_zad2.m}
+
+
+Poniżej confusion matrix:
+
+\begin{tabular}{|c|c|c|}
+	\hline 
+	2 & 0 & 1 \\ 
+	\hline 
+	3 & 1 & 0 \\ 
+	\hline 
+	3 & 0 & 0 \\ 
+	\hline 
+\end{tabular} 
+
+
+\section{Zadanie 3}
 \paragraph{}
 Wyznaczyć pary własne macierzy kowariancji za pomocą algorytmów: Powera oraz Lanczosa. Zaimplementować algorytmy i zastosować je do rozwiązania powyższych zadań. Porównać wyniki.
 
+\subsection{Algorytm Powera}
+\paragraph{}
 
+\lstinputlisting[label=lst:zad3,caption=Fragment skryptu w Matlabie,firstline=1,lastline=500]{./assets/skrypt_zad3.m}
+
+
+\subsection{Algorytm Lanczosa}
+\paragraph{}
+
+\subsection{Wyniki}
+\paragraph{}
 
 \section{Podsumowanie}
 \paragraph{}
-W trakcie przeprowadzonych badań...
+Podczas zajęć laboratoryjnych...
+
+\fbi
+Z przeprowadzonych badań wynika...
 
 \newpage
 \begin{thebibliography}{40}
@@ -175,10 +251,13 @@ W trakcie przeprowadzonych badań...
 \url{https://www.mathworks.com/help/stats/confusionmat.html}
 
 \bibitem{test3}
-\url{https://en.wikipedia.org/wiki/Lanczos_algorithm}
+\url{https://www.mathworks.com/help/bioinfo/ref/knnclassify.html}
 
 \bibitem{test4}
 \url{http://www.kmg.zut.edu.pl/opt/wyklad/bezgrad/powell.html}
+
+\bibitem{test5}
+\url{https://en.wikipedia.org/wiki/Lanczos_algorithm}
 
 \end{thebibliography}
 
