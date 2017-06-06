@@ -1,7 +1,7 @@
 clc;
-Persons = 10
-ImagesPerPerson = 10
-J = 20
+Persons = 3;
+ImagesPerPerson = 10;
+J = 10;
 M = [];
 for p=(1:Persons)
     for i=(1:ImagesPerPerson)
@@ -13,8 +13,17 @@ for p=(1:Persons)
     end
 end
 
-[eigenvectors, eigenvalues] = eigs(M*(M'), J);
-V = eigenvectors;
+%subtract mean
+x=bsxfun(@minus, M, mean(M,2));
+
+% calculate covariance
+s = cov(x');
+
+% obtain eigenvalue & eigenvector
+[V,D] = eigs(s,J);
+
+Z = (x') * V;
+
 figure;
 for i=(1:J)
     C = V(:,i);
@@ -27,6 +36,13 @@ for i=(1:J)
 end
 
 id = (1:J);
-result = kmeans(V', Persons/2);
-result = [id', result];
-sortrows(result, 2)
+result = kmeans(Z', Persons);
+groups = sortrows([id', result], 2);
+
+T=[1 1 1 1; 2 2 2 2; 3 3 3 3];
+[Acc,rand_index,match]=AccMeasure(T,result);
+
+
+%Class = knnclassify(V, M, Group);
+
+
