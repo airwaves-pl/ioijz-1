@@ -159,16 +159,12 @@ Jeżeli wybierzemy mniejszą liczbę wektorów własnych (\textit{k} z \textit{n
 
 \subsection{Realizacja}
 \paragraph{}
-\fbi
-Rozwiązanie zadania polega kolejno na...
+Opracowano skrypt w środowisku Matlab realizujący metodę PCA zgodnie z algorytmem opisanym wcześniej. Wykorzystano wbudowane funkcję do obliczenia i odjęcia wartości średnich [mean(.), bsxfun(.)] oraz do wyznaczenia macierzy kowariancji [cov(.)]. W celu obliczenia par własnych macierzy kowariancji zastosowana została metoda eigs(.), w której pierwszym argumentem jest macierz kowariancji, a drugim ilość wektorów własnych.
 
 \lstinputlisting[label=lst:zad1,caption=Wyznaczanie wartości własnych i wektorów własnych,firstline=1,lastline=21]{./assets/skrypt_zad1.m}
 
 \fbi
-Powyższy kod przedstawia zaimplementowaną metodę PCA dla zadanego zbioru danych.
-
-\fbi
-W celu obliczenia par własnych macierzy kowariancji zastosowana została dwuargumentowa metoda eigs, w której pierwszym argumentem jest macierz danych, drugim ilość wektorów (wierszy macierzy).
+Pozostałe funkcje służą do wykreślenia wykresu zawierającego kolejno: dane wejściowe, składowe główne oraz wyznaczone wektory własne. 
 
 \subsection{Wyniki}
 \paragraph{}
