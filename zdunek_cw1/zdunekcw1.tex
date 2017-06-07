@@ -217,56 +217,39 @@ Dla obrazów twarzy z bazy ORL (lub podobnej) wyznaczyć cechy holistyczne (twar
 
 \subsection{Wczytanie obrazów twarzy}
 \paragraph{}
-Na ilustracji \ref{fig:ilustracja_zad2_dane} zamieszczono wykorzystane dane twarzy 3 różnych osób. Oryginalne twarze pochodzą ze strony \cite{test6}. Zdjęcia twarzy są już znormalizowane.
+Na ilustracji \ref{fig:ilustracja_zad2_dane} zamieszczono wykorzystane dane twarzy 3 różnych osób. Oryginalne twarze pochodzą ze strony \cite{test6}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_dane.png}
-	\caption{Obrazy twarzy wykorzystane do obliczeń}
+	\caption{Obrazy twarzy wykorzystane w dalszej części}
 	\label{fig:ilustracja_zad2_dane}
 \end{figure}
 
-\lstinputlisting[label=lst:zad2b,caption=Wczytywanie danych twarzy do macierzy,firstline=1,lastline=25]{./assets/skrypt_zad2.m}
+\newpage
+
+\fbi
+Na listingu poniżej \ref{lst:zad2a} zamieszczono fragment odpowiedzialny za wczytywanie danych twarzy do macierzy, ich normalizację oraz wyświetlanie.
+
+\lstinputlisting[label=lst:zad2a,caption=Początkowy fragment skryptu,firstline=1,lastline=50]{./assets/skrypt_zad2_test.m}
 
 \subsection{Wyznaczenie cech holistycznych (twarzy własnych)}
 \paragraph{}
-Do wyznaczania twarzy własnych zastosowano podobnie jak w zadaniu poprzednim metodę PCA. Na listingu \ref{lst:zad2b} fragment odpowiedzialny za ten etap.
-
-\lstinputlisting[label=lst:zad2b,caption=Wyznaczanie twarzy własnych,firstline=25,lastline=40]{./assets/skrypt_zad2.m}
+Do wyznaczania twarzy własnych zastosowano podobnie jak w zadaniu poprzednim metodę PCA. Na ilustracji poniżej \ref{fig:ilustracja_zad2_eigen_j30} rezultaty dla J=30, wektory zostały posortowane malejąco.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j4.png}
-	\caption{Wyznaczone twarze własne dla J=4}
-	\label{fig:ilustracja_zad2_eigen_j4}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j10.png}
-	\caption{Wyznaczone twarze własne dla J=10}
-	\label{fig:ilustracja_zad2_eigen_j10}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j20.png}
-	\caption{Wyznaczone twarze własne dla J=20}
-	\label{fig:ilustracja_zad2_eigen_j20}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j30.png}
+	\includegraphics[width=0.99\textwidth]{./assets/ilustracja_zad2_eigen_j30.png}
 	\caption{Wyznaczone twarze własne dla J=30}
 	\label{fig:ilustracja_zad2_eigen_j30}
 \end{figure}
 
+Na listingu \ref{lst:zad2b} zamieszczono główną część skryptu która odpowiedzialna jest za wyznaczanie twarzy własnych oraz zredukowanych a także grupowanie i klasyfikację.
+
+\lstinputlisting[label=lst:zad2b,caption=Główna część skryptu,firstline=50,lastline=500]{./assets/skrypt_zad2_test.m}
+
 \subsection{Grupowanie metodą k-średnich}
 \paragraph{}
-
-
-\lstinputlisting[label=lst:zad2c,caption=Grupowanie twarzy oryginalnych i własnych ,firstline=63,lastline=80]{./assets/skrypt_zad2.m}
 
 Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przedstawiono w tabeli \ref{tab:wynikiGrupowaniaZwykle}.
 
@@ -400,7 +383,7 @@ Class = knnclassify(Sample, Training, Group)
 
 Poniżej (listing \ref{lst:zad2d}) zamieszczono implementację klasyfikacji.
 
-\lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=80,lastline=100]{./assets/skrypt_zad2.m}
+\lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=80,lastline=100]{./assets/skrypt_zad2_test.m}
 
 
 \begin{figure}[H]

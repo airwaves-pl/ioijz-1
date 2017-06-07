@@ -77,7 +77,7 @@ for J_current=(1:length(J_serie))
     Z = V' * M;
 
     %figure;
-    %suptitle('Twarze w≥asne');
+    %suptitle('Twarze w≈Çasne');
     %for i=(1:J)
     %    C = V(:,i);
     %    CC = reshape(C, [46, 56]);
