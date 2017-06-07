@@ -107,6 +107,7 @@
 
 \date{\today}
 
+
 \begin{document}
 
 \input{./zdunekcw1title.tex}
@@ -146,10 +147,11 @@ Jako dane wejściowe podawana jest macierz zawierająca kolejne obserwacje, na p
 	\item Rzutowanie na wektory własne
 \end{enumerate}
 
+\fbi
 Na początku należy przeprowadzić normalizację. W ten sposób zapewniamy, że cechy szerzej rozłożone nie zdominują cech mocniej skoncentrowanych. Normalizacja polega na wyznaczeniu średnich wartości kolejnych cech dla wszystkich obserwacji. Następnie od macierzy wejściowej odejmujemy wcześniej wyliczone średnie - od każdego elementu macierzy odejmujemy średnią dla wiersza, w którym się znajduje. Dla tak uzyskanych danych należy policzyć macierz kowariancji.
 
 \fbi
-Kolejnym krokiem jest wyznaczenie wektorów i wartości własnych. Wylicza się \textit{k}-ortonormalnych wektorów, które tworzą bazę dla unormowanych danych wejsciowych. Są to wektory jednostkowe, wskazujące w kierunku prostopadłym do pozostałych wektorów z utworzonej bazy. Liczba wektorów własnych jest związana z wymiarem rozpatrywanych danych, a wartości własne określają długość wektora.
+Kolejnym krokiem jest wyznaczenie wektorów i wartości własnych. Wylicza się \textit{k}-ortonormalnych wektorów, które tworzą bazę dla unormowanych danych wejściowych. Są to wektory jednostkowe, wskazujące w kierunku prostopadłym do pozostałych wektorów z utworzonej bazy. Liczba wektorów własnych jest związana z wymiarem rozpatrywanych danych, a wartości własne określają długość wektora.
 
 \fbi
 Następnie porządkujemy wartości własne w kolejności malejącej. Redukcja opiera się na wyborze wektorów własnych z największą wartością własną. Można powiedzieć, że maksymalizujemy zmienność danych wraz z jednoczesną minimalizacją ubytku informacji spowodowanej ich redukcją. Redukcja dokonuje się poprzez mnożenie macierzy wybranych wektorów przez \textit{n}-wymiarową macierz danych.
@@ -161,7 +163,7 @@ Jeżeli wybierzemy mniejszą liczbę wektorów własnych (\textit{k} z \textit{n
 \paragraph{}
 Opracowano skrypt w środowisku Matlab realizujący metodę PCA zgodnie z algorytmem opisanym wcześniej. Wykorzystano wbudowane funkcję do obliczenia i odjęcia wartości średnich (mean(.), bsxfun(.)) oraz do wyznaczenia macierzy kowariancji (cov(.)). W celu obliczenia par własnych macierzy kowariancji zastosowana została metoda eigs(.), w której pierwszym argumentem jest macierz kowariancji, a drugim ilość wektorów własnych.
 
-\lstinputlisting[label=lst:zad1,caption=Wyznaczanie wartości własnych i wektorów własnych,firstline=1,lastline=23]{./assets/skrypt_zad1.m}
+\lstinputlisting[label=lst:zad1,caption=Wyznaczanie wartości własnych i wektorów własnych,firstline=1,lastline=50]{./assets/skrypt_zad1.m}
 
 \fbi
 Pozostałe funkcje służą do wykreślenia wykresu zawierającego kolejno: dane wejściowe, składowe główne oraz wyznaczone wektory własne. 
@@ -215,27 +217,89 @@ Dla obrazów twarzy z bazy ORL (lub podobnej) wyznaczyć cechy holistyczne (twar
 
 \subsection{Wczytanie obrazów twarzy}
 \paragraph{}
+Na ilustracji \ref{fig:ilustracja_zad2_dane} zamieszczono wykorzystane dane twarzy 3 różnych osób. Oryginalne twarze pochodzą ze strony \cite{test6}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_a.png}
-	\caption{Ilustracja twarzy wejściowych...}
-	\label{fig:zad2a}
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_dane.png}
+	\caption{Obrazy twarzy wykorzystane do obliczeń}
+	\label{fig:ilustracja_zad2_dane}
 \end{figure}
+
+\lstinputlisting[label=lst:zad2b,caption=Wczytywanie danych twarzy do macierzy,firstline=1,lastline=25]{./assets/skrypt_zad2.m}
 
 \subsection{Wyznaczenie cech holistycznych (twarzy własnych)}
 \paragraph{}
+Do wyznaczania twarzy własnych zastosowano podobnie jak w zadaniu poprzednim metodę PCA. Na listingu \ref{lst:zad2b} fragment odpowiedzialny za ten etap.
+
+\lstinputlisting[label=lst:zad2b,caption=Wyznaczanie twarzy własnych,firstline=25,lastline=40]{./assets/skrypt_zad2.m}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_b.png}
-	\caption{Ilustracja ejgenfejsów...}
-	\label{fig:zad2b}
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j10.png}
+	\caption{Wyznaczone twarze własne J=10}
+	\label{fig:ilustracja_zad2_eigen_j10}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j20.png}
+	\caption{Wyznaczone twarze własne J=20}
+	\label{fig:ilustracja_zad2_eigen_j20}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j30.png}
+	\caption{Wyznaczone twarze własne J=30}
+	\label{fig:ilustracja_zad2_eigen_j30}
+\end{figure}
 
 \subsection{Grupowanie metodą k-średnich}
 \paragraph{}
+
+
+\lstinputlisting[label=lst:zad2c,caption=Grupowanie twarzy oryginalnych i własnych ,firstline=63,lastline=80]{./assets/skrypt_zad2.m}
+
+Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przedstawiono w tabeli \ref{wynikiGrupowaniaZwykle}.
+
+\begin{table}[H]
+	\centering
+	\caption{Jakość grupowania dla różnych wielkości grup (n) dla obrazów oryginalnych}
+	\begin{tabular}{|c|c|}
+		\hline 
+		n & AccMeasure \\ 
+		\hline
+		1 &  \\
+		\hline
+		2 &  \\
+		\hline
+		3 &  \\
+		\hline
+	\end{tabular}
+	\label{tab:wynikiGrupowaniaZwykle}
+\end{table}
+
+Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli \ref{wynikiGrupowaniaWlasne}.
+
+\begin{table}[H]
+	\centering
+	\caption{Jakość grupowania dla różnych wartości J dla twarzy własnych}
+	\begin{tabular}{|c|c|}
+		\hline 
+		J & AccMeasure \\ 
+		\hline
+		3 &  \\
+		\hline
+		10 &  \\
+		\hline
+		20 &  \\
+		\hline
+		30 &  \\
+		\hline
+	\end{tabular}
+	\label{tab:wynikiGrupowaniaWlasne}
+\end{table}
 
 \subsection{Klasyfikacja za pomocą klasyfikatora k-NN}
 \paragraph{}
@@ -247,29 +311,17 @@ Class = knnclassify(Sample, Training, Group)
 
 , parametry $Training$ oraz $Group$ zawierają informację o podziale danych na grupy natomiast $Sample$ jest zbiorem którego klasyfikację pragniemy przeprowadzić. Wynikiem jest $Class$ będący tego samego typu co $Group$ tzn. dziedzina klasyfikacji jest taka sama.
 
-Poniżej zamieszczono..
+Poniżej (listing \ref{lst:zad2d}) zamieszczono implementację klasyfikacji.
 
-\lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=1,lastline=500]{./assets/skrypt_zad2.m}
+\lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=80,lastline=100]{./assets/skrypt_zad2.m}
 
-
-Poniżej confusion matrix..
-
-\begin{tabular}{|c|c|c|}
-	\hline 
-	2 & 0 & 1 \\ 
-	\hline 
-	3 & 1 & 0 \\ 
-	\hline 
-	3 & 0 & 0 \\ 
-	\hline 
-\end{tabular} 
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.75\textwidth]{./assets/ilustracja_zad2_c.png}
-	\caption{Tzw. confusion matrix...}
-	\label{fig:zad2c}
+	\includegraphics[width=0.75\textwidth]{./assets/ilustracja_zad2_conf_j20.png}
+	\caption{Confusion matrix dla J=20}
+	\label{fig:ilustracja_zad2_conf_j20}
 \end{figure}
 
 
@@ -300,10 +352,8 @@ W zaimplementowanej funkcji przechowywane są dwa wektory - stary i nowy. Wektor
 
 \section{Podsumowanie}
 \paragraph{}
-Podczas zajęć laboratoryjnych...
+Podczas zajęć laboratoryjnych zapoznano się z metodą PCA. Poznano również podstawy grupowania i klasyfikacji danych z wykorzystaniem pakietu Matlab.
 
-\fbi
-Z przeprowadzonych badań wynika...
 
 \newpage
 \begin{thebibliography}{40}
@@ -322,6 +372,9 @@ Z przeprowadzonych badań wynika...
 
 \bibitem{test5}
 \url{https://en.wikipedia.org/wiki/Lanczos_algorithm}
+
+\bibitem{test6}
+\url{http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html}
 
 \end{thebibliography}
 
