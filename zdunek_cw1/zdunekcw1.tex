@@ -246,7 +246,7 @@ Do wyznaczania twarzy własnych zastosowano podobnie jak w zadaniu poprzednim me
 
 Na listingu \ref{lst:zad2b} zamieszczono główną część skryptu która odpowiedzialna jest za wyznaczanie twarzy własnych oraz zredukowanych a także grupowanie i klasyfikację.
 
-\lstinputlisting[label=lst:zad2b,caption=Główna część skryptu,firstline=50,lastline=500]{./assets/skrypt_zad2_test.m}
+\lstinputlisting[label=lst:zad2b,caption=Główna część skryptu,firstline=51,lastline=500]{./assets/skrypt_zad2_test.m}
 
 \newpage
 \subsection{Grupowanie metodą k-średnich}
@@ -375,28 +375,16 @@ Class = knnclassify(Sample, Training, Group)
 
 , parametry $Training$ oraz $Group$ zawierają informację o podziale danych na grupy natomiast $Sample$ jest zbiorem którego klasyfikację pragniemy przeprowadzić. Wynikiem jest $Class$ będący tego samego typu co $Group$ tzn. dziedzina klasyfikacji jest taka sama.
 
-Poniżej zamieszczono implementację klasyfikacji.
-
-\lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=80,lastline=100]{./assets/skrypt_zad2_test.m}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\textwidth]{./assets/ilustracja_zad2_conf_j20.png}
-	\caption{Confusion matrix dla J=20}
-	\label{fig:ilustracja_zad2_conf_j20}
-\end{figure}
-
 
 \fbi
-Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli\ref{tab:wynikiKlasyfikacjaRedukowane}.
+Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli \ref{tab:wynikiKlasyfikacjaRedukowane}.
 
 \begin{table}[H]
 	\centering
 	\caption{Jakość klasyfikacji dla różnych wartości J dla twarzy redukowanych}
 	\begin{tabular}{|c|c|c|}
 		\hline 
-		J & AccMeasure & Czas przetwarzania [s] \\ 
+		J & Rand's index & Czas przetwarzania [s] \\ 
 		\hline
 		4 & 66.67 & 0.005 \\
 		\hline
@@ -429,12 +417,7 @@ Powyższe założenie wynika z faktu, że kolejne wektory dążą do pewnej zwie
 \fbi
 W zaimplementowanej funkcji przechowywane są dwa wektory - stary i nowy. Wektory te odejmowane są od siebie i normalizowane. Jeżeli różnica między nimi jest mniejsza niż założona tolerancja zwracany jest wektor nowszy jako bliższy idealnemu rozwiązaniu.
 
-\subsection{Algorytm Lanczosa}
-\paragraph{}
-
-\subsection{Wyniki}
-\paragraph{}
-
+\newpage
 \section{Podsumowanie}
 \paragraph{}
 Podczas zajęć laboratoryjnych zapoznano się z metodą PCA. Poznano również podstawy grupowania i klasyfikacji danych z wykorzystaniem pakietu Matlab.
