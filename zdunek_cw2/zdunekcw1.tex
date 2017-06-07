@@ -1,0 +1,149 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[export]{adjustbox}
+\usepackage{graphicx}
+\usepackage{amsmath} 
+\usepackage{listings}
+\usepackage{color}
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{amssymb}
+
+\geometry{margin=1.2in}
+\usepackage[final]{pdfpages}
+
+\newcommand{\fbi}{\leavevmode{\parindent=1em\indent}}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+	frame=tblr,
+	language=Matlab,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	mathescape=false,
+	breakatwhitespace=true,
+	tabsize=3,
+	inputencoding=utf8,
+	extendedchars=true,
+	literate=
+	{ą}{{\k{a}}}1
+	{Ą}{{\k{A}}}1
+	{ę}{{\k{e}}}1
+	{Ę}{{\k{E}}}1
+	{ó}{{\'o}}1
+	{Ó}{{\'O}}1
+	{ś}{{\'s}}1
+	{Ś}{{\'S}}1
+	{ł}{{\l{}}}1
+	{Ł}{{\L{}}}1
+	{ż}{{\.z}}1
+	{Ż}{{\.Z}}1
+	{ź}{{\'z}}1
+	{Ź}{{\'Z}}1
+	{ć}{{\'c}}1
+	{Ć}{{\'C}}1
+	{ń}{{\'n}}1
+	{Ń}{{\'N}}1
+}
+
+\renewcommand\lstlistingname{Listing}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}}
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}
+  {3.25ex \@plus1ex \@minus.2ex}
+  {-0em}
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}
+  {3.25ex \@plus1ex \@minus .2ex}
+  {-1em}
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\hypersetup{pageanchor=false}
+
+\setlength\parindent{3pt}
+
+\renewcommand{\labelenumi}{\alph{enumi}.} 
+
+\date{\today}
+
+
+\begin{document}
+
+\input{./zdunekcw1title.tex}
+
+\tableofcontents
+
+\newpage
+
+
+
+\newpage
+\begin{thebibliography}{40}
+
+\bibitem{test1}
+\url{https://www.mathworks.com/help/nnet/ref/plotconfusion.html}
+
+\bibitem{test2}
+\url{https://www.mathworks.com/help/stats/confusionmat.html}
+
+\bibitem{test3}
+\url{https://www.mathworks.com/help/bioinfo/ref/knnclassify.html}
+
+\bibitem{test4}
+\url{http://www.kmg.zut.edu.pl/opt/wyklad/bezgrad/powell.html}
+
+\bibitem{test5}
+\url{https://en.wikipedia.org/wiki/Lanczos_algorithm}
+
+\bibitem{test6}
+\url{http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html}
+
+\bibitem{test7}
+Berk Gokberk, ,,Assignment 2: Face Recognition using PCA'',
+\url{http://www2.cmpe.boun.edu.tr/courses/cmpe58Z/spring2010/files/assignment2_new.pdf}
+
+
+\end{thebibliography}
+
+\end{document}
