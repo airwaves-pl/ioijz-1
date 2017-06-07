@@ -331,7 +331,7 @@ Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w
 \end{figure}
 
 \fbi
-W tym przypadku algorytm musiał przypisać 4 zdjęcia 3 osób do 3 grup, co udało mu się wykonać bardzo dobrze. 
+W tym przypadku algorytm przypisywał większość twarzy do jednej osoby, aż do momentu, gdy zdjęcie znacznie się wyróżniało. Nie poradził sobie poprawnie z rozpoznaniem ostatniej z osób, gdyż jej zdjęcia zostały przypisane do dwóch różnych grup.
 
 
 \begin{figure}[H]
@@ -343,7 +343,7 @@ W tym przypadku algorytm musiał przypisać 4 zdjęcia 3 osób do 3 grup, co uda
 
 
 \fbi
-Dla J=10 algorytm się pogubił, nie potrafił dokładnie określić, które zdjęcia należą do odpowiedniej osoby.
+Dla J=10 algorytm się okazał się skuteczniejszy niż we wcześniejszym przypadku. Zdjęcia pogrupowane zostały prawie idealnie. Tylko jedno ze zdjęć zostało błędnie przypisane.
 
 
 \begin{figure}[H]
@@ -354,8 +354,7 @@ Dla J=10 algorytm się pogubił, nie potrafił dokładnie określić, które zdj
 \end{figure}
 
 \fbi
-W przypadku J=20 większość zdjęć została zamazana zostawiając tylko kontur twarzy. Algorytm wykorzystał ten kontur by podporządkować te zdjęcia w jedną grupę.
-Druga~i trzecia grupa została przypisana do zdjęć, w których twarz jest lepiej określona.
+W tym przypadku algorytm popełnił więcej błędów, niepoprawnie klasyfikując zdjęcia pierwszej osoby. Zdjęcia trzeciej z osób zostały przypisane poprawnie, ponieważ wyróżniają się dużo bardziej niż pozostałe.
 
 
 \begin{figure}[H]
@@ -366,10 +365,7 @@ Druga~i trzecia grupa została przypisana do zdjęć, w których twarz jest lepi
 \end{figure}
 
 \fbi
-Tak samo jak w przypadku wcześniej, algorytm pogrupował twarze według jakości zdjęcia. Zdjęcia, które w wyniku obróbki utraciły jakość zostały przyporządkowane do jednej grupy, co zaznaczone zostało kolorem niebieskim.
-
-\fbi
-Pozostałe zdjęcia przypisane zostały niemal losowo, wyniki to z faktu utraty zbyt dużej ilości danych by rozpoznać osobę i jednocześnie zbyt małej by wpisać zdjęcie do wcześniejszej wspomnianej grupy.
+Dla J=30 algorytm pogrupował zdjęcia popełniając ten sam błąd co w przypadku J=20. Zdjęcia pierwszej osoby zostały przypisane zarówno do pierwszej~i drugiej grupy. Mimo dużej utraty jakości zdjęcia grupa trzecia została przypisana zgodnie z rzeczywistością.
 
 \subsection{Klasyfikacja za pomocą klasyfikatora k-NN}
 \paragraph{}
@@ -381,7 +377,7 @@ Class = knnclassify(Sample, Training, Group)
 
 , parametry $Training$ oraz $Group$ zawierają informację o podziale danych na grupy natomiast $Sample$ jest zbiorem którego klasyfikację pragniemy przeprowadzić. Wynikiem jest $Class$ będący tego samego typu co $Group$ tzn. dziedzina klasyfikacji jest taka sama.
 
-Poniżej (listing \ref{lst:zad2d}) zamieszczono implementację klasyfikacji.
+Poniżej zamieszczono implementację klasyfikacji.
 
 \lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=80,lastline=100]{./assets/skrypt_zad2_test.m}
 
