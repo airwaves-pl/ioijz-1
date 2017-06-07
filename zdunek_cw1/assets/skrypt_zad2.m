@@ -6,7 +6,6 @@ load('FaceData_56_46.mat');
 
 Persons = 3;
 ImagesPerPerson = 10;
-J_serie = [4 10 20 30];
 
 %wczytywanie danych
 Group = [];
@@ -22,28 +21,40 @@ for p=(1:Persons)
     end
 end
 
+figure;
+suptitle('Twarze oryginalne');
+nOfImages = Persons*ImagesPerPerson;
+for i=(1:nOfImages)
+    C = M(:,i);
+    CC = reshape(C, [46, 56]);
+    subplot(round(sqrt(nOfImages)), round(sqrt(nOfImages)) + 1, i);
+    imagesc(CC');
+    title(i)
+    colormap gray;
+end
+
+for group_size=(1:3)
+    tic;
+    
+    % ksrednich dla obrazow oryginalnych
+    kmeans_result_orig = kmeans(M', group_size);
+    [acc_orig, rand_index_orig, match_orig] = AccMeasure(Group, kmeans_result_orig');
+
+    disp(sprintf('Czas grupowania dla obrazow oryginalnych n=%d: %2.3fs',group_size, toc))
+    disp(sprintf('Dokladnosc grupowania dla obrazow oryginalnych n=%d: %2.2f',group_size, acc_orig))
+end
+
+% calculate covariance
+s = cov(M');
+
+J_serie = [4 10 20 30];
 for J_current=(1:length(J_serie))
     J = J_serie(J_current);
 
-    %subtract mean
-    x=bsxfun(@minus, M, mean(M,2));
-    % calculate covariance
-    s = cov(x');
     % obtain eigenvalue & eigenvector
     [V,D] = eigs(s,J);
-    Z = (x') * V;
 
-    figure;
-    suptitle('Twarze oryginalne');
-    nOfImages = Persons*ImagesPerPerson;
-    for i=(1:nOfImages)
-        C = M(:,i);
-        CC = reshape(C, [46, 56]);
-        subplot(round(sqrt(nOfImages)), round(sqrt(nOfImages)) + 1, i);
-        imagesc(CC');
-        title(i)
-        colormap gray;
-    end
+    Z = (M') * V;
 
     figure;
     suptitle('Twarze w³asne');
@@ -57,16 +68,7 @@ for J_current=(1:length(J_serie))
     end
 
     known_groups = ones(1,J);
-    
-    tic;
-    
-    % ksrednich dla obrazow oryginalnych
-    kmeans_result_orig = kmeans(M', Persons);
-    [acc_orig, rand_index_orig, match_orig] = AccMeasure(Group, kmeans_result_orig');
-    
-    disp(sprintf('Czas grupowania dla obrazow oryginalnych J=%d: %2.3fs',J, toc))
-    disp(sprintf('Dokladnosc grupowania dla obrazow oryginalnych J=%d: %2.2f',J, acc_orig))
-    
+
     tic;
     
     % ksrednich dla obrazow redukowanych

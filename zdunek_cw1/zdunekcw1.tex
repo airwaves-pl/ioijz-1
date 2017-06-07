@@ -217,7 +217,7 @@ Dla obrazów twarzy z bazy ORL (lub podobnej) wyznaczyć cechy holistyczne (twar
 
 \subsection{Wczytanie obrazów twarzy}
 \paragraph{}
-Na ilustracji \ref{fig:ilustracja_zad2_dane} zamieszczono wykorzystane dane twarzy 3 różnych osób. Oryginalne twarze pochodzą ze strony \cite{test6}.
+Na ilustracji \ref{fig:ilustracja_zad2_dane} zamieszczono wykorzystane dane twarzy 3 różnych osób. Oryginalne twarze pochodzą ze strony \cite{test6}. Zdjęcia twarzy są już znormalizowane.
 
 \begin{figure}[H]
 	\centering
@@ -268,41 +268,41 @@ Do wyznaczania twarzy własnych zastosowano podobnie jak w zadaniu poprzednim me
 
 \lstinputlisting[label=lst:zad2c,caption=Grupowanie twarzy oryginalnych i własnych ,firstline=63,lastline=80]{./assets/skrypt_zad2.m}
 
-Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przedstawiono w tabeli \ref{wynikiGrupowaniaZwykle}.
+Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przedstawiono w tabeli \ref{tab:wynikiGrupowaniaZwykle}.
 
 \begin{table}[H]
 	\centering
 	\caption{Jakość grupowania dla różnych wielkości grup (n) dla obrazów oryginalnych}
-	\begin{tabular}{|c|c|}
+	\begin{tabular}{|c|c|c|}
 		\hline 
-		n & AccMeasure \\ 
+		n & AccMeasure & Czas przetwarzania [s] \\ 
 		\hline
-		1 &  \\
+		1 & 33.33 & 0.886 \\
 		\hline
-		2 &  \\
+		2 & 66.67 & 0.168 \\
 		\hline
-		3 &  \\
+		3 & 100.00 & 0.113 \\
 		\hline
 	\end{tabular}
 	\label{tab:wynikiGrupowaniaZwykle}
 \end{table}
 
-Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli \ref{wynikiGrupowaniaWlasne}.
+Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli \ref{tab:wynikiGrupowaniaWlasne}.
 
 \begin{table}[H]
 	\centering
 	\caption{Jakość grupowania dla różnych wartości J dla twarzy własnych}
-	\begin{tabular}{|c|c|}
+	\begin{tabular}{|c|c|c|}
 		\hline 
-		J & AccMeasure \\ 
+		J & AccMeasure & Czas przetwarzania [s] \\ 
 		\hline
-		3 &  \\
+		3 & 50.00 & 0.057 \\
 		\hline
-		10 &  \\
+		10 & 50.00 & 0.048 \\
 		\hline
-		20 &  \\
+		20 & 65.00 & 0.062 \\
 		\hline
-		30 &  \\
+		30 & 80.00 & 0.020 \\
 		\hline
 	\end{tabular}
 	\label{tab:wynikiGrupowaniaWlasne}
