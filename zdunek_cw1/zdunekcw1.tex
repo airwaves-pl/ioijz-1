@@ -250,8 +250,16 @@ Wyznaczyć pary własne macierzy kowariancji za pomocą algorytmów: Powera oraz
 \subsection{Algorytm Powera}
 \paragraph{}
 
-\lstinputlisting[label=lst:zad3,caption=Fragment skryptu w Matlabie,firstline=1,lastline=500]{./assets/skrypt_zad3.m}
+\lstinputlisting[label=lst:zad3,caption=Fragment skryptu w Matlabie,firstline=1,lastline=500]{./assets/Power_f.m}
 
+\fbi
+Algorytm Powera polega na kolejnym przemnażaniu macierzy wejściowej przez wektor wynikowy do momentu, gdy wektor uzyskany w wyniku działania nie różni się bardziej od wynikowego o więcej niż założona wartość tolerancji.
+
+\fbi
+Powyższe założenie wynika z faktu, że kolejne wektory dążą do pewnej zwielokrotnionej wartości. Ważnym jest by tę wartość wychwycić nie wykonując nadmiarowych obliczeń.
+
+\fbi
+W zaimplementowanej funkcji przechowywane są dwa wektory - stary i nowy. Wektory te odejmowane są od siebie i normalizowane. Jeżeli różnica między nimi jest mniejsza niż założona tolerancja zwracany jest wektor nowszy jako bliższy idealnemu rozwiązaniu.
 
 \subsection{Algorytm Lanczosa}
 \paragraph{}
