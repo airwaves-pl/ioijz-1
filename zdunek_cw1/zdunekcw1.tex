@@ -277,17 +277,45 @@ Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przeds
 		\hline 
 		n & AccMeasure & Czas przetwarzania [s] \\ 
 		\hline
-		1 & 33.33 & 0.886 \\
+		1 & 31.03 & 0.011 \\
 		\hline
-		2 & 66.67 & 0.168 \\
+		2 & 77.01 & 0.045 \\
 		\hline
-		3 & 100.00 & 0.113 \\
+		3 & 91.72 & 0.140 \\
 		\hline
 	\end{tabular}
 	\label{tab:wynikiGrupowaniaZwykle}
 \end{table}
 
-Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli \ref{tab:wynikiGrupowaniaWlasne}.
+\fbi
+Poniżej przedstawiono ilustrację przypisania poszczególnych zdjęć do grup przez algorytm dla 2 oraz 3 grup.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_dane_pogrupowane_2.png}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć nieobrobionych przy 2 grupach}
+	\label{fig:ilustracja_zad2_dane_pogrupowane_2}
+\end{figure}
+
+\fbi
+W tym przypadku algorytm poradził sobie najlepiej jak potrafił. Poprawnie przyporządkował dwie pierwsze osoby do pierwszej grupy i trzecią do grupy drugiej. Nierówne przyporządkowanie zdjęć do innych osób oznaczałoby popełnienie błędu.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_dane_pogrupowane_3.png}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć nieobrobionych przy 3 grupach}
+	\label{fig:ilustracja_zad2_dane_pogrupowane_3}
+\end{figure}
+
+\fbi
+Jak widać na powyższej ilustracji\ref{fig:ilustracja_zad2_dane_pogrupowane_3} algorytm nie poradził sobie w pełni z rozpoznaniem twarzy pierwszej osoby. Zdjęcia 1 i 3 włączone zostały do grupy osoby drugiej.
+
+\fbi
+Wyniki te odpowiadają skutecznościom zamieszczonym w tabeli\ref{tab:wynikiGrupowaniaZwykle}.
+
+\paragraph{}
+\fbi
+Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli\ref{tab:wynikiGrupowaniaWlasne}.
 
 \begin{table}[H]
 	\centering
@@ -296,17 +324,65 @@ Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w
 		\hline 
 		J & AccMeasure & Czas przetwarzania [s] \\ 
 		\hline
-		3 & 50.00 & 0.057 \\
+		3 & 16.67 & 0.057 \\
 		\hline
-		10 & 50.00 & 0.048 \\
+		10 & 40.00 & 0.048 \\
 		\hline
-		20 & 65.00 & 0.062 \\
+		20 & 58.42 & 0.062 \\
 		\hline
-		30 & 80.00 & 0.020 \\
+		30 & 60.23 & 0.020 \\
 		\hline
 	\end{tabular}
 	\label{tab:wynikiGrupowaniaWlasne}
 \end{table}
+
+\fbi
+Poniżej ilustracje grupowania.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j4_pogrupowane.png}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~4}
+	\label{fig:ilustracja_zad2_eigen_j4_pogrupowane}
+\end{figure}
+
+\fbi
+W tym przypadku algorytm musiał przypisać 4 zdjęcia 3 osób do 3 grup, co udało mu się wykonać bardzo dobrze. 
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j10_pogrupowane.png}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~10}
+	\label{fig:ilustracja_zad2_eigen_j10_pogrupowane}
+\end{figure}
+
+\fbi
+Dla J=10 algorytm się pogubił, nie potrafił dokładnie określić, które zdjęcia należą do odpowiedniej osoby.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j20_pogrupowane.png}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~20}
+	\label{fig:ilustracja_zad2_eigen_j20_pogrupowane}
+\end{figure}
+
+\fbi
+W przypadku J=20 większość zdjęć została zamazana zostawiając tylko kontur twarzy. Algorytm wykorzystał ten kontur by podporządkować te zdjęcia w jedną grupę.
+Druga~i trzecia grupa została przypisana do zdjęć, w których twarz jest lepiej określona.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j30_pogrupowane.png}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~30}
+	\label{fig:ilustracja_zad2_eigen_j30_pogrupowane}
+\end{figure}
+
+\fbi
+Tak samo jak w przypadku wcześniej, algorytm pogrupował twarze według jakości zdjęcia. Zdjęcia, które w wyniku obróbki utraciły jakość zostały przyporządkowane do jednej grupy, co zaznaczone zostało kolorem niebieskim.
+
+\fbi
+Pozostałe zdjęcia przypisane zostały niemal losowo, wyniki to z faktu utraty zbyt dużej ilości danych by rozpoznać osobę i jednocześnie zbyt małej by wpisać zdjęcie do wcześniejszej wspomnianej grupy.
 
 \subsection{Klasyfikacja za pomocą klasyfikatora k-NN}
 \paragraph{}
@@ -321,7 +397,6 @@ Class = knnclassify(Sample, Training, Group)
 Poniżej (listing \ref{lst:zad2d}) zamieszczono implementację klasyfikacji.
 
 \lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=80,lastline=100]{./assets/skrypt_zad2.m}
-
 
 
 \begin{figure}[H]
