@@ -8,13 +8,16 @@ x_norm = bsxfun(@minus, x, mean(x, 2));
 s = cov(x_norm');
 % wyznaczenie wartosci i wektorow wlasnych
 [eigenvectors, eigenvalues] = eigs(s, 2);
+% porzadkujemy wartosci wlasne w kolejnosci malejacej
+[eigenvalues order] = sort(diag(eigenvalues), 'descend');
+eigenvectors = eigenvectors(:,order);
 % rzutowanie
 pcs = eigenvectors' * x;
 
 figure;
 hold on
-plot(x(1,:), x(2,:), 'or', pcs(1,:), pcs(2,:), 'ob')
-plotv(eigenvectors(:,1), '-');
-plotv(eigenvectors(:,2), '-');
-legend('dane oryginalne', 'skladowe glowne', 'wektor cechy 1','wektor cechy 2','Location','northeast','Orientation','vertical')
+plot(x(2,:), x(1,:), 'or', pcs(2,:), pcs(1,:), 'ob')
+plotv(eigenvectors(:,1), '-r');
+plotv(eigenvectors(:,2), '-b');
+legend('dane oryginalne','skladowe glowne','wektor cechy 1','wektor cechy 2','Location','northeast','Orientation','vertical')
 hold off

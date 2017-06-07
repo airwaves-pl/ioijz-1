@@ -159,21 +159,52 @@ Jeżeli wybierzemy mniejszą liczbę wektorów własnych (\textit{k} z \textit{n
 
 \subsection{Realizacja}
 \paragraph{}
-Opracowano skrypt w środowisku Matlab realizujący metodę PCA zgodnie z algorytmem opisanym wcześniej. Wykorzystano wbudowane funkcję do obliczenia i odjęcia wartości średnich [mean(.), bsxfun(.)] oraz do wyznaczenia macierzy kowariancji [cov(.)]. W celu obliczenia par własnych macierzy kowariancji zastosowana została metoda eigs(.), w której pierwszym argumentem jest macierz kowariancji, a drugim ilość wektorów własnych.
+Opracowano skrypt w środowisku Matlab realizujący metodę PCA zgodnie z algorytmem opisanym wcześniej. Wykorzystano wbudowane funkcję do obliczenia i odjęcia wartości średnich (mean(.), bsxfun(.)) oraz do wyznaczenia macierzy kowariancji (cov(.)). W celu obliczenia par własnych macierzy kowariancji zastosowana została metoda eigs(.), w której pierwszym argumentem jest macierz kowariancji, a drugim ilość wektorów własnych.
 
-\lstinputlisting[label=lst:zad1,caption=Wyznaczanie wartości własnych i wektorów własnych,firstline=1,lastline=21]{./assets/skrypt_zad1.m}
+\lstinputlisting[label=lst:zad1,caption=Wyznaczanie wartości własnych i wektorów własnych,firstline=1,lastline=23]{./assets/skrypt_zad1.m}
 
 \fbi
 Pozostałe funkcje służą do wykreślenia wykresu zawierającego kolejno: dane wejściowe, składowe główne oraz wyznaczone wektory własne. 
 
 \subsection{Wyniki}
 \paragraph{}
+Dane wejściowe, składowe główne oraz wektory własne przedstawiono na rysunku \ref{fig:zad1}. Wyznaczone wektory i wartości własne przedstawiono w tabelach \ref{tab:wektory-wlasne} oraz \ref{tab:wartosci-wlasne}. Można zauważyć, że zgodnie z założeniami metody PCA, wektory własne są ortogonalne. Jeden z wektorów pokazuje kierunek, w którym wariancja jest największa.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad1_normalizacja.png}
 	\caption{Ilustracja punktów obserwacji i składowych głównych}
 	\label{fig:zad1}
 \end{figure}
+
+\begin{table}[H]
+	\centering
+	\caption{Wyznaczone wektory własne.}
+	\begin{tabular}{c|c|c|}
+		\cline{2-3}
+		& x & y \\ 
+		\hline
+		\multicolumn{1}{|c|}{wektor cechy 1} & 0.7352 & 0.6779 \\ 
+		\hline 
+		\multicolumn{1}{|c|}{wektor cechy 2} & 0.6779 & -0.7352 \\
+		\hline 
+	\end{tabular}
+	\label{tab:wektory-wlasne}
+\end{table}
+
+
+\begin{table}[H]
+	\centering
+	\caption{Wyznaczone wartości własne.}
+	\begin{tabular}{|c|c|}
+		\hline 
+		wektor cechy 1 & 1.2840 \\ 
+		\hline 
+		wektor cechy 2 & 0.0491 \\ 
+		\hline
+	\end{tabular}
+	\label{tab:wartosci-wlasne}
+\end{table}
 
 \fbi
 Na wykresie można zauważyć poprawne działanie funkcji PCA. Dane rozkładają się wzdłuż oznaczonych wektorów.
