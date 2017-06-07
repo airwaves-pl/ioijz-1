@@ -8,5 +8,8 @@ function [eigenvectors] = PCA_f(X)
 
     %analiza wektorów w³asnych
     [eigenvectors, eigenvalues] = eigs(R, n);
+    
+    %sortowanie wektorów
+    eigenvectors = sort(eigenvectors, 'ascend')
 
 end

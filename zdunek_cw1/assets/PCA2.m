@@ -15,6 +15,9 @@ R = cov(X');
 %analiza wektorów w³asnych
 [eigenvectors, eigenvalues] = eigs(R, n);
 
+%sortowanie wektorów
+eigenvectors = sort(eigenvectors, 'ascend')
+
 %utworzenie wykresu
 hold on;
 plot(X(1:1,:), X(2:2,:), 'ob');
