@@ -236,29 +236,29 @@ Do wyznaczania twarzy własnych zastosowano podobnie jak w zadaniu poprzednim me
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j4.png}
-	\caption{Wyznaczone twarze własne J=4}
+	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j4.png}
+	\caption{Wyznaczone twarze własne dla J=4}
 	\label{fig:ilustracja_zad2_eigen_j4}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j10.png}
-	\caption{Wyznaczone twarze własne J=10}
+	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j10.png}
+	\caption{Wyznaczone twarze własne dla J=10}
 	\label{fig:ilustracja_zad2_eigen_j10}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j20.png}
-	\caption{Wyznaczone twarze własne J=20}
+	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j20.png}
+	\caption{Wyznaczone twarze własne dla J=20}
 	\label{fig:ilustracja_zad2_eigen_j20}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j30.png}
-	\caption{Wyznaczone twarze własne J=30}
+	\includegraphics[width=0.7\textwidth]{./assets/ilustracja_zad2_eigen_j30.png}
+	\caption{Wyznaczone twarze własne dla J=30}
 	\label{fig:ilustracja_zad2_eigen_j30}
 \end{figure}
 
@@ -293,7 +293,7 @@ Poniżej przedstawiono ilustrację przypisania poszczególnych zdjęć do grup p
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_dane_pogrupowane_2.png}
-	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć nieobrobionych przy 2 grupach}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć oryginalnych przy 2 grupach}
 	\label{fig:ilustracja_zad2_dane_pogrupowane_2}
 \end{figure}
 
@@ -303,7 +303,7 @@ W tym przypadku algorytm poradził sobie najlepiej jak potrafił. Poprawnie przy
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_dane_pogrupowane_3.png}
-	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć nieobrobionych przy 3 grupach}
+	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć oryginalnych przy 3 grupach}
 	\label{fig:ilustracja_zad2_dane_pogrupowane_3}
 \end{figure}
 
@@ -336,14 +336,15 @@ Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w
 	\label{tab:wynikiGrupowaniaWlasne}
 \end{table}
 
-\fbi
-Poniżej ilustracje grupowania.
+
+\subsubsection{Rezultaty grupowania dla obrazów zredukowanych}
+
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j4_pogrupowane.png}
-	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~4}
-	\label{fig:ilustracja_zad2_eigen_j4_pogrupowane}
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_redukcja_j4.png}
+	\caption{Twarze zredukowane J=4}
+	\label{fig:ilustracja_zad2_redukcja_j4}
 \end{figure}
 
 \fbi
@@ -352,30 +353,33 @@ W tym przypadku algorytm musiał przypisać 4 zdjęcia 3 osób do 3 grup, co uda
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j10_pogrupowane.png}
-	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~10}
-	\label{fig:ilustracja_zad2_eigen_j10_pogrupowane}
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_redukcja_j10.png}
+	\caption{Twarze zredukowane J=10}
+	\label{fig:ilustracja_zad2_redukcja_j10}
 \end{figure}
+
 
 \fbi
 Dla J=10 algorytm się pogubił, nie potrafił dokładnie określić, które zdjęcia należą do odpowiedniej osoby.
 
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j20_pogrupowane.png}
-	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~20}
-	\label{fig:ilustracja_zad2_eigen_j20_pogrupowane}
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_redukcja_j20.png}
+	\caption{Twarze zredukowane J=20}
+	\label{fig:ilustracja_zad2_redukcja_j20}
 \end{figure}
 
 \fbi
 W przypadku J=20 większość zdjęć została zamazana zostawiając tylko kontur twarzy. Algorytm wykorzystał ten kontur by podporządkować te zdjęcia w jedną grupę.
 Druga~i trzecia grupa została przypisana do zdjęć, w których twarz jest lepiej określona.
 
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_eigen_j30_pogrupowane.png}
-	\caption{Przydzielone grupy dla poszczególnych twarzy dla zdjęć obrobionych dla~J~=~30}
-	\label{fig:ilustracja_zad2_eigen_j30_pogrupowane}
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad2_redukcja_j30.png}
+	\caption{Twarze zredukowane J=30}
+	\label{fig:ilustracja_zad2_redukcja_j30}
 \end{figure}
 
 \fbi

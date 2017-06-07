@@ -6,7 +6,7 @@ close all;
 Persons = 3;
 ImagesPerPerson = 10;
 NumberOfGroups = 3;
-J_serie = [4];
+J_serie = [4 10 20 30];
 
 % wczytywanie danych do macierzy wejsciowej
 load('FaceData_56_46.mat');
@@ -88,7 +88,7 @@ for J_current=(1:length(J_serie))
     %end
 
     figure;
-    suptitle('Twarze zredukowane');
+    suptitle(sprintf('Twarze zredukowane J=%d', J));
     nOfImages = Persons*ImagesPerPerson;
     for i=(1:nOfImages)
         C = Z(:,i)' * V(:,1:J)';
