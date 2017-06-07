@@ -246,19 +246,20 @@ Do wyznaczania twarzy własnych zastosowano podobnie jak w zadaniu poprzednim me
 
 Na listingu \ref{lst:zad2b} zamieszczono główną część skryptu która odpowiedzialna jest za wyznaczanie twarzy własnych oraz zredukowanych a także grupowanie i klasyfikację.
 
-\lstinputlisting[label=lst:zad2b,caption=Główna część skryptu,firstline=50,lastline=500]{./assets/skrypt_zad2_test.m}
+\lstinputlisting[label=lst:zad2b,caption=Główna część skryptu,firstline=51,lastline=500]{./assets/skrypt_zad2_test.m}
 
+\newpage
 \subsection{Grupowanie metodą k-średnich}
 \paragraph{}
 
-Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przedstawiono w tabeli \ref{tab:wynikiGrupowaniaZwykle}.
+Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przedstawiono w tabeli \ref{tab:wynikiGrupowaniaZwykle}. Mierzono indeks Randsa z użyciem AccMeasure oraz czas obliczeń.
 
 \begin{table}[H]
 	\centering
-	\caption{Jakość grupowania dla różnych wielkości grup (n) dla obrazów oryginalnych}
+	\caption{Wartości metryk dla różnych wielkości grup (n) dla obrazów oryginalnych}
 	\begin{tabular}{|c|c|c|}
 		\hline 
-		n & AccMeasure & Czas przetwarzania [s] \\ 
+		n & Rand's index & Czas przetwarzania [s] \\ 
 		\hline
 		1 & 31.03 & 0.011 \\
 		\hline
@@ -271,7 +272,7 @@ Wyniki grupowania dla obrazów oryginalnych dla różnych rozmiarów grup przeds
 \end{table}
 
 \fbi
-Poniżej przedstawiono ilustrację przypisania poszczególnych zdjęć do grup przez algorytm dla 2 oraz 3 grup.
+Na ilustracjach \ref{fig:ilustracja_zad2_dane_pogrupowane_2} oraz \ref{fig:ilustracja_zad2_dane_pogrupowane_3} przedstawiono wyniki grupowania twarzy oryginalnych przez algorytm k-średnich dla 2 oraz 3 grup.
 
 \begin{figure}[H]
 	\centering
@@ -296,16 +297,17 @@ Jak widać na powyższej ilustracji\ref{fig:ilustracja_zad2_dane_pogrupowane_3} 
 \fbi
 Wyniki te odpowiadają skutecznościom zamieszczonym w tabeli\ref{tab:wynikiGrupowaniaZwykle}.
 
+
+\subsubsection{Rezultaty grupowania dla obrazów zredukowanych}
 \paragraph{}
-\fbi
-Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli\ref{tab:wynikiGrupowaniaWlasne}.
+Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli\ref{tab:wynikiGrupowaniaWlasne}. Podobnie jak dla twarzy oryginalnych mierzono indeks Randsa z użyciem AccMeasure oraz czas obliczeń.
 
 \begin{table}[H]
 	\centering
 	\caption{Jakość grupowania dla różnych wartości J dla twarzy redukowanych}
 	\begin{tabular}{|c|c|c|}
 		\hline 
-		J & AccMeasure & Czas przetwarzania [s] \\ 
+		J & Rand's index & Czas przetwarzania [s] \\ 
 		\hline
 		4 & 90.00 & 0.004 \\
 		\hline
@@ -318,10 +320,6 @@ Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w
 	\end{tabular}
 	\label{tab:wynikiGrupowaniaWlasne}
 \end{table}
-
-
-\subsubsection{Rezultaty grupowania dla obrazów zredukowanych}
-
 
 \begin{figure}[H]
 	\centering
@@ -377,28 +375,16 @@ Class = knnclassify(Sample, Training, Group)
 
 , parametry $Training$ oraz $Group$ zawierają informację o podziale danych na grupy natomiast $Sample$ jest zbiorem którego klasyfikację pragniemy przeprowadzić. Wynikiem jest $Class$ będący tego samego typu co $Group$ tzn. dziedzina klasyfikacji jest taka sama.
 
-Poniżej zamieszczono implementację klasyfikacji.
-
-\lstinputlisting[label=lst:zad2,caption=Fragment skryptu w Matlabie obejmujący klasyfikację k-NN,firstline=80,lastline=100]{./assets/skrypt_zad2_test.m}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\textwidth]{./assets/ilustracja_zad2_conf_j20.png}
-	\caption{Confusion matrix dla J=20}
-	\label{fig:ilustracja_zad2_conf_j20}
-\end{figure}
-
 
 \fbi
-Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli\ref{tab:wynikiKlasyfikacjaRedukowane}.
+Wyniki grupowania dla twarzy własnych dla różnych wartości J przedstawiono w tabeli \ref{tab:wynikiKlasyfikacjaRedukowane}.
 
 \begin{table}[H]
 	\centering
 	\caption{Jakość klasyfikacji dla różnych wartości J dla twarzy redukowanych}
 	\begin{tabular}{|c|c|c|}
 		\hline 
-		J & AccMeasure & Czas przetwarzania [s] \\ 
+		J & Rand's index & Czas przetwarzania [s] \\ 
 		\hline
 		4 & 66.67 & 0.005 \\
 		\hline
@@ -431,12 +417,7 @@ Powyższe założenie wynika z faktu, że kolejne wektory dążą do pewnej zwie
 \fbi
 W zaimplementowanej funkcji przechowywane są dwa wektory - stary i nowy. Wektory te odejmowane są od siebie i normalizowane. Jeżeli różnica między nimi jest mniejsza niż założona tolerancja zwracany jest wektor nowszy jako bliższy idealnemu rozwiązaniu.
 
-\subsection{Algorytm Lanczosa}
-\paragraph{}
-
-\subsection{Wyniki}
-\paragraph{}
-
+\newpage
 \section{Podsumowanie}
 \paragraph{}
 Podczas zajęć laboratoryjnych zapoznano się z metodą PCA. Poznano również podstawy grupowania i klasyfikacji danych z wykorzystaniem pakietu Matlab.

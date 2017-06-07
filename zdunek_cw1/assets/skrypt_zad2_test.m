@@ -49,9 +49,6 @@ for i=(1:nOfImages)
     colormap gray;
 end
 
-% M2 - zawiera usrednione obrazy w formie macierzy
-% wyznaczenie macierzy kowariancji
-s = cov(M2');
 
 for g=(3:NumberOfGroups)
     tic;
@@ -61,10 +58,13 @@ for g=(3:NumberOfGroups)
     disp(sprintf('Dokladnosc grupowania do obrazow oryginalnych G=%d: %2.2f', g, acc_orig))
 end
 
-
 knnclassify_org = knnclassify(M', M', Group);
 [acc_redknno, rand_index_redknno, match_redknno] = AccMeasure(Group, knnclassify_org');
 disp(sprintf('Dokladnosc klasyfikacji dla obrazow oryginalnych: %2.2f', acc_redknno))
+
+% M2 - zawiera usrednione obrazy w formie macierzy
+% wyznaczenie macierzy kowariancji
+s = cov(M2');
 
 for J_current=(1:length(J_serie))
     J = J_serie(J_current);
@@ -76,16 +76,16 @@ for J_current=(1:length(J_serie))
     % rzutowanie
     Z = V' * M;
 
-    %figure;
-    %suptitle('Twarze własne');
-    %for i=(1:J)
-    %    C = V(:,i);
-    %    CC = reshape(C, [46, 56]);
-    %    subplot(round(sqrt(J)), round(sqrt(J)) + 1, i);
-    %    imagesc(CC');
-    %    title(i)
-    %    colormap gray;
-    %end
+    figure;
+    suptitle('Twarze własne');
+    for i=(1:J)
+        C = V(:,i);
+        CC = reshape(C, [46, 56]);
+        subplot(round(sqrt(J)), round(sqrt(J)) + 1, i);
+        imagesc(CC');
+        title(i)
+        colormap gray;
+    end
 
     figure;
     suptitle(sprintf('Twarze zredukowane J=%d', J));
