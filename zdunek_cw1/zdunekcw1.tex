@@ -129,32 +129,48 @@ Dla danych:
 
 \subsection{Opis metody}
 \paragraph{}
-Metoda PCA (ang. \textit{Principal Component Analysis}) jest jedną ze statystycznych metod analizy czynnikowej, która pozwala na odnajdywanie pewnych struktur w zbiorze zmiennych losowych. Wielowymiarowe dane z reguły nie są równomiernie rozrzucone wzdłuż wszystkich kierunków układu współrzędnych, ale koncentrują się w pewnych podprzestrzeniach oryginalnej przestrzeni. Analiza składowych głównych oparta jest na wykorzystaniu pojęć ze statystyki, jakimi są m.in. korelacja i wariancja. Celem PCA jest znalezienie tych podprzestrzeni w postaci składowych głównych, tzn. kierunków przy których wartość wariancji (lub korelacji) jest zmaksymalizowana. Analiza może być oparta albo na macierzy korelacji, albo macierzy kowariancji utworzonej ze zbioru wejściowego.
+Metoda PCA (ang. \textit{Principal Component Analysis}) jest jedną ze statystycznych metod analizy czynnikowej, która pozwala na odnajdywanie pewnych struktur w zbiorze zmiennych losowych. Analiza składowych głównych oparta jest na wykorzystaniu pojęć ze statystyki, jakimi są m.in. korelacja i wariancja. Wielowymiarowe dane z reguły nie są równomiernie rozrzucone wzdłuż wszystkich kierunków układu współrzędnych, ale koncentrują się w pewnych podprzestrzeniach oryginalnej przestrzeni. Celem PCA jest znalezienie tych podprzestrzeni w postaci składowych głównych, tzn. kierunków przy których wartość wariancji (lub korelacji) jest zmaksymalizowana. Analiza może być oparta albo na macierzy korelacji, albo macierzy kowariancji utworzonych ze zbioru wejściowego.
 
 \fbi
-Metoda PCA jest zazwyczaj używana do redukcji rozmiaru danych statystycznych, poprzez odrzucenie ostatnich czynników, tzn. takich, których wariancja jest najniższa. Oznacza to, że \textit{n}-wymiarowy zbiór danych możemy ograniczyć wyznaczając \textit{n}-wektorów własnych, z których wybieramy tylko \textit{k}-wektorów, tak aby $k  n$. Zrzutowanie danych na przestrzeń rozpiętą przez \textit{k}-wybranych wektorów pozwala zredukować wymiarowość danych.
+Metoda PCA jest zazwyczaj używana do redukcji rozmiaru danych poprzez odrzucenie ostatnich czynników, tzn. takich, których wariancja jest najniższa. Oznacza to, że \textit{n}-wymiarowy zbiór danych możemy ograniczyć wyznaczając \textit{n}-wektorów własnych, z których wybieramy tylko \textit{k}-wektorów, tak aby $k \le n$. Zrzutowanie danych na przestrzeń rozpiętą przez \textit{k}-wybranych wektorów pozwala zredukować wymiarowość danych.
 
 \subsection{Algorytm}
 \paragraph{}
+Jako dane wejściowe podawana jest macierz zawierająca kolejne obserwacje, na podstawie których będą wyznaczane główne składowe. Algorytm PCA składa się z następujących kroków:
+\begin{enumerate}[1.]
+	\item Wyznaczenie wartości średnich dla wierszy 
+	\item Odjęcie od macierzy wejściowej wyliczonych poprzednio średnich
+	\item Wyznaczenie macierzy kowariancji
+	\item Wyznaczenie składowych głównych
+	\item Wybór najlepszych składowych
+	\item Rzutowanie na wektory własne
+\end{enumerate}
+
+Na początku należy przeprowadzić normalizację. W ten sposób zapewniamy, że cechy szerzej rozłożone nie zdominują cech mocniej skoncentrowanych. Normalizacja polega na wyznaczeniu średnich wartości kolejnych cech dla wszystkich obserwacji. Następnie od macierzy wejściowej odejmujemy wcześniej wyliczone średnie - od każdego elementu macierzy odejmujemy średnią dla wiersza, w którym się znajduje. Dla tak uzyskanych danych należy policzyć macierz kowariancji.
+
+\fbi
+Kolejnym krokiem jest wyznaczenie wektorów i wartości własnych. Wylicza się \textit{k}-ortonormalnych wektorów, które tworzą bazę dla unormowanych danych wejsciowych. Są to wektory jednostkowe, wskazujące w kierunku prostopadłym do pozostałych wektorów z utworzonej bazy. Liczba wektorów własnych jest związana z wymiarem rozpatrywanych danych, a wartości własne określają długość wektora.
+
+\fbi
+Następnie porządkujemy wartości własne w kolejności malejącej. Redukcja opiera się na wyborze wektorów własnych z największą wartością własną. Można powiedzieć, że maksymalizujemy zmienność danych wraz z jednoczesną minimalizacją ubytku informacji spowodowanej ich redukcją. Redukcja dokonuje się poprzez mnożenie macierzy wybranych wektorów przez \textit{n}-wymiarową macierz danych.
+
+\fbi
+Jeżeli wybierzemy mniejszą liczbę wektorów własnych (\textit{k} z \textit{n}) otrzymujemy zredukowaną przestrzeń danych. Prowadzi to do utraty części oryginalnej informacji, a rozmiar straty zależy od doboru wektorów. Jeżeli wybierzemy wszystkie wektory własne, uzyskujemy jedynie obrót macierzy danych wejściowych, bez utraty żadnych informacji.
 
 \subsection{Realizacja}
 \paragraph{}
-\fbi
-Rozwiązanie zadania polega kolejno na...
+Opracowano skrypt w środowisku Matlab realizujący metodę PCA zgodnie z algorytmem opisanym wcześniej. Wykorzystano wbudowane funkcję do obliczenia i odjęcia wartości średnich [mean(.), bsxfun(.)] oraz do wyznaczenia macierzy kowariancji [cov(.)]. W celu obliczenia par własnych macierzy kowariancji zastosowana została metoda eigs(.), w której pierwszym argumentem jest macierz kowariancji, a drugim ilość wektorów własnych.
 
-\lstinputlisting[label=lst:zad1,caption=Skrypt w Matlabie,firstline=1,lastline=500]{./assets/skrypt_zad1.m}
-
-\fbi
-Powyższy kod przedstawia zaimplementowaną metodę PCA dla zadanego zbioru danych.
+\lstinputlisting[label=lst:zad1,caption=Wyznaczanie wartości własnych i wektorów własnych,firstline=1,lastline=21]{./assets/skrypt_zad1.m}
 
 \fbi
-W celu obliczenia par własnych macierzy kowariancji zastosowana została dwuargumentowa metoda eigs, w której pierwszym argumentem jest macierz danych, drugim ilość wektorów (wierszy macierzy).
+Pozostałe funkcje służą do wykreślenia wykresu zawierającego kolejno: dane wejściowe, składowe główne oraz wyznaczone wektory własne. 
 
 \subsection{Wyniki}
 \paragraph{}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad1.png}
+	\includegraphics[width=0.95\textwidth]{./assets/ilustracja_zad1_normalizacja.png}
 	\caption{Ilustracja punktów obserwacji i składowych głównych}
 	\label{fig:zad1}
 \end{figure}
@@ -234,8 +250,16 @@ Wyznaczyć pary własne macierzy kowariancji za pomocą algorytmów: Powera oraz
 \subsection{Algorytm Powera}
 \paragraph{}
 
-\lstinputlisting[label=lst:zad3,caption=Fragment skryptu w Matlabie,firstline=1,lastline=500]{./assets/skrypt_zad3.m}
+\lstinputlisting[label=lst:zad3,caption=Fragment skryptu w Matlabie,firstline=1,lastline=500]{./assets/Power_f.m}
 
+\fbi
+Algorytm Powera polega na kolejnym przemnażaniu macierzy wejściowej przez wektor wynikowy do momentu, gdy wektor uzyskany w wyniku działania nie różni się bardziej od wynikowego o więcej niż założona wartość tolerancji.
+
+\fbi
+Powyższe założenie wynika z faktu, że kolejne wektory dążą do pewnej zwielokrotnionej wartości. Ważnym jest by tę wartość wychwycić nie wykonując nadmiarowych obliczeń.
+
+\fbi
+W zaimplementowanej funkcji przechowywane są dwa wektory - stary i nowy. Wektory te odejmowane są od siebie i normalizowane. Jeżeli różnica między nimi jest mniejsza niż założona tolerancja zwracany jest wektor nowszy jako bliższy idealnemu rozwiązaniu.
 
 \subsection{Algorytm Lanczosa}
 \paragraph{}
