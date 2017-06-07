@@ -1,4 +1,4 @@
-function [m,y_final]=power_method(A,x)
+function [m,y_final]=power_method(x,A)
 m=0;
 n=length(x);
 y_final=x;
