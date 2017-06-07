@@ -2,46 +2,13 @@ clc;
 clear;
 close all;
 
-load('yalefaces.mat'); 
 load('FaceData_56_46.mat');
-
-%imagesc(yalefaces(:,:,1))
-
-% -- FRAGMENT Z WIKIPEDII --
-
-% J = 30;
-% [h,w,n] = size(yalefaces);
-% d = h*w;
-% % vectorize images
-% x = reshape(yalefaces,[d n]);
-% x = double(x);
-% %subtract mean
-% x=bsxfun(@minus, x, mean(x,2));
-% % calculate covariance
-% s = cov(x');
-% % obtain eigenvalue & eigenvector
-% [V,D] = eigs(s,J);
-% eigval = diag(D);
-% % sort eigenvalues in descending order
-% eigval = eigval(end:-1:1);
-% V = fliplr(V);
-% % show 0th through 15th principal eigenvectors
-% eig0 = reshape(mean(x,2), [h,w]);
-% figure,subplot(6,6,1)
-% imagesc(eig0)
-% colormap gray
-% for i = 1:J
-% 	subplot(6,6,i+1)
-% 	imagesc(reshape(V(:,i),h,w))
-% end
-
-
-% -- NASZ KOD --
 
 Persons = 3;
 ImagesPerPerson = 10;
-J = 10;
+J_serie = [4 10 20 30];
 
+%wczytywanie danych
 Group = [];
 M = [];
 for p=(1:Persons)
@@ -55,60 +22,65 @@ for p=(1:Persons)
     end
 end
 
+for J_current=(1:length(J_serie))
+    J = J_serie(J_current);
 
-%[eigenvectors, eigenvalues] = eigs(M*(M'), J);
-%V = eigenvectors;
+    %subtract mean
+    x=bsxfun(@minus, M, mean(M,2));
+    % calculate covariance
+    s = cov(x');
+    % obtain eigenvalue & eigenvector
+    [V,D] = eigs(s,J);
+    Z = (x') * V;
+
+    figure;
+    suptitle('Twarze oryginalne');
+    nOfImages = Persons*ImagesPerPerson;
+    for i=(1:nOfImages)
+        C = M(:,i);
+        CC = reshape(C, [46, 56]);
+        subplot(round(sqrt(nOfImages)), round(sqrt(nOfImages)) + 1, i);
+        imagesc(CC');
+        title(i)
+        colormap gray;
+    end
+
+    figure;
+    suptitle('Twarze w³asne');
+    for i=(1:J)
+        C = V(:,i);
+        CC = reshape(C, [46, 56]);
+        subplot(round(sqrt(J)), round(sqrt(J)) + 1, i);
+        imagesc(CC');
+        title(i)
+        colormap gray;
+    end
+
+    known_groups = ones(1,J);
+    
+    tic;
+    
+    % ksrednich dla obrazow oryginalnych
+    kmeans_result_orig = kmeans(M', Persons);
+    [acc_orig, rand_index_orig, match_orig] = AccMeasure(Group, kmeans_result_orig');
+    
+    disp(sprintf('Czas grupowania dla obrazow oryginalnych J=%d: %2.3fs',J, toc))
+    disp(sprintf('Dokladnosc grupowania dla obrazow oryginalnych J=%d: %2.2f',J, acc_orig))
+    
+    tic;
+    
+    % ksrednich dla obrazow redukowanych
+    kmeans_result_eigen = kmeans(Z', Persons);
+    [acc_eigen, rand_index_eigen, match_eigen] = AccMeasure(known_groups, kmeans_result_eigen');
+    
+    disp(sprintf('Czas grupowania dla obrazow redukowanych J=%d: %2.3fs',J, toc))
+    disp(sprintf('Dokladnosc grupowania dla obrazow redukowanych J=%d: %2.2f',J, acc_eigen))
 
 
-%subtract mean
-x=bsxfun(@minus, M, mean(M,2));
-% calculate covariance
-s = cov(x');
-% obtain eigenvalue & eigenvector
-[V,D] = eigs(s,J);
-Z = (x') * V;
+    Class = knnclassify(V', M', Group);
+    [acc_classify, rand_index_classify, match_classify] = AccMeasure(known_groups, Class');
 
+    figure;
+    plotconfusion(known_groups, Class')
 
-figure; %oryginalne
-nOfImages = Persons*ImagesPerPerson;
-for i=(1:nOfImages)
-    C = M(:,i);
-    CC = reshape(C, [46, 56]);
-    subplot(round(sqrt(nOfImages)), round(sqrt(nOfImages)) + 1, i);
-    imagesc(CC');
-    title(i)
-    colormap gray;
 end
-
-figure; %eigenfaces
-for i=(1:J)
-    C = V(:,i);
-    CC = reshape(C, [46, 56]);
-    subplot(round(sqrt(J)), round(sqrt(J)) + 1, i);
-    imagesc(CC');
-    title(i)
-    colormap gray;
-end
-
-id = (1:J);
-
-kmeans_result = kmeans(Z', Persons);
-groups = sortrows([id', kmeans_result], 2);
-
-known_groups = [1 2 3 2 1 2 3 2 3 1];
-
-confusionmat_result = confusionmat(known_groups, kmeans_result);
-
-figure;
-plotconfusion(known_groups, kmeans_result')
-
-[acc_eigen, rand_index_eigen, match_eigen] = AccMeasure(known_groups, kmeans_result);
-
-kmeans_result_original = kmeans(M', Persons);
-[acc_orig, rand_index_orig, match_orig] = AccMeasure(Group, kmeans_result_original);
-
-Class = knnclassify(V', M', Group);
-
-figure;
-plotconfusion(known_groups, Class')
-
