@@ -1,6 +1,6 @@
 clear
 
-% Dane originalne
+% Dane oryginalne
 I = 100; T = 1000; J = 10;
 Aw = max(0,randn(I,J));
 Xw = max(0,randn(J,T));
@@ -23,8 +23,19 @@ for k = 1:MaxIter
     
 end
 
+% to wy¿ej to algorytm optymalizacji naprzemiennej
+
 figure
 semilogy(res)
+
+% to samo ale z wykorzystaniem wbudowanej funkcji
+
+rng(1) % For reproducibility
+[W,H] = nnmf(Y,10);
+D = norm(Y-W*H,'fro')/sqrt(I*T); % b³¹d residualny
+
+
+SIR = CalcSIR(Aw,A);
 
 % ---- to co napisal na konsoli ----
 

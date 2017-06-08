@@ -1,4 +1,4 @@
-function [ C,delta,elapsed_time ] = Tucker_orth_4D( Yr,Yt,Class_train_inx,Class_test_inx,J )
+function [ C,delta,elapsed_time ] = Tucker_orth_3D( Yr,Yt,Class_train_inx,Class_test_inx,J )
 
 % %Centralization of each spectogram
 % for i = 1:size(Yr,3)
@@ -17,19 +17,22 @@ function [ C,delta,elapsed_time ] = Tucker_orth_4D( Yr,Yt,Class_train_inx,Class_
 % TRAINING
 % =========================================
 tic
-[Ar,Br,Cr,Dr,Gr] = tucker_hosvd_4D(Yr,J);
+[Ar,Br,Cr,Gr] = tucker_hosvd_3D(Yr,J);
 elapsed_time = toc;
 
 % TESTING
 % =========================================
-Y4 = reshape(permute(Yt,[4 1 2 3]),size(Yt,4),size(Yt,1)*size(Yt,2)*size(Yt,3));
-C4 = reshape(permute(Gr,[4 1 2 3]),[J(4),J(1)*J(2)*J(3)]);
+Y3 = reshape(permute(Yt,[3 1 2]),size(Yt,3),size(Yt,1)*size(Yt,2));
+G3 = reshape(permute(Gr,[3 1 2]),[J(3),J(1)*J(2)]);
 
-Dt = Y4*pinv(double(C4)*(kron(Cr,kron(Br,Ar)))');
-Dt = Dt.*repmat(1./sqrt(sum(Dt.^2,2)+eps),1,size(Dt,2));
+Ct = Y3*pinv(double(G3)*(kron(Br,Ar))');
+Ct = Ct.*repmat(1./sqrt(sum(Ct.^2,2)+eps),1,size(Ct,2));
 
 % Klasyfikacja 1-NN
-Class_knn = knnclasify(Dt,Dr,Class_train_inx,1,'cosine');
+Ct
+Cr
+Class_train_inx
+Class_knn = knnclasify(Ct,Cr,Class_train_inx,1,'cosine');
 
 % Dok³adnoœæ klasyfikacji
 delta = 100*(length(find((Class_knn - Class_test_inx)==0))/length(Class_test_inx));

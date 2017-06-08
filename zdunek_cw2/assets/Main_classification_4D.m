@@ -1,82 +1,12 @@
 
-% -- SCROLL DOWN
+% tutaj trzeba wczytac obrazy do tensorow i je foldowac na 2 zbiory
 
+Jt = 4;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% NMF
+% 
 % C(:,:,n,2) = C_cp; delta(n,2) = delta_cp; ET(n,2) = elapsed_time_cp; res.res_nmf = res_nmf;
 
 %  % Nonnegative ALS-CP
@@ -91,9 +21,9 @@
     [C_hosvd,delta_hosvd,elapsed_time_hosvd] = Tucker_orth_4D(Y_train,Y_test,Class_train_inx,Class_test_inx,Jt);
     C(:,:,n,5) = C_hosvd; delta(n,5) = delta_hosvd; ET(n,5) = elapsed_time_hosvd; 
 
- %  Orth-Tucker(core)
-    [C_hosvd,delta_hosvd,elapsed_time_hosvd] = Tucker_orth_4D_core(Y_train,Y_test,Class_train_inx,Class_test_inx,Jtc);
-    C(:,:,n,6) = C_hosvd; delta(n,6) = delta_hosvd; ET(n,6) = elapsed_time_hosvd;
+%  %  Orth-Tucker(core)
+%     [C_hosvd,delta_hosvd,elapsed_time_hosvd] = Tucker_orth_4D_core(Y_train,Y_test,Class_train_inx,Class_test_inx,Jtc);
+%     C(:,:,n,6) = C_hosvd; delta(n,6) = delta_hosvd; ET(n,6) = elapsed_time_hosvd;
 
 % % Multiclass-NMP
 %     [C_cp,delta_cp, elapsed_time_cp ] = Multiclass_NMP_4D(Y_train,Y_test,Class_train_inx,Class_train_inx,J,MCRuns,MaxIter);
@@ -120,6 +50,10 @@
         subplot(2,3,4)
         hintonw((squeeze(mean(C(:,:,:,4),3)))')
         title(['CP(HALS): P = ',num2str(mean(delta(:,4)) ), ' %'])
+        ylabel('Output')
+        
+        hintonw((squeeze(mean(C(:,:,:,5),3)))')
+        title(['OrthTucker: P = ',num2str(mean(delta(:,5)) ), ' %'])
         ylabel('Output')
         
     end
