@@ -115,10 +115,25 @@
 \tableofcontents
 
 \newpage
-
 \section{Zadanie 1}
 \paragraph{}
-Wygenerować faktory..
+Wygenerować faktory $A = [a_{ij}] \in R^{I x J}_{+}$ i $X = [x_{jt}] \in R^{J x T}_{+}$, gdzie $a_{ij} = max(0,\check{a}_{ij})$ i $x_{jt} = max(0,\check{x}_{jt})$ oraz $\check{a}_{ij},\check{x}_{jt}\sim N(0,1)$ (rozkład normalny). Wygeneruj syntetyczne obserwacje Y=AX dla I = 100, T = 1000, J = 10. Stosując wybrane algorytmy NMF (ALS, MUE, HALS) wyznacz estymowane faktory \^{A} i \^{X} oraz unormowany błąd residualny w funkcji iteracji naprzemiennych. Oceń jakość estymacji stosując miary MSE (ang. Mean-Squarred Error) lub SIR (ang. Signal-to-Interference Ratio).
+
+\subsection{Algorytm ALS}
+\paragraph{}
+
+\subsection{Algorytm MUE}
+\paragraph{}
+
+\subsection{Algorytm HALS}
+\paragraph{}
+
+\subsection{Realizacja}
+\paragraph{}
+
+\subsection{Wyniki}
+\paragraph{}
+
 
 \section{Zadanie 2}
 \paragraph{}
@@ -127,8 +142,19 @@ Wygenerować faktory..
 
 \section{Zadanie 3}
 \paragraph{}
-Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora..
+Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y = \in R^{I_1xI_2xI_3}$, gdzie $I_3$ jest liczbą obrazów. Rozdziel obrazy na zbiory trenujący i testujący według odpowiedniej zasady, np, 5-folds CV i utwórz odpowiednie tensory trenujący $Y_r$ i testujący $Y_t$. Tensor trenujący poddaj dekompozycji CP (np. algorytmem ALS) oraz HOSVD dla J = 4, 10, 20, 30. Pogrupować obrazy stosując metodę k-średnich dla faktora $\widehat{U}^{(3)}$. Badania przeprowadzić dla różnej liczby grup. Porównać dokładność grupowania z metodą PCA (z poprzedniego ćwiczenia). Następnie dokonaj projekcji obrazów z tensora $Y_t$ na podprzestrzeń cech generowaną faktorami otrzymanymi z $Y_r$. Dokonaj klasyfikacji obrazów w przestrzeni cech w $\widehat{U}^{(3)}$ za pomocą klasyfikatora k-NN. Porównać efekty klasyfikacji różnymi metodami (np. PCA, CP, HOSVD).
 
+\subsection{Opis metody}
+\paragraph{}
+
+\subsection{Algorytm}
+\paragraph{}
+
+\subsection{Realizacja}
+\paragraph{}
+
+\subsection{Wyniki}
+\paragraph{}
 
 \section{Podsumowanie}
 \paragraph{}
