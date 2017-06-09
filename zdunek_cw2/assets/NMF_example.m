@@ -7,6 +7,8 @@ Xw = max(0,randn(J,T));
 
 Y = Aw*Xw;
 
+% algorytm optymalizacji naprzemiennej (als)
+
 % Inicjalizacja
 A = rand(size(Y,1),J);
 X = rand(J,size(Y,2));
@@ -22,8 +24,6 @@ for k = 1:MaxIter
     res(k) = norm(Y - A*X,'fro')/norm(Y,'fro');
     
 end
-
-% to wy¿ej to algorytm optymalizacji naprzemiennej
 
 figure
 semilogy(res)

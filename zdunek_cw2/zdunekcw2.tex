@@ -131,8 +131,17 @@ Wygenerować faktory $A = [a_{ij}] \in R^{I x J}_{+}$ i $X = [x_{jt}] \in R^{J x
 \subsection{Realizacja}
 \paragraph{}
 
+\lstinputlisting[label=lst:zad1main,caption=Skrypt z realizacją w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad1.m}
+
 \subsection{Wyniki}
 \paragraph{}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/wykres_zad1.png}
+	\caption{Wykres ilustrujący przebieg optymalizacji naprzemiennej}
+	\label{fig:wykres_zad1}
+\end{figure}
 
 
 \section{Zadanie 2}
@@ -153,8 +162,70 @@ Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y = \in R^
 \subsection{Realizacja}
 \paragraph{}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/twarze_org.png}
+	\caption{Twarze wykorzystane podczas testów}
+	\label{fig:twarze_org}
+\end{figure}
+
+\lstinputlisting[label=lst:zad3main,caption=Podstawowy skrypt z realizacją w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad3.m}
+
+\lstinputlisting[label=lst:zad3hosvd,caption=Funkcja realizująca algorytm HOSVD,firstline=1,lastline=200]{./assets/skrypt_zad3_hosvd.m}
+
 \subsection{Wyniki}
 \paragraph{}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j4.png}
+	\caption{Twarze zredukowane J=4 (HOSVD)}
+	\label{fig:rezultat_HOSVD_j4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j10.png}
+	\caption{Twarze zredukowane J=10 (HOSVD)}
+	\label{fig:rezultat_HOSVD_j10}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j20.png}
+	\caption{Twarze zredukowane J=20 (HOSVD)}
+	\label{fig:rezultat_HOSVD_j20}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j30.png}
+	\caption{Twarze zredukowane J=4 (HOSVD)}
+	\label{fig:rezultat_HOSVD_j30}
+\end{figure}
+
+\fbi
+W tabeli \ref{tab:wynikiOgolne} zamieszczono otrzymane wartości metryk. Acc oraz Rand's index zostały policzone dla algorytmu k-średnich natomiast dokładność (delta) jest związana z klasyfikacją w przestrzeni cech $\widehat{U}^{(3)}$ przy pomocy metody najbliższych sąsiadów.
+
+\begin{table}[H]
+	\centering
+	\caption{Otrzymane metryki dla różnych wartości parametru J}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline 
+		 & 4 & 10 & 20 & 30 \\ 
+		\hline
+		Acc & 76,25 & 100 & 80,00 & 63,75 \\
+		\hline
+		Rand's index & 92,56 & 100 & 93,04 & 84,56 \\
+		\hline
+		delta & 68,75 & 93,75 & 100 & 100 \\
+		\hline
+	\end{tabular}
+	\label{tab:wynikiOgolne}
+\end{table}
+
+\fbi
+Jak możemy zauważyć metoda k-średnich daje najlepsze rezultaty dla J=10, zarówno mniej jak i więcej szczegółów w obrazie negatywnie wpływa na rezultat grupowania. W przypadku metody najbliższych sąsiadów jest inaczej -- tutaj im bardziej szczegółowy obraz otrzyma ta metoda na wejściu tym lepsze będą rezultaty. Trzeba również pamiętać, że metoda k-średnich nie wymaga zbioru treningowego i uczącego.
 
 \section{Podsumowanie}
 \paragraph{}
@@ -164,10 +235,23 @@ Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y = \in R^
 \begin{thebibliography}{40}
 
 \bibitem{test1}
+Dokumentacja środowiska MATLAB,
 \url{https://www.mathworks.com/}
 
+\bibitem{test2}
+Zdunek, Rafał, ,,Nieujemna faktoryzacja macierzy i tensorów : zastosowanie do klasyfikacji i przetwarzania sygnałów'', Oficyna Wydawnicza Politechniki Wrocławskiej, 2014
 
+\bibitem{test3}
+\url{http://www.sandia.gov/~tgkolda/TensorToolbox/index-2.6.html}
 
+\bibitem{test4}
+\url{http://www.esat.kuleuven.be/sista/tensorlab/}
+
+\bibitem{test5}
+\url{http://www.bsp.brain.riken.jp/TDALAB/}
+
+\bibitem{test6}
+\url{http://www.bsp.brain.riken.jp/~phan/}
 
 \end{thebibliography}
 
