@@ -122,6 +122,17 @@ Wygenerować faktory $A = [a_{ij}] \in R^{I x J}_{+}$ i $X = [x_{jt}] \in R^{J x
 \subsection{Algorytm ALS}
 \paragraph{}
 
+Algorytm ALS polega na N-krotnym powtórzeniu pętli, której zadaniem jest obliczenie tensorów A oraz X.
+
+\fbi
+W pierwszym etapie tensory A i X inicjalizowane są liczbami losowymi zależnymi od rzędu faktoryzacji. Następnie następuje N-krotne powtórzenie pętli, w której estymowane są faktory stosując wykorzystując pochodną kwadratu odległości euklidesowej.
+
+$\nabla_A D(Y|AX) = (AX - Y)X^T = 0 \Rightarrow AXX^T = YX^T \Rightarrow A = YX^T(XX^T)^{-1}$
+
+$\nabla_X D(Y|AX) = A^T(AX - Y) = 0 \Rightarrow A^TAX = A^TY \Rightarrow X = (A^TA)^{-1}A^TY$
+
+Wykorzystując otrzymane wyniki obliczany jest błąd residualny.
+
 \subsection{Algorytm MUE}
 \paragraph{}
 
