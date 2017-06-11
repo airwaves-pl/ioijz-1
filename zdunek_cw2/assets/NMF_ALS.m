@@ -8,7 +8,7 @@ function[A,X,res] = NMF_ALS(A,X,Y,N)
         % obliczanie X
         X = max(0,inv(A'*A)*A'*Y);
         
-        % b³¹d residualny
+        % blad residualny
         res(k) = norm(Y - A*X,'fro')/norm(Y,'fro');
 
     end

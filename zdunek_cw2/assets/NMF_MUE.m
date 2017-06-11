@@ -13,6 +13,6 @@ function [A,X,res] = MUE(A,X,Y,N)
     
     X = max(0, s1./s2);
     
-    % b³¹d residualny
+    % blad residualny
     res(k) = norm(Y - A*X, 'fro')/norm(Y,'fro');
   end
