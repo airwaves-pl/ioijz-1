@@ -121,7 +121,7 @@
 \newpage
 \section{Zadanie 1}
 \paragraph{}
-Wygenerować faktory $A = [a_{ij}] \in R^{I x J}_{+}$ i $X = [x_{jt}] \in R^{J x T}_{+}$, gdzie $a_{ij} = max(0,\check{a}_{ij})$ i $x_{jt} = max(0,\check{x}_{jt})$ oraz $\check{a}_{ij},\check{x}_{jt}\sim N(0,1)$ (rozkład normalny). Wygeneruj syntetyczne obserwacje Y=AX dla I = 100, T = 1000, J = 10. Stosując wybrane algorytmy NMF (ALS, MUE, HALS) wyznacz estymowane faktory \^{A} i \^{X} oraz unormowany błąd residualny w funkcji iteracji naprzemiennych. Oceń jakość estymacji stosując miary MSE (ang. Mean-Squarred Error) lub SIR (ang. Signal-to-Interference Ratio).
+Wygenerować faktory $A = [a_{ij}] \in R^{I x J}_{+}$ i $X = [x_{jt}] \in R^{J x T}_{+}$, gdzie $a_{ij} = max(0,\check{a}_{ij})$ i $x_{jt} = max(0,\check{x}_{jt})$ oraz $\check{a}_{ij},\check{x}_{jt}\sim N(0,1)$ (rozkład normalny). Wygeneruj syntetyczne obserwacje Y=AX dla I = 100, T = 1000, J = 10. Stosując wybrane algorytmy NMF (ALS, MUE, HALS) wyznacz estymowane faktory \^{A} i \^{X} oraz unormowany błąd residualny w~funkcji iteracji naprzemiennych. Oceń jakość estymacji stosując miary MSE (ang. Mean-Squarred Error) lub SIR (ang. Signal-to-Interference Ratio).
 
 \subsection{Algorytm ALS}
 \paragraph{}
@@ -223,11 +223,11 @@ $U^(1) = [u^{(1)}_{i_1j}] \in R_+^{I_1xJ}$,
 
 \section{Zadanie 3}
 \paragraph{}
-Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y \in R^{I_1xI_2xI_3}$, gdzie $I_3$ jest liczbą obrazów. Rozdziel obrazy na zbiory trenujący i testujący według odpowiedniej zasady, np, 5-folds CV i utwórz odpowiednie tensory trenujący $Y_r$ i testujący $Y_t$. Tensor trenujący poddaj dekompozycji CP (np. algorytmem ALS) oraz HOSVD dla J = 4, 10, 20, 30. Pogrupować obrazy stosując metodę k-średnich dla faktora $\widehat{U}^{(3)}$. Badania przeprowadzić dla różnej liczby grup. Porównać dokładność grupowania z metodą PCA (z poprzedniego ćwiczenia). Następnie dokonaj projekcji obrazów z tensora $Y_t$ na podprzestrzeń cech generowaną faktorami otrzymanymi z $Y_r$. Dokonaj klasyfikacji obrazów w przestrzeni cech w $\widehat{U}^{(3)}$ za pomocą klasyfikatora k-NN. Porównać efekty klasyfikacji różnymi metodami (np. PCA, CP, HOSVD).
+Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y \in R^{I_1xI_2xI_3}$, gdzie $I_3$ jest liczbą obrazów. Rozdziel obrazy na zbiory trenujący i testujący według odpowiedniej zasady, np, 5-folds CV i utwórz odpowiednie tensory trenujący $Y_r$ i testujący $Y_t$. Tensor trenujący poddaj dekompozycji CP (np. algorytmem ALS) oraz HOSVD dla J~= 4, 10, 20, 30. Pogrupować obrazy stosując metodę k-średnich dla faktora $\widehat{U}^{(3)}$. Badania przeprowadzić dla różnej liczby grup. Porównać dokładność grupowania z metodą PCA (z poprzedniego ćwiczenia). Następnie dokonaj projekcji obrazów z tensora $Y_t$ na podprzestrzeń cech generowaną faktorami otrzymanymi z $Y_r$. Dokonaj klasyfikacji obrazów w przestrzeni cech w $\widehat{U}^{(3)}$ za pomocą klasyfikatora k-NN. Porównać efekty klasyfikacji różnymi metodami (np. PCA, CP, HOSVD).
 
 \subsection{Opis metody}
 \paragraph{}
-HOSVD jest szczególnym przypadkiem modelu dekompozycji Tuckera. Kolumny każdej z macierzy czynnikowych (faktorów) są wzajemnie ortogonalne, a tensor rdzeniowy $\mathcal {G}$ nie jest superdiagonalny. Dokonujemy kolejno matrycyzacji względem n-tego modu. 
+HOSVD jest szczególnym przypadkiem modelu dekompozycji Tuckera. Kolumny każdej z~macierzy czynnikowych (faktorów) są wzajemnie ortogonalne, a tensor rdzeniowy $\mathcal {G}$ nie jest superdiagonalny. Dokonujemy kolejno matrycyzacji względem n-tego modu. 
 
 \subsection{Algorytm}
 \paragraph{}
@@ -268,7 +268,8 @@ W niniejszym punkcie zamieszczono wyniki dla dekompozycji z wykorzystaniem metod
 \end{figure}
 
 \newpage
-Ilustracja \ref{fig:rezultat_HOSVD_j4} przedstawia wynik grupowania metodą k-średnich dla J=4 oraz liczby grup równej liczbie osób wynoszącej 8.
+\fbi
+Ilustracja \ref{fig:rezultat_HOSVD_j4} przedstawia wynik grupowania metodą k-średnich dla J=4 oraz liczby grup równej liczbie osób wynoszącej 8. Cztery osoby zostały w całości zgrupowane poprawnie, najwięcej problemów sprawiły osoby 3 i 4, które okazały się zbyt podobne do siebie.
 
 \begin{figure}[H]
 	\centering
@@ -278,7 +279,8 @@ Ilustracja \ref{fig:rezultat_HOSVD_j4} przedstawia wynik grupowania metodą k-ś
 \end{figure}
 
 \newpage
-Rysunek \ref{fig:rezultat_HOSVD_j10} przedstawia wynik grupowania metodą k-średnich dla J=10 oraz liczby grup równej liczbie osób wynoszącej 8.
+\fbi
+Rysunek \ref{fig:rezultat_HOSVD_j10} przedstawia wynik grupowania metodą k-średnich dla J=10 oraz liczby grup równej liczbie osób wynoszącej 8. Metoda k-średnich poradziła tu sobie znakomicie. Wszystkie osoby zostały poprawnie zgrupowane.
 
 \begin{figure}[H]
 	\centering
@@ -288,7 +290,8 @@ Rysunek \ref{fig:rezultat_HOSVD_j10} przedstawia wynik grupowania metodą k-śre
 \end{figure}
 
 \newpage
-Na ilustracji \ref{fig:rezultat_HOSVD_j20} przedstawiono wynik grupowania metodą k-średnich dla J=20 oraz liczby grup równej liczbie osób wynoszącej 8.
+\fbi
+Na ilustracji \ref{fig:rezultat_HOSVD_j20} przedstawiono wynik grupowania metodą k-średnich dla J=20 oraz liczby grup równej liczbie osób wynoszącej 8. Cztery osoby zostały zgrupowane poprawnie, osoby 3 i 4 zostały wzajemnie ze sobą pomieszane.
 
 \begin{figure}[H]
 	\centering
@@ -298,7 +301,8 @@ Na ilustracji \ref{fig:rezultat_HOSVD_j20} przedstawiono wynik grupowania metod�
 \end{figure}
 
 \newpage
-Na rysunku \ref{fig:rezultat_HOSVD_j30} przedstawiono wynik grupowania metodą k-średnich dla J=30 oraz liczby grup równej liczbie osób wynoszącej 8.
+\fbi
+Na rysunku \ref{fig:rezultat_HOSVD_j30} przedstawiono wynik grupowania metodą k-średnich dla J=30 oraz liczby grup równej liczbie osób wynoszącej 8. Wyniki dla tej próby są najgorsze, udało się zgrupować jedynie jedną osobę.
 
 \begin{figure}[H]
 	\centering
@@ -326,8 +330,9 @@ W tabeli \ref{tab:wynikiKmeans} zamieszczono otrzymane wartości metryk. Dla alg
 \end{table}
 
 \fbi
-Jak możemy zauważyć metoda k-średnich daje najlepsze rezultaty dla J=10, zarówno mniej jak i więcej szczegółów w obrazie negatywnie wpływa na rezultat grupowania. W przypadku metody najbliższych sąsiadów jest inaczej -- tutaj im bardziej szczegółowy obraz otrzyma ta metoda na wejściu tym lepsze będą rezultaty. Trzeba również pamiętać, że metoda k-średnich nie wymaga zbioru treningowego i uczącego.
+Jak możemy zauważyć metoda k-średnich daje najlepsze rezultaty dla J=10, zarówno mniej jak i więcej szczegółów w obrazie negatywnie wpływa na rezultat grupowania. W~przypadku metody najbliższych sąsiadów jest inaczej -- tutaj im bardziej szczegółowy obraz otrzyma ta metoda na wejściu tym lepsze będą rezultaty. Trzeba również pamiętać, że metoda k-średnich nie wymaga zbioru treningowego i uczącego.
 
+\fbi
 W tabeli \ref{tab:wynikiKnn} zamieszczono metryki dla klasyfikacji metodą najbliższych sąsiadów. Zostały policzone dokładność (Acc) oraz Rand's index dla klasyfikacji w przestrzeni cech $\widehat{U}^{(3)}$ przy pomocy metody najbliższych sąsiadów.
 
 \begin{table}[H]
@@ -345,6 +350,7 @@ W tabeli \ref{tab:wynikiKnn} zamieszczono metryki dla klasyfikacji metodą najbl
 	\label{tab:wynikiKnn}
 \end{table}
 
+\fbi
 Natomiast zależności czasowe przedstawiono w tabeli \ref{tab:wynikiCzas}. Grupowanie przeprowadzono dla ilości grup równej liczbie osób aby móc jednoznacznie zinterpretować wyniki. Na ilustracji \ref{fig:wykres_zad3_czas} zamieszczono graficzne porównanie.
 
 \begin{table}[H]
