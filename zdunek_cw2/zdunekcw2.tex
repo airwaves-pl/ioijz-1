@@ -121,46 +121,51 @@ Wygenerować faktory $A = [a_{ij}] \in R^{I x J}_{+}$ i $X = [x_{jt}] \in R^{J x
 
 \subsection{Algorytm ALS}
 \paragraph{}
-
 Algorytm ALS polega na N-krotnym powtórzeniu pętli, której zadaniem jest obliczenie tensorów A oraz X.
-Wynik obliczenia jednego tensora wpływa na wynik drugiego, co dla kolejnych iteracji zmniejsza różnice między obrazem właściwym a zredukowanym.
+Wynik obliczenia jednego tensora wpływa na wynik drugiego, co dla kolejnych iteracji zmniejsza różnice między obrazem właściwym a zredukowanym. Algorytm bazuje na wzorach \ref{eq:als1} oraz \ref{eq:als2}.	
 
-\fbi
-Algorytm wykorzystuje następujące wzory:	
+\begin{equation}\label{eq:als1}
+\nabla_A D(Y|AX) = (AX - Y)X^T = 0 \Rightarrow AXX^T = YX^T \Rightarrow A = YX^T(XX^T)^{-1}
+\end{equation}
 
-$\nabla_A D(Y|AX) = (AX - Y)X^T = 0 \Rightarrow AXX^T = YX^T \Rightarrow A = YX^T(XX^T)^{-1}$
-
-$\nabla_X D(Y|AX) = A^T(AX - Y) = 0 \Rightarrow A^TAX = A^TY \Rightarrow X = (A^TA)^{-1}A^TY$
+\begin{equation}\label{eq:als2}
+\nabla_X D(Y|AX) = A^T(AX - Y) = 0 \Rightarrow A^TAX = A^TY \Rightarrow X = (A^TA)^{-1}A^TY
+\end{equation}
 
 \fbi
 Otrzymane tensory po każdej z iteracji przemnażane są przez siebie otrzymując obraz zredukowany, który następnie jest przyrównywany do oryginału oznaczonego jako Y.
 
 \subsection{Algorytm MUE}
 \paragraph{}
-
 Algorytm MUE działa podobnie do algorytmu ALS. Zmieniają się w nim wzory odpowiadające za poszczególne tensory.
 
-$a_{ij} = a_{ij}\frac{[YX^T]_{ij}}{[AXX^T]_{ij}}$
-
-$x_{jt} = x_{jt}\frac{[A^TY]_{jt}}{[A^TAX]_{jt}}$
+\begin{equation}\label{eq:mue1}
+a_{ij} = a_{ij}\frac{[YX^T]_{ij}}{[AXX^T]_{ij}}
+\end{equation}
+\begin{equation}\label{eq:mue2}
+x_{jt} = x_{jt}\frac{[A^TY]_{jt}}{[A^TAX]_{jt}}
+\end{equation}
 
 \fbi
 Zaletą algorytmu MUE jest niski koszt obliczeniowy. Niestety, jest on obarczony kosztem w postaci powolnej zbieżności, co oznacza konieczność wykonania większej ilości obliczeń, które mogą zanegować jego zalety.
 
 \subsection{Algorytm HALS}
 \paragraph{}
-
 Algorytm HALS od algorytmu ALS różni się iterowaniem osobno po wierszach i kolumnach.
 
-$a_j = [a_j + \dfrac{[YX^T]_{*j} - A[XX^T]_{*j}}{[XX^T]_{jj}}]_+$
-
-$x_j = [x_j + \dfrac{[A^TY]_{j*} - [A^TA]_{j*}X}{[A^TA]_{jj}}]_+$
+\begin{equation}\label{eq:hals1}
+a_j = [a_j + \dfrac{[YX^T]_{*j} - A[XX^T]_{*j}}{[XX^T]_{jj}}]_+
+\end{equation}
+\begin{equation}\label{eq:hals2}
+x_j = [x_j + \dfrac{[A^TY]_{j*} - [A^TA]_{j*}X}{[A^TA]_{jj}}]_+
+\end{equation}
 
 \fbi
 Algorytm ten charakteryzuje się najmniejszym błędem residualnym osiąganym już przy niskiej ilości iteracji.
 
 \subsection{Realizacja}
 \paragraph{}
+Na poniższych listingach zamieszczono praktyczną implementację algorytmów w środowisku MATLAB.
 
 \lstinputlisting[label=lst:zad1main,caption=Skrypt wywołujący realizacje w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad1.m}
 
@@ -172,11 +177,12 @@ Algorytm ten charakteryzuje się najmniejszym błędem residualnym osiąganym ju
 
 \subsection{Wyniki}
 \paragraph{}
+Na ilustracji \ref{fig:wykres_zad1} zamieszczono graficzne porównanie przebiegu optymalizacji kolejno algorytmami ALS oraz MUE.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{./assets/wykres_zad1.png}
-	\caption{Wykres ilustrujący przebieg optymalizacji naprzemiennej}
+	\caption{Wykres ilustrujący przebieg optymalizacji ALS oraz MUE}
 	\label{fig:wykres_zad1}
 \end{figure}
 
@@ -194,8 +200,7 @@ Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y \in R^{I
 
 \subsection{Realizacja}
 \paragraph{}
-
-
+Na kolejnych listingach zamieszczono implementację w środowisku MATLAB. Listing \ref{lst:zad3main} stanowi podstawowy potok przetwarzania od wczytania danych po wyświetlenie wyników pomiarów. Na listingu \ref{lst:zad3hosvd} zamieszczono implementację metody HOSVD.
 
 \lstinputlisting[label=lst:zad3main,caption=Podstawowy skrypt z realizacją w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad3.m}
 
@@ -212,12 +217,18 @@ W niniejszym punkcie zamieszczono wyniki dla dekompozycji z wykorzystaniem metod
 	\label{fig:twarze_org}
 \end{figure}
 
+\newpage
+Ilustracja \ref{fig:rezultat_HOSVD_j4} przedstawia wynik grupowania metodą k-średnich dla J=4 oraz liczby grup równej liczbie osób wynoszącej 8.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./assets/rezultat_HOSVD_j4.png}
 	\caption{Twarze zredukowane J=4 (HOSVD)}
 	\label{fig:rezultat_HOSVD_j4}
 \end{figure}
+
+\newpage
+Rysunek \ref{fig:rezultat_HOSVD_j10} przedstawia wynik grupowania metodą k-średnich dla J=10 oraz liczby grup równej liczbie osób wynoszącej 8.
 
 \begin{figure}[H]
 	\centering
@@ -226,12 +237,18 @@ W niniejszym punkcie zamieszczono wyniki dla dekompozycji z wykorzystaniem metod
 	\label{fig:rezultat_HOSVD_j10}
 \end{figure}
 
+\newpage
+Na ilustracji \ref{fig:rezultat_HOSVD_j20} przedstawiono wynik grupowania metodą k-średnich dla J=20 oraz liczby grup równej liczbie osób wynoszącej 8.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./assets/rezultat_HOSVD_j20.png}
 	\caption{Twarze zredukowane J=20 (HOSVD)}
 	\label{fig:rezultat_HOSVD_j20}
 \end{figure}
+
+\newpage
+Na rysunku \ref{fig:rezultat_HOSVD_j30} przedstawiono wynik grupowania metodą k-średnich dla J=30 oraz liczby grup równej liczbie osób wynoszącej 8.
 
 \begin{figure}[H]
 	\centering
