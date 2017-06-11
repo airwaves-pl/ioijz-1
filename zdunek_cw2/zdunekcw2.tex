@@ -155,14 +155,10 @@ Wykorzystując otrzymane wyniki obliczany jest błąd residualny.
 \end{figure}
 
 
-\section{Zadanie 2}
-\paragraph{}
-Wygenerować faktory..
-
 
 \section{Zadanie 3}
 \paragraph{}
-Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y = \in R^{I_1xI_2xI_3}$, gdzie $I_3$ jest liczbą obrazów. Rozdziel obrazy na zbiory trenujący i testujący według odpowiedniej zasady, np, 5-folds CV i utwórz odpowiednie tensory trenujący $Y_r$ i testujący $Y_t$. Tensor trenujący poddaj dekompozycji CP (np. algorytmem ALS) oraz HOSVD dla J = 4, 10, 20, 30. Pogrupować obrazy stosując metodę k-średnich dla faktora $\widehat{U}^{(3)}$. Badania przeprowadzić dla różnej liczby grup. Porównać dokładność grupowania z metodą PCA (z poprzedniego ćwiczenia). Następnie dokonaj projekcji obrazów z tensora $Y_t$ na podprzestrzeń cech generowaną faktorami otrzymanymi z $Y_r$. Dokonaj klasyfikacji obrazów w przestrzeni cech w $\widehat{U}^{(3)}$ za pomocą klasyfikatora k-NN. Porównać efekty klasyfikacji różnymi metodami (np. PCA, CP, HOSVD).
+Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y \in R^{I_1xI_2xI_3}$, gdzie $I_3$ jest liczbą obrazów. Rozdziel obrazy na zbiory trenujący i testujący według odpowiedniej zasady, np, 5-folds CV i utwórz odpowiednie tensory trenujący $Y_r$ i testujący $Y_t$. Tensor trenujący poddaj dekompozycji CP (np. algorytmem ALS) oraz HOSVD dla J = 4, 10, 20, 30. Pogrupować obrazy stosując metodę k-średnich dla faktora $\widehat{U}^{(3)}$. Badania przeprowadzić dla różnej liczby grup. Porównać dokładność grupowania z metodą PCA (z poprzedniego ćwiczenia). Następnie dokonaj projekcji obrazów z tensora $Y_t$ na podprzestrzeń cech generowaną faktorami otrzymanymi z $Y_r$. Dokonaj klasyfikacji obrazów w przestrzeni cech w $\widehat{U}^{(3)}$ za pomocą klasyfikatora k-NN. Porównać efekty klasyfikacji różnymi metodami (np. PCA, CP, HOSVD).
 
 \subsection{Opis metody}
 \paragraph{}
@@ -173,12 +169,7 @@ Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y = \in R^
 \subsection{Realizacja}
 \paragraph{}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/twarze_org.png}
-	\caption{Twarze wykorzystane podczas testów}
-	\label{fig:twarze_org}
-\end{figure}
+
 
 \lstinputlisting[label=lst:zad3main,caption=Podstawowy skrypt z realizacją w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad3.m}
 
@@ -186,61 +177,112 @@ Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y = \in R^
 
 \subsection{Wyniki}
 \paragraph{}
+W niniejszym punkcie zamieszczono wyniki dla dekompozycji z wykorzystaniem metody HOSVD. Badaniu poddano 80 obrazów twarzy (ilustracja \ref{fig:twarze_org}) z bazy Uniwersytetu Cambridge \cite{test7}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j4.png}
+	\includegraphics[width=1\textwidth]{./assets/twarze_org.png}
+	\caption{Twarze wykorzystane podczas testów}
+	\label{fig:twarze_org}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./assets/rezultat_HOSVD_j4.png}
 	\caption{Twarze zredukowane J=4 (HOSVD)}
 	\label{fig:rezultat_HOSVD_j4}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j10.png}
+	\includegraphics[width=1\textwidth]{./assets/rezultat_HOSVD_j10.png}
 	\caption{Twarze zredukowane J=10 (HOSVD)}
 	\label{fig:rezultat_HOSVD_j10}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j20.png}
+	\includegraphics[width=1\textwidth]{./assets/rezultat_HOSVD_j20.png}
 	\caption{Twarze zredukowane J=20 (HOSVD)}
 	\label{fig:rezultat_HOSVD_j20}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.95\textwidth]{./assets/rezultat_HOSVD_j30.png}
-	\caption{Twarze zredukowane J=4 (HOSVD)}
+	\includegraphics[width=1\textwidth]{./assets/rezultat_HOSVD_j30.png}
+	\caption{Twarze zredukowane J=30 (HOSVD)}
 	\label{fig:rezultat_HOSVD_j30}
 \end{figure}
 
 \fbi
-W tabeli \ref{tab:wynikiOgolne} zamieszczono otrzymane wartości metryk. Acc oraz Rand's index zostały policzone dla algorytmu k-średnich natomiast dokładność (delta) jest związana z klasyfikacją w przestrzeni cech $\widehat{U}^{(3)}$ przy pomocy metody najbliższych sąsiadów.
+W tabeli \ref{tab:wynikiKmeans} zamieszczono otrzymane wartości metryk. Dla algorytmu k-średnich zostały policzone Acc (dokładność) oraz Rand's index.
 
 \begin{table}[H]
 	\centering
-	\caption{Otrzymane metryki dla różnych wartości parametru J}
+	\caption{Otrzymane metryki dla różnych wartości parametru J (k-średnich)}
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline 
 		 & 4 & 10 & 20 & 30 \\ 
 		\hline
-		Acc & 76,25 & 100 & 80,00 & 63,75 \\
+		Acc (dokładność) & 76,25 & 100 & 80,00 & 63,75 \\
 		\hline
 		Rand's index & 92,56 & 100 & 93,04 & 84,56 \\
 		\hline
-		delta & 68,75 & 93,75 & 100 & 100 \\
-		\hline
 	\end{tabular}
-	\label{tab:wynikiOgolne}
+	\label{tab:wynikiKmeans}
 \end{table}
 
 \fbi
 Jak możemy zauważyć metoda k-średnich daje najlepsze rezultaty dla J=10, zarówno mniej jak i więcej szczegółów w obrazie negatywnie wpływa na rezultat grupowania. W przypadku metody najbliższych sąsiadów jest inaczej -- tutaj im bardziej szczegółowy obraz otrzyma ta metoda na wejściu tym lepsze będą rezultaty. Trzeba również pamiętać, że metoda k-średnich nie wymaga zbioru treningowego i uczącego.
 
+W tabeli \ref{tab:wynikiKnn} zamieszczono metryki dla klasyfikacji metodą najbliższych sąsiadów. Zostały policzone dokładność (Acc) oraz Rand's index dla klasyfikacji w przestrzeni cech $\widehat{U}^{(3)}$ przy pomocy metody najbliższych sąsiadów.
+
+\begin{table}[H]
+	\centering
+	\caption{Otrzymane metryki dla różnych wartości parametru J (k-najbliższych sąsiadów)}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline 
+		& 4 & 10 & 20 & 30 \\ 
+		\hline
+		Acc (dokładność) & 81,25 & 93,75 & 100 & 100 \\
+		\hline
+		Rand's index & 94,17 & 97,50 & 100 & 100 \\
+		\hline
+	\end{tabular}
+	\label{tab:wynikiKnn}
+\end{table}
+
+Natomiast zależności czasowe przedstawiono w tabeli \ref{tab:wynikiCzas}. Grupowanie przeprowadzono dla ilości grup równej liczbie osób aby móc jednoznacznie zinterpretować wyniki. Na ilustracji \ref{fig:wykres_zad3_czas} zamieszczono graficzne porównanie.
+
+\begin{table}[H]
+	\centering
+	\caption{Czas przetwarzania [ms] w zależności od parametru J}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline 
+		& 4 & 10 & 20 & 30 \\ 
+		\hline
+		HOSVD & 12,54 & 14,09 & 11,80 & 13,58 \\
+		\hline
+		grupowanie k-średnich & 8,25 & 9,81 & 11,15 & 15,22 \\
+		\hline
+		klasyfikacja k-NN & 14,17 & 13,61 & 13,62 & 14,21 \\
+		\hline
+	\end{tabular}
+	\label{tab:wynikiCzas}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{./assets/wykres_zad3_czas.png}
+	\caption{Czas przetwarzania w zależności od wartości J}
+	\label{fig:wykres_zad3_czas}
+\end{figure}
+
+
 \section{Podsumowanie}
 \paragraph{}
-..
+Podczas prac nad zadaniami zapoznano się z metodami redukcji wymiarowości przy pomocy nieujemnej faktoryzacji macierzy i dekompozycji tensorów.
+
 
 \newpage
 \begin{thebibliography}{40}
@@ -263,6 +305,9 @@ Zdunek, Rafał, ,,Nieujemna faktoryzacja macierzy i tensorów : zastosowanie do 
 
 \bibitem{test6}
 \url{http://www.bsp.brain.riken.jp/~phan/}
+
+\bibitem{test7}
+\url{http://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html}
 
 \end{thebibliography}
 
