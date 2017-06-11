@@ -17,6 +17,8 @@
 \usepackage{hyperref}
 \usepackage{tabularx}
 \usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 
 \geometry{margin=1.2in}
 \usepackage[final]{pdfpages}
@@ -26,6 +28,8 @@
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\floatname{algorithm}{Pseudokod}
 
 \lstset{
 	frame=tblr,
@@ -223,18 +227,35 @@ Obrazy twarzy z bazy ORL (lub podobnej) przedstaw za pomocą tensora $Y \in R^{I
 
 \subsection{Opis metody}
 \paragraph{}
+HOSVD jest szczególnym przypadkiem modelu dekompozycji Tuckera. Kolumny każdej z macierzy czynnikowych (faktorów) są wzajemnie ortogonalne, a tensor rdzeniowy $\mathcal {G}$ nie jest superdiagonalny. Dokonujemy kolejno matrycyzacji względem n-tego modu. 
 
 \subsection{Algorytm}
 \paragraph{}
+Wejściem algorytmu HO-SVD są: tensor danych $Y \in R^{I_1xI_2xI_3}$ oraz rzędy faktoryzacji $J = [J_1, ..., J_N]$, natomiast wyjściem: estymowane wektory $U^{(n)}$ oraz tensor rdzeniowy $\mathcal {G}$.
+
+
+
+\begin{algorithm}
+	\caption{Algorytm HO-SVD}
+	\label{algorytmHosvd}
+	\begin{algorithmic}[1]
+		\For {\textit{n} = 1, ..., \textit{N}}
+		\State $Y_{(n)} \gets $ \text{unfolding($\mathcal {Y}$, n) $\in R^{I_{n}\times \prod _{{p\neq n}}I_{p}}$}
+		\State $U_{(n)} \gets $ \text{eigs($ Y_{(n)}(Y_{(n)})^T, J_n$)}
+		\EndFor
+		\State {Wyznacz tensor $\mathcal {G}$}
+	\end{algorithmic}
+\end{algorithm}
 
 \subsection{Realizacja}
 \paragraph{}
-Na kolejnych listingach zamieszczono implementację w środowisku MATLAB. Listing \ref{lst:zad3main} stanowi podstawowy potok przetwarzania od wczytania danych po wyświetlenie wyników pomiarów. Na listingu \ref{lst:zad3hosvd} zamieszczono implementację metody HOSVD.
+Na kolejnych listingach zamieszczono implementację w środowisku MATLAB. Listing \ref{lst:zad3main} stanowi podstawowy potok przetwarzania od wczytania danych po wyświetlenie wyników pomiarów. Na listingu \ref{lst:zad3hosvd} zamieszczono implementację metody HOSVD. W celu przeprowadzenia klasyfikacji kNN dokonano podziału zbioru wejściowego przy pomocy \textit{cvpartition} 5-folds (podzielono 80 zdjęć na dwa zbiory składające się odpowiednio z 64 i 16 obrazów).
 
 \lstinputlisting[label=lst:zad3main,caption=Podstawowy skrypt z realizacją w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad3.m}
 
 \lstinputlisting[label=lst:zad3hosvd,caption=Funkcja realizująca algorytm HOSVD,firstline=1,lastline=200]{./assets/skrypt_zad3_hosvd.m}
 
+\newpage
 \subsection{Wyniki}
 \paragraph{}
 W niniejszym punkcie zamieszczono wyniki dla dekompozycji z wykorzystaniem metody HOSVD. Badaniu poddano 80 obrazów twarzy (ilustracja \ref{fig:twarze_org}) z bazy Uniwersytetu Cambridge \cite{test7}.
