@@ -36,7 +36,7 @@ function [A,X,res] = NMF_HALS(A,X,Y,J,MaxIter)
         
         X(j,:) = max(0, combined);
     end
-    % b³¹d residualny
+    % blad residualny
     res(k) = norm(Y - A*X, 'fro')/norm(Y,'fro');
   end
 end

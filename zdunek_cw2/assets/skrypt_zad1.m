@@ -15,11 +15,11 @@ X = rand(J,size(Y,2));
 
 A1 = A;
 A2 = A;
-%A3 = A;
+A3 = A;
 
 X1 = X;
 X2 = X;
-%X3 = X;
+X3 = X;
 
 MaxIter = 100;
 
@@ -32,6 +32,7 @@ hold on;
 semilogy(res1)
 semilogy(res2)
 %semilogy(res3)
+legend('ALS', 'MUE')
 
 % to samo ale z wykorzystaniem wbudowanej funkcji
 

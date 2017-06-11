@@ -123,26 +123,52 @@ Wygenerować faktory $A = [a_{ij}] \in R^{I x J}_{+}$ i $X = [x_{jt}] \in R^{J x
 \paragraph{}
 
 Algorytm ALS polega na N-krotnym powtórzeniu pętli, której zadaniem jest obliczenie tensorów A oraz X.
+Wynik obliczenia jednego tensora wpływa na wynik drugiego, co dla kolejnych iteracji zmniejsza różnice między obrazem właściwym a zredukowanym.
 
 \fbi
-W pierwszym etapie tensory A i X inicjalizowane są liczbami losowymi zależnymi od rzędu faktoryzacji. Następnie następuje N-krotne powtórzenie pętli, w której estymowane są faktory stosując wykorzystując pochodną kwadratu odległości euklidesowej.
+Algorytm wykorzystuje następujące wzory:	
 
 $\nabla_A D(Y|AX) = (AX - Y)X^T = 0 \Rightarrow AXX^T = YX^T \Rightarrow A = YX^T(XX^T)^{-1}$
 
 $\nabla_X D(Y|AX) = A^T(AX - Y) = 0 \Rightarrow A^TAX = A^TY \Rightarrow X = (A^TA)^{-1}A^TY$
 
-Wykorzystując otrzymane wyniki obliczany jest błąd residualny.
+\fbi
+Otrzymane tensory po każdej z iteracji przemnażane są przez siebie otrzymując obraz zredukowany, który następnie jest przyrównywany do oryginału oznaczonego jako Y.
 
 \subsection{Algorytm MUE}
 \paragraph{}
 
+Algorytm MUE działa podobnie do algorytmu ALS. Zmieniają się w nim wzory odpowiadające za poszczególne tensory.
+
+$a_{ij} = a_{ij}\frac{[YX^T]_{ij}}{[AXX^T]_{ij}}$
+
+$x_{jt} = x_{jt}\frac{[A^TY]_{jt}}{[A^TAX]_{jt}}$
+
+\fbi
+Zaletą algorytmu MUE jest niski koszt obliczeniowy. Niestety, jest on obarczony kosztem w postaci powolnej zbieżności, co oznacza konieczność wykonania większej ilości obliczeń, które mogą zanegować jego zalety.
+
 \subsection{Algorytm HALS}
 \paragraph{}
+
+Algorytm HALS od algorytmu ALS różni się iterowaniem osobno po wierszach i kolumnach.
+
+$a_j = [a_j + \dfrac{[YX^T]_{*j} - A[XX^T]_{*j}}{[XX^T]_{jj}}]_+$
+
+$x_j = [x_j + \dfrac{[A^TY]_{j*} - [A^TA]_{j*}X}{[A^TA]_{jj}}]_+$
+
+\fbi
+Algorytm ten charakteryzuje się najmniejszym błędem residualnym osiąganym już przy niskiej ilości iteracji.
 
 \subsection{Realizacja}
 \paragraph{}
 
-\lstinputlisting[label=lst:zad1main,caption=Skrypt z realizacją w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad1.m}
+\lstinputlisting[label=lst:zad1main,caption=Skrypt wywołujący realizacje w środowisku MATLAB,firstline=1,lastline=200]{./assets/skrypt_zad1.m}
+
+\lstinputlisting[label=lst:zad1als,caption=Algorytm ALS,firstline=1,lastline=200]{./assets/NMF_ALS.m}
+
+\lstinputlisting[label=lst:zad1mue,caption=Algorytm MUE,firstline=1,lastline=200]{./assets/NMF_MUE.m}
+
+\lstinputlisting[label=lst:zad1hals,caption=Algorytm HALS,firstline=1,lastline=200]{./assets/NMF_HALS.m}
 
 \subsection{Wyniki}
 \paragraph{}
