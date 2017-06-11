@@ -1,4 +1,5 @@
-function [A,X,res] = skrypt_zad1_nmf_mue(A,X,Y,N)
+function [A,X,res,MSE] = skrypt_zad1_nmf_mue(A,X,Y,N)
+    MSE = [];
     for k = 1:N
         % obliczanie A
         s1 = A.*(Y*X');
@@ -13,5 +14,8 @@ function [A,X,res] = skrypt_zad1_nmf_mue(A,X,Y,N)
 
         % blad residualny
         res(k) = norm(Y - A*X, 'fro')/norm(Y,'fro');
+        
+        % blad srednio-kwadratowy
+        MSE = [MSE immse(Y,A*X)];
     end
 end

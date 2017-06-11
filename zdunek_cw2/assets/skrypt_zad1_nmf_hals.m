@@ -1,4 +1,5 @@
-function [A,X,res] = skrypt_zad1_nmf_hals(A,X,Y,J,MaxIter)
+function [A,X,res,MSE] = skrypt_zad1_nmf_hals(A,X,Y,J,MaxIter)
+    MSE = [];
     for k = 1:MaxIter
         for j = 1:J % obliczanie A - po kolumnach
             YXp = Y*X';
@@ -12,5 +13,7 @@ function [A,X,res] = skrypt_zad1_nmf_hals(A,X,Y,J,MaxIter)
             X(j,:) = max(0, X(j,:)+(ApY(j,:)-ApA(j,:)*X)/(ApA(j,j)+eps));
         end
         res(k) = norm(Y - A*X, 'fro')/norm(Y,'fro'); % blad residualny
+        % blad srednio-kwadratowy
+        MSE = [MSE immse(Y,A*X)];
     end
 end

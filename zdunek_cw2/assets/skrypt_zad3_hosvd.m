@@ -1,7 +1,6 @@
 function [ A, B, C, G, Y_hat ] = skrypt_zad3_hosvd( Y, J )
-
     DimY = size(Y);
-
+    
     % unfolding
     Y1 = reshape(Y,DimY(1),DimY(2)*DimY(3));
     Y2 = reshape(permute(Y,[2 1 3]),DimY(2),DimY(1)*DimY(3));
