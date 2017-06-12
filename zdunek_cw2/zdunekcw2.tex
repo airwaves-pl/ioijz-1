@@ -144,7 +144,7 @@ Wynik obliczenia jednego tensora wpływa na wynik drugiego, co dla kolejnych ite
 \end{equation}
 
 \fbi
-Otrzymane tensory po każdej z iteracji przemnażane są przez siebie otrzymując obraz zredukowany, który następnie jest przyrównywany do oryginału oznaczonego jako Y. Złożoność obliczeniową algorytmu można zgrubnie oszacować jako O($ J^3 $).
+Otrzymane tensory po każdej z iteracji przemnażane są przez siebie otrzymując obraz zredukowany, który następnie jest przyrównywany do oryginału oznaczonego jako Y. Złożoność obliczeniową algorytmu można zgrubnie oszacować jako $ O(J^3) $.
 
 \subsection{Algorytm MUE}
 \paragraph{}
@@ -389,12 +389,17 @@ Natomiast zależności czasowe przedstawiono w tabeli \ref{tab:wynikiCzas}. Grup
 	\label{fig:wykres_zad3_czas}
 \end{figure}
 
-
+\newpage
 \section{Podsumowanie}
 \paragraph{}
 Podczas zajęć laboratoryjnych mieliśmy okazję zapoznać się z metodami redukcji wymiarowości przy pomocy nieujemnej faktoryzacji macierzy oraz technikami dekompozycji tensorów.
+Celem pierwszego zadania było zapoznanie z algorytmami stosowanymi do estymacji faktorów. O ile ich implementacja w środowisku MATLAB wydaje się prosta, o tyle wyznaczenie wymaga skomplikowanych obliczeń matematycznych. Otrzymane wyniki pozwoliły ocenić skuteczność każdego z poszczególnych algorytmów.
 
+\fbi
+W przypadku analizy wyników z zadania trzeciego, zauważono, że zarówno mniejsza jak i większa liczba szczegółów w obrazie, za którą odpowiadał parametr J, negatywnie wpływa na rezultat grupowania metodą k-średnich. W przypadku metody najbliższych sąsiadów jest zupełnie odwrotnie – im większy parametr J, czyli bardziej szczegółowy obraz, tym lepsze są rezultaty. 
 
+\fbi
+Redukcja wymiarowości pozwala w znacznym stopniu ograniczyć rozmiar przetwarzanych danych przy niewielkiej stracie informacji. Pozwala to na uzyskanie zbliżonych efektów, jednak przy krótszym czasie wykonywania obliczeń.
 
 \newpage
 \begin{thebibliography}{40}
